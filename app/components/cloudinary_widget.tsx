@@ -35,8 +35,8 @@ export default function CloudinaryWidget({handleUpload}) {
   >
     {({ open }) => {
       return (
-        <button type="button" onClick={() => open?.()} className="border">
-          charger des images
+        <button type="button" onClick={() => open?.()} className="border p-1">
+          Ajouter des photos
         </button>
       );
     }}

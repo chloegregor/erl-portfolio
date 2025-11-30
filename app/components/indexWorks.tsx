@@ -1,43 +1,48 @@
 'use client';
 import {useState} from "react";
 import {EditForm} from "./editForm";
+import {deleteWorkById} from "@/app/actions/works";
 import Image from "next/image";
 
-export function IndexWorks({ works }: { works: Array<{ id: number; title: string; description: string }> }) {
+export function IndexWorks({ works }) {
 
   const [selectedWorkId, setSelectedWorkId] = useState<number | null>(null);
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col gap-4 p-2">
       <h2>projet Publiés</h2>
-        <div className="grid grid-cols-3 gap-4">
-          {works.map((work) => (
-            <div className ="border" key={work.id}>
-              <div>
-              <p>{work.title}</p>
-              <p>{work.description}</p>
-              <div className="flex gap-2">
-                {work.photos && work.photos.length > 0 && (
-                    work.photos.map((photo) => (
-                      <Image key={photo.id} src={photo.url} alt={work.title} width={100} height={100} />
-                    ))
-                  )}
-                </div>
-                <div>
-                  {work.videos && work.videos.length > 0 && (
-                    work.videos.map((video) => (
-                      <div key={video.id}>
-                        <a href={video.url} target="_blank" rel="noopener noreferrer">{video.url}</a>
-                      </div>
-                    ))
-                  )}
-                </div>
+        <div className="flex flex-col">
+          <div className="grid border grid-cols-20 h-[2em]">
+            <p className="border-r col-span-2 p-[0.2em] text-center">Type</p>
+            <p className=" border-r col-span-4 p-[0.2em] text-center ">Titre</p>
+            <p className="border-r col-span-4 p-[0.2em] text-center">sous-titre</p>
+            <p className="border-r col-span-6 p-[0.2em] text-center "> Contenu</p>
+            <div className="border-r col-span-1 text-center">
+              <p>photos</p>
+            </div>
+            <div className ="border-r col-span-1 text-center">
+              <p>vidéos</p>
+            </div>
 
+          </div>
+          {works.map((work) => (
+            <div className ="grid border-l border-b grid-cols-20 h-[2em]" key={work.id}>
+              <p className="border-r col-span-2 p-[0.2em] ">{work.type}</p>
+              <p className=" border-r col-span-4 p-[0.2em] ">{work.title}</p>
+              <p className=" border-r col-span-4 p-[0.2em] ">{work.subtitle}</p>
+              <p className="border-r col-span-6 p-[0.2em] overflow-y-hidden"> {work.description}</p>
+              <div className="border-r col-span-1 text-center">
+                <p>{work.photos.length}</p>
               </div>
-              <button onClick={() => setSelectedWorkId(work.id)}>Edit</button>
+              <div className ="border-r col-span-1 text-center">
+                <p>{work.videos.length}</p>
+              </div>
+              <button className="border-r cursor-pointer col-span-1 text-center" onClick={() => setSelectedWorkId(work.id)}>Editer</button>
               {selectedWorkId === work.id && (
-                <EditForm id={work.id} title={work.title} description={work.description} />
+                <EditForm work={work} onClose={() => setSelectedWorkId(null)} />
               )}
+              <button onClick={() => deleteWorkById(work.id)}className="cursor-pointer col-span-1 text-center border-r">Supprimer</button>
+
             </div>
           ))}
         </div>

@@ -121,14 +121,30 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.WorkScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  subtitle: 'subtitle',
   description: 'description',
+  illustration: 'illustration',
+  type: 'type',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.LanguageScalarFieldEnum = {
+  id: 'id',
+  locale: 'locale',
+  title: 'title',
+  slug: 'slug',
+  subtitle: 'subtitle',
+  description: 'description',
+  type: 'type',
+  content: 'content',
+  workId: 'workId'
 };
 
 exports.Prisma.PhotoScalarFieldEnum = {
   id: 'id',
   url: 'url',
+  titre: 'titre',
   caption: 'caption',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -157,6 +173,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Work: 'Work',
+  Language: 'Language',
   Photo: 'Photo',
   Video: 'Video'
 };

@@ -25,9 +25,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen `}
       >
-        {children}
+        <header>
+
+          <div className=" p-[1em] fixed bg-white w-full z-100">
+            <h1 className="text-2xl ">Elodie Rougeaux-Léaux</h1>
+          </div>
+        </header>
+        <div className="pt-[2.8em] h-full">
+          {children}
+        </div>
+        <footer>
+          <div className=" mt-[10em] w-full text-end">
+            <p className="text-sm ">© 2024 Elodie Rougeaux-Léaud</p>
+          </div>
+        </footer>
       </body>
     </html>
   );

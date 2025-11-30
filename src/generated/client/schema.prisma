@@ -15,22 +15,40 @@ datasource db {
 }
 
 model Work {
-  id          Int      @id @default(autoincrement())
+  id           Int        @id @default(autoincrement())
+  title        String
+  subtitle     String?
+  description  String?
+  illustration String
+  type         String     @default("performance")
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  photos       Photo[]
+  videos       Video[]
+  languages    Language[]
+}
+
+model Language {
+  id          Int    @id @default(autoincrement())
+  locale      String
   title       String
+  slug        String
+  subtitle    String
   description String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  photos      Photo[]
-  videos      Video[]
+  type        String
+  content     String
+  work        Work   @relation(fields: [workId], references: [id], onDelete: Cascade)
+  workId      Int
 }
 
 model Photo {
   id        Int      @id @default(autoincrement())
   url       String
+  titre     String
   caption   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  work      Work     @relation(fields: [workId], references: [id])
+  work      Work     @relation(fields: [workId], references: [id], onDelete: Cascade)
   workId    Int
 }
 
@@ -40,6 +58,6 @@ model Video {
   caption   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  work      Work     @relation(fields: [workId], references: [id])
+  work      Work     @relation(fields: [workId], references: [id], onDelete: Cascade)
   workId    Int
 }

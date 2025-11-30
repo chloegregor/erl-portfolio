@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type Work = $Result.DefaultSelection<Prisma.$WorkPayload>
 /**
+ * Model Language
+ * 
+ */
+export type Language = $Result.DefaultSelection<Prisma.$LanguagePayload>
+/**
  * Model Photo
  * 
  */
@@ -156,6 +161,16 @@ export class PrismaClient<
     * ```
     */
   get work(): Prisma.WorkDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.language`: Exposes CRUD operations for the **Language** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Languages
+    * const languages = await prisma.language.findMany()
+    * ```
+    */
+  get language(): Prisma.LanguageDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.photo`: Exposes CRUD operations for the **Photo** model.
@@ -618,6 +633,7 @@ export namespace Prisma {
 
   export const ModelName: {
     Work: 'Work',
+    Language: 'Language',
     Photo: 'Photo',
     Video: 'Video'
   };
@@ -638,7 +654,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "work" | "photo" | "video"
+      modelProps: "work" | "language" | "photo" | "video"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -713,6 +729,80 @@ export namespace Prisma {
           count: {
             args: Prisma.WorkCountArgs<ExtArgs>
             result: $Utils.Optional<WorkCountAggregateOutputType> | number
+          }
+        }
+      }
+      Language: {
+        payload: Prisma.$LanguagePayload<ExtArgs>
+        fields: Prisma.LanguageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LanguageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LanguagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LanguageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LanguagePayload>
+          }
+          findFirst: {
+            args: Prisma.LanguageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LanguagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LanguageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LanguagePayload>
+          }
+          findMany: {
+            args: Prisma.LanguageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LanguagePayload>[]
+          }
+          create: {
+            args: Prisma.LanguageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LanguagePayload>
+          }
+          createMany: {
+            args: Prisma.LanguageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LanguageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LanguagePayload>[]
+          }
+          delete: {
+            args: Prisma.LanguageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LanguagePayload>
+          }
+          update: {
+            args: Prisma.LanguageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LanguagePayload>
+          }
+          deleteMany: {
+            args: Prisma.LanguageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LanguageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LanguageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LanguagePayload>[]
+          }
+          upsert: {
+            args: Prisma.LanguageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LanguagePayload>
+          }
+          aggregate: {
+            args: Prisma.LanguageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLanguage>
+          }
+          groupBy: {
+            args: Prisma.LanguageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LanguageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LanguageCountArgs<ExtArgs>
+            result: $Utils.Optional<LanguageCountAggregateOutputType> | number
           }
         }
       }
@@ -961,6 +1051,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     work?: WorkOmit
+    language?: LanguageOmit
     photo?: PhotoOmit
     video?: VideoOmit
   }
@@ -1045,11 +1136,13 @@ export namespace Prisma {
   export type WorkCountOutputType = {
     photos: number
     videos: number
+    languages: number
   }
 
   export type WorkCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     photos?: boolean | WorkCountOutputTypeCountPhotosArgs
     videos?: boolean | WorkCountOutputTypeCountVideosArgs
+    languages?: boolean | WorkCountOutputTypeCountLanguagesArgs
   }
 
   // Custom InputTypes
@@ -1075,6 +1168,13 @@ export namespace Prisma {
    */
   export type WorkCountOutputTypeCountVideosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: VideoWhereInput
+  }
+
+  /**
+   * WorkCountOutputType without action
+   */
+  export type WorkCountOutputTypeCountLanguagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LanguageWhereInput
   }
 
 
@@ -1105,7 +1205,10 @@ export namespace Prisma {
   export type WorkMinAggregateOutputType = {
     id: number | null
     title: string | null
+    subtitle: string | null
     description: string | null
+    illustration: string | null
+    type: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1113,7 +1216,10 @@ export namespace Prisma {
   export type WorkMaxAggregateOutputType = {
     id: number | null
     title: string | null
+    subtitle: string | null
     description: string | null
+    illustration: string | null
+    type: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1121,7 +1227,10 @@ export namespace Prisma {
   export type WorkCountAggregateOutputType = {
     id: number
     title: number
+    subtitle: number
     description: number
+    illustration: number
+    type: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1139,7 +1248,10 @@ export namespace Prisma {
   export type WorkMinAggregateInputType = {
     id?: true
     title?: true
+    subtitle?: true
     description?: true
+    illustration?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1147,7 +1259,10 @@ export namespace Prisma {
   export type WorkMaxAggregateInputType = {
     id?: true
     title?: true
+    subtitle?: true
     description?: true
+    illustration?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1155,7 +1270,10 @@ export namespace Prisma {
   export type WorkCountAggregateInputType = {
     id?: true
     title?: true
+    subtitle?: true
     description?: true
+    illustration?: true
+    type?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1250,7 +1368,10 @@ export namespace Prisma {
   export type WorkGroupByOutputType = {
     id: number
     title: string
-    description: string
+    subtitle: string | null
+    description: string | null
+    illustration: string
+    type: string
     createdAt: Date
     updatedAt: Date
     _count: WorkCountAggregateOutputType | null
@@ -1277,18 +1398,25 @@ export namespace Prisma {
   export type WorkSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
+    subtitle?: boolean
     description?: boolean
+    illustration?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     photos?: boolean | Work$photosArgs<ExtArgs>
     videos?: boolean | Work$videosArgs<ExtArgs>
+    languages?: boolean | Work$languagesArgs<ExtArgs>
     _count?: boolean | WorkCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["work"]>
 
   export type WorkSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
+    subtitle?: boolean
     description?: boolean
+    illustration?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["work"]>
@@ -1296,7 +1424,10 @@ export namespace Prisma {
   export type WorkSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
+    subtitle?: boolean
     description?: boolean
+    illustration?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["work"]>
@@ -1304,15 +1435,19 @@ export namespace Prisma {
   export type WorkSelectScalar = {
     id?: boolean
     title?: boolean
+    subtitle?: boolean
     description?: boolean
+    illustration?: boolean
+    type?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type WorkOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["work"]>
+  export type WorkOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "subtitle" | "description" | "illustration" | "type" | "createdAt" | "updatedAt", ExtArgs["result"]["work"]>
   export type WorkInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     photos?: boolean | Work$photosArgs<ExtArgs>
     videos?: boolean | Work$videosArgs<ExtArgs>
+    languages?: boolean | Work$languagesArgs<ExtArgs>
     _count?: boolean | WorkCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type WorkIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1323,11 +1458,15 @@ export namespace Prisma {
     objects: {
       photos: Prisma.$PhotoPayload<ExtArgs>[]
       videos: Prisma.$VideoPayload<ExtArgs>[]
+      languages: Prisma.$LanguagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       title: string
-      description: string
+      subtitle: string | null
+      description: string | null
+      illustration: string
+      type: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["work"]>
@@ -1726,6 +1865,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     photos<T extends Work$photosArgs<ExtArgs> = {}>(args?: Subset<T, Work$photosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PhotoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     videos<T extends Work$videosArgs<ExtArgs> = {}>(args?: Subset<T, Work$videosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    languages<T extends Work$languagesArgs<ExtArgs> = {}>(args?: Subset<T, Work$languagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1757,7 +1897,10 @@ export namespace Prisma {
   interface WorkFieldRefs {
     readonly id: FieldRef<"Work", 'Int'>
     readonly title: FieldRef<"Work", 'String'>
+    readonly subtitle: FieldRef<"Work", 'String'>
     readonly description: FieldRef<"Work", 'String'>
+    readonly illustration: FieldRef<"Work", 'String'>
+    readonly type: FieldRef<"Work", 'String'>
     readonly createdAt: FieldRef<"Work", 'DateTime'>
     readonly updatedAt: FieldRef<"Work", 'DateTime'>
   }
@@ -2194,6 +2337,30 @@ export namespace Prisma {
   }
 
   /**
+   * Work.languages
+   */
+  export type Work$languagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Language
+     */
+    select?: LanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Language
+     */
+    omit?: LanguageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LanguageInclude<ExtArgs> | null
+    where?: LanguageWhereInput
+    orderBy?: LanguageOrderByWithRelationInput | LanguageOrderByWithRelationInput[]
+    cursor?: LanguageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LanguageScalarFieldEnum | LanguageScalarFieldEnum[]
+  }
+
+  /**
    * Work without action
    */
   export type WorkDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2209,6 +2376,1152 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: WorkInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Language
+   */
+
+  export type AggregateLanguage = {
+    _count: LanguageCountAggregateOutputType | null
+    _avg: LanguageAvgAggregateOutputType | null
+    _sum: LanguageSumAggregateOutputType | null
+    _min: LanguageMinAggregateOutputType | null
+    _max: LanguageMaxAggregateOutputType | null
+  }
+
+  export type LanguageAvgAggregateOutputType = {
+    id: number | null
+    workId: number | null
+  }
+
+  export type LanguageSumAggregateOutputType = {
+    id: number | null
+    workId: number | null
+  }
+
+  export type LanguageMinAggregateOutputType = {
+    id: number | null
+    locale: string | null
+    title: string | null
+    slug: string | null
+    subtitle: string | null
+    description: string | null
+    type: string | null
+    content: string | null
+    workId: number | null
+  }
+
+  export type LanguageMaxAggregateOutputType = {
+    id: number | null
+    locale: string | null
+    title: string | null
+    slug: string | null
+    subtitle: string | null
+    description: string | null
+    type: string | null
+    content: string | null
+    workId: number | null
+  }
+
+  export type LanguageCountAggregateOutputType = {
+    id: number
+    locale: number
+    title: number
+    slug: number
+    subtitle: number
+    description: number
+    type: number
+    content: number
+    workId: number
+    _all: number
+  }
+
+
+  export type LanguageAvgAggregateInputType = {
+    id?: true
+    workId?: true
+  }
+
+  export type LanguageSumAggregateInputType = {
+    id?: true
+    workId?: true
+  }
+
+  export type LanguageMinAggregateInputType = {
+    id?: true
+    locale?: true
+    title?: true
+    slug?: true
+    subtitle?: true
+    description?: true
+    type?: true
+    content?: true
+    workId?: true
+  }
+
+  export type LanguageMaxAggregateInputType = {
+    id?: true
+    locale?: true
+    title?: true
+    slug?: true
+    subtitle?: true
+    description?: true
+    type?: true
+    content?: true
+    workId?: true
+  }
+
+  export type LanguageCountAggregateInputType = {
+    id?: true
+    locale?: true
+    title?: true
+    slug?: true
+    subtitle?: true
+    description?: true
+    type?: true
+    content?: true
+    workId?: true
+    _all?: true
+  }
+
+  export type LanguageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Language to aggregate.
+     */
+    where?: LanguageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Languages to fetch.
+     */
+    orderBy?: LanguageOrderByWithRelationInput | LanguageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LanguageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Languages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Languages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Languages
+    **/
+    _count?: true | LanguageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LanguageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LanguageSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LanguageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LanguageMaxAggregateInputType
+  }
+
+  export type GetLanguageAggregateType<T extends LanguageAggregateArgs> = {
+        [P in keyof T & keyof AggregateLanguage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLanguage[P]>
+      : GetScalarType<T[P], AggregateLanguage[P]>
+  }
+
+
+
+
+  export type LanguageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LanguageWhereInput
+    orderBy?: LanguageOrderByWithAggregationInput | LanguageOrderByWithAggregationInput[]
+    by: LanguageScalarFieldEnum[] | LanguageScalarFieldEnum
+    having?: LanguageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LanguageCountAggregateInputType | true
+    _avg?: LanguageAvgAggregateInputType
+    _sum?: LanguageSumAggregateInputType
+    _min?: LanguageMinAggregateInputType
+    _max?: LanguageMaxAggregateInputType
+  }
+
+  export type LanguageGroupByOutputType = {
+    id: number
+    locale: string
+    title: string
+    slug: string
+    subtitle: string
+    description: string
+    type: string
+    content: string
+    workId: number
+    _count: LanguageCountAggregateOutputType | null
+    _avg: LanguageAvgAggregateOutputType | null
+    _sum: LanguageSumAggregateOutputType | null
+    _min: LanguageMinAggregateOutputType | null
+    _max: LanguageMaxAggregateOutputType | null
+  }
+
+  type GetLanguageGroupByPayload<T extends LanguageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LanguageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LanguageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LanguageGroupByOutputType[P]>
+            : GetScalarType<T[P], LanguageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LanguageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    locale?: boolean
+    title?: boolean
+    slug?: boolean
+    subtitle?: boolean
+    description?: boolean
+    type?: boolean
+    content?: boolean
+    workId?: boolean
+    work?: boolean | WorkDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["language"]>
+
+  export type LanguageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    locale?: boolean
+    title?: boolean
+    slug?: boolean
+    subtitle?: boolean
+    description?: boolean
+    type?: boolean
+    content?: boolean
+    workId?: boolean
+    work?: boolean | WorkDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["language"]>
+
+  export type LanguageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    locale?: boolean
+    title?: boolean
+    slug?: boolean
+    subtitle?: boolean
+    description?: boolean
+    type?: boolean
+    content?: boolean
+    workId?: boolean
+    work?: boolean | WorkDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["language"]>
+
+  export type LanguageSelectScalar = {
+    id?: boolean
+    locale?: boolean
+    title?: boolean
+    slug?: boolean
+    subtitle?: boolean
+    description?: boolean
+    type?: boolean
+    content?: boolean
+    workId?: boolean
+  }
+
+  export type LanguageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "locale" | "title" | "slug" | "subtitle" | "description" | "type" | "content" | "workId", ExtArgs["result"]["language"]>
+  export type LanguageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    work?: boolean | WorkDefaultArgs<ExtArgs>
+  }
+  export type LanguageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    work?: boolean | WorkDefaultArgs<ExtArgs>
+  }
+  export type LanguageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    work?: boolean | WorkDefaultArgs<ExtArgs>
+  }
+
+  export type $LanguagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Language"
+    objects: {
+      work: Prisma.$WorkPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      locale: string
+      title: string
+      slug: string
+      subtitle: string
+      description: string
+      type: string
+      content: string
+      workId: number
+    }, ExtArgs["result"]["language"]>
+    composites: {}
+  }
+
+  type LanguageGetPayload<S extends boolean | null | undefined | LanguageDefaultArgs> = $Result.GetResult<Prisma.$LanguagePayload, S>
+
+  type LanguageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LanguageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LanguageCountAggregateInputType | true
+    }
+
+  export interface LanguageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Language'], meta: { name: 'Language' } }
+    /**
+     * Find zero or one Language that matches the filter.
+     * @param {LanguageFindUniqueArgs} args - Arguments to find a Language
+     * @example
+     * // Get one Language
+     * const language = await prisma.language.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LanguageFindUniqueArgs>(args: SelectSubset<T, LanguageFindUniqueArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Language that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LanguageFindUniqueOrThrowArgs} args - Arguments to find a Language
+     * @example
+     * // Get one Language
+     * const language = await prisma.language.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LanguageFindUniqueOrThrowArgs>(args: SelectSubset<T, LanguageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Language that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LanguageFindFirstArgs} args - Arguments to find a Language
+     * @example
+     * // Get one Language
+     * const language = await prisma.language.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LanguageFindFirstArgs>(args?: SelectSubset<T, LanguageFindFirstArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Language that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LanguageFindFirstOrThrowArgs} args - Arguments to find a Language
+     * @example
+     * // Get one Language
+     * const language = await prisma.language.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LanguageFindFirstOrThrowArgs>(args?: SelectSubset<T, LanguageFindFirstOrThrowArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Languages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LanguageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Languages
+     * const languages = await prisma.language.findMany()
+     * 
+     * // Get first 10 Languages
+     * const languages = await prisma.language.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const languageWithIdOnly = await prisma.language.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LanguageFindManyArgs>(args?: SelectSubset<T, LanguageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Language.
+     * @param {LanguageCreateArgs} args - Arguments to create a Language.
+     * @example
+     * // Create one Language
+     * const Language = await prisma.language.create({
+     *   data: {
+     *     // ... data to create a Language
+     *   }
+     * })
+     * 
+     */
+    create<T extends LanguageCreateArgs>(args: SelectSubset<T, LanguageCreateArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Languages.
+     * @param {LanguageCreateManyArgs} args - Arguments to create many Languages.
+     * @example
+     * // Create many Languages
+     * const language = await prisma.language.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LanguageCreateManyArgs>(args?: SelectSubset<T, LanguageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Languages and returns the data saved in the database.
+     * @param {LanguageCreateManyAndReturnArgs} args - Arguments to create many Languages.
+     * @example
+     * // Create many Languages
+     * const language = await prisma.language.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Languages and only return the `id`
+     * const languageWithIdOnly = await prisma.language.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LanguageCreateManyAndReturnArgs>(args?: SelectSubset<T, LanguageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Language.
+     * @param {LanguageDeleteArgs} args - Arguments to delete one Language.
+     * @example
+     * // Delete one Language
+     * const Language = await prisma.language.delete({
+     *   where: {
+     *     // ... filter to delete one Language
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LanguageDeleteArgs>(args: SelectSubset<T, LanguageDeleteArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Language.
+     * @param {LanguageUpdateArgs} args - Arguments to update one Language.
+     * @example
+     * // Update one Language
+     * const language = await prisma.language.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LanguageUpdateArgs>(args: SelectSubset<T, LanguageUpdateArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Languages.
+     * @param {LanguageDeleteManyArgs} args - Arguments to filter Languages to delete.
+     * @example
+     * // Delete a few Languages
+     * const { count } = await prisma.language.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LanguageDeleteManyArgs>(args?: SelectSubset<T, LanguageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Languages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LanguageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Languages
+     * const language = await prisma.language.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LanguageUpdateManyArgs>(args: SelectSubset<T, LanguageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Languages and returns the data updated in the database.
+     * @param {LanguageUpdateManyAndReturnArgs} args - Arguments to update many Languages.
+     * @example
+     * // Update many Languages
+     * const language = await prisma.language.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Languages and only return the `id`
+     * const languageWithIdOnly = await prisma.language.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LanguageUpdateManyAndReturnArgs>(args: SelectSubset<T, LanguageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Language.
+     * @param {LanguageUpsertArgs} args - Arguments to update or create a Language.
+     * @example
+     * // Update or create a Language
+     * const language = await prisma.language.upsert({
+     *   create: {
+     *     // ... data to create a Language
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Language we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LanguageUpsertArgs>(args: SelectSubset<T, LanguageUpsertArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Languages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LanguageCountArgs} args - Arguments to filter Languages to count.
+     * @example
+     * // Count the number of Languages
+     * const count = await prisma.language.count({
+     *   where: {
+     *     // ... the filter for the Languages we want to count
+     *   }
+     * })
+    **/
+    count<T extends LanguageCountArgs>(
+      args?: Subset<T, LanguageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LanguageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Language.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LanguageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LanguageAggregateArgs>(args: Subset<T, LanguageAggregateArgs>): Prisma.PrismaPromise<GetLanguageAggregateType<T>>
+
+    /**
+     * Group by Language.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LanguageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LanguageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LanguageGroupByArgs['orderBy'] }
+        : { orderBy?: LanguageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LanguageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLanguageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Language model
+   */
+  readonly fields: LanguageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Language.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LanguageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    work<T extends WorkDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkDefaultArgs<ExtArgs>>): Prisma__WorkClient<$Result.GetResult<Prisma.$WorkPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Language model
+   */
+  interface LanguageFieldRefs {
+    readonly id: FieldRef<"Language", 'Int'>
+    readonly locale: FieldRef<"Language", 'String'>
+    readonly title: FieldRef<"Language", 'String'>
+    readonly slug: FieldRef<"Language", 'String'>
+    readonly subtitle: FieldRef<"Language", 'String'>
+    readonly description: FieldRef<"Language", 'String'>
+    readonly type: FieldRef<"Language", 'String'>
+    readonly content: FieldRef<"Language", 'String'>
+    readonly workId: FieldRef<"Language", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Language findUnique
+   */
+  export type LanguageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Language
+     */
+    select?: LanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Language
+     */
+    omit?: LanguageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LanguageInclude<ExtArgs> | null
+    /**
+     * Filter, which Language to fetch.
+     */
+    where: LanguageWhereUniqueInput
+  }
+
+  /**
+   * Language findUniqueOrThrow
+   */
+  export type LanguageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Language
+     */
+    select?: LanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Language
+     */
+    omit?: LanguageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LanguageInclude<ExtArgs> | null
+    /**
+     * Filter, which Language to fetch.
+     */
+    where: LanguageWhereUniqueInput
+  }
+
+  /**
+   * Language findFirst
+   */
+  export type LanguageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Language
+     */
+    select?: LanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Language
+     */
+    omit?: LanguageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LanguageInclude<ExtArgs> | null
+    /**
+     * Filter, which Language to fetch.
+     */
+    where?: LanguageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Languages to fetch.
+     */
+    orderBy?: LanguageOrderByWithRelationInput | LanguageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Languages.
+     */
+    cursor?: LanguageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Languages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Languages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Languages.
+     */
+    distinct?: LanguageScalarFieldEnum | LanguageScalarFieldEnum[]
+  }
+
+  /**
+   * Language findFirstOrThrow
+   */
+  export type LanguageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Language
+     */
+    select?: LanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Language
+     */
+    omit?: LanguageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LanguageInclude<ExtArgs> | null
+    /**
+     * Filter, which Language to fetch.
+     */
+    where?: LanguageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Languages to fetch.
+     */
+    orderBy?: LanguageOrderByWithRelationInput | LanguageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Languages.
+     */
+    cursor?: LanguageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Languages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Languages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Languages.
+     */
+    distinct?: LanguageScalarFieldEnum | LanguageScalarFieldEnum[]
+  }
+
+  /**
+   * Language findMany
+   */
+  export type LanguageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Language
+     */
+    select?: LanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Language
+     */
+    omit?: LanguageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LanguageInclude<ExtArgs> | null
+    /**
+     * Filter, which Languages to fetch.
+     */
+    where?: LanguageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Languages to fetch.
+     */
+    orderBy?: LanguageOrderByWithRelationInput | LanguageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Languages.
+     */
+    cursor?: LanguageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Languages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Languages.
+     */
+    skip?: number
+    distinct?: LanguageScalarFieldEnum | LanguageScalarFieldEnum[]
+  }
+
+  /**
+   * Language create
+   */
+  export type LanguageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Language
+     */
+    select?: LanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Language
+     */
+    omit?: LanguageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LanguageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Language.
+     */
+    data: XOR<LanguageCreateInput, LanguageUncheckedCreateInput>
+  }
+
+  /**
+   * Language createMany
+   */
+  export type LanguageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Languages.
+     */
+    data: LanguageCreateManyInput | LanguageCreateManyInput[]
+  }
+
+  /**
+   * Language createManyAndReturn
+   */
+  export type LanguageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Language
+     */
+    select?: LanguageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Language
+     */
+    omit?: LanguageOmit<ExtArgs> | null
+    /**
+     * The data used to create many Languages.
+     */
+    data: LanguageCreateManyInput | LanguageCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LanguageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Language update
+   */
+  export type LanguageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Language
+     */
+    select?: LanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Language
+     */
+    omit?: LanguageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LanguageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Language.
+     */
+    data: XOR<LanguageUpdateInput, LanguageUncheckedUpdateInput>
+    /**
+     * Choose, which Language to update.
+     */
+    where: LanguageWhereUniqueInput
+  }
+
+  /**
+   * Language updateMany
+   */
+  export type LanguageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Languages.
+     */
+    data: XOR<LanguageUpdateManyMutationInput, LanguageUncheckedUpdateManyInput>
+    /**
+     * Filter which Languages to update
+     */
+    where?: LanguageWhereInput
+    /**
+     * Limit how many Languages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Language updateManyAndReturn
+   */
+  export type LanguageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Language
+     */
+    select?: LanguageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Language
+     */
+    omit?: LanguageOmit<ExtArgs> | null
+    /**
+     * The data used to update Languages.
+     */
+    data: XOR<LanguageUpdateManyMutationInput, LanguageUncheckedUpdateManyInput>
+    /**
+     * Filter which Languages to update
+     */
+    where?: LanguageWhereInput
+    /**
+     * Limit how many Languages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LanguageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Language upsert
+   */
+  export type LanguageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Language
+     */
+    select?: LanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Language
+     */
+    omit?: LanguageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LanguageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Language to update in case it exists.
+     */
+    where: LanguageWhereUniqueInput
+    /**
+     * In case the Language found by the `where` argument doesn't exist, create a new Language with this data.
+     */
+    create: XOR<LanguageCreateInput, LanguageUncheckedCreateInput>
+    /**
+     * In case the Language was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LanguageUpdateInput, LanguageUncheckedUpdateInput>
+  }
+
+  /**
+   * Language delete
+   */
+  export type LanguageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Language
+     */
+    select?: LanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Language
+     */
+    omit?: LanguageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LanguageInclude<ExtArgs> | null
+    /**
+     * Filter which Language to delete.
+     */
+    where: LanguageWhereUniqueInput
+  }
+
+  /**
+   * Language deleteMany
+   */
+  export type LanguageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Languages to delete
+     */
+    where?: LanguageWhereInput
+    /**
+     * Limit how many Languages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Language without action
+   */
+  export type LanguageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Language
+     */
+    select?: LanguageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Language
+     */
+    omit?: LanguageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LanguageInclude<ExtArgs> | null
   }
 
 
@@ -2237,6 +3550,7 @@ export namespace Prisma {
   export type PhotoMinAggregateOutputType = {
     id: number | null
     url: string | null
+    titre: string | null
     caption: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2246,6 +3560,7 @@ export namespace Prisma {
   export type PhotoMaxAggregateOutputType = {
     id: number | null
     url: string | null
+    titre: string | null
     caption: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2255,6 +3570,7 @@ export namespace Prisma {
   export type PhotoCountAggregateOutputType = {
     id: number
     url: number
+    titre: number
     caption: number
     createdAt: number
     updatedAt: number
@@ -2276,6 +3592,7 @@ export namespace Prisma {
   export type PhotoMinAggregateInputType = {
     id?: true
     url?: true
+    titre?: true
     caption?: true
     createdAt?: true
     updatedAt?: true
@@ -2285,6 +3602,7 @@ export namespace Prisma {
   export type PhotoMaxAggregateInputType = {
     id?: true
     url?: true
+    titre?: true
     caption?: true
     createdAt?: true
     updatedAt?: true
@@ -2294,6 +3612,7 @@ export namespace Prisma {
   export type PhotoCountAggregateInputType = {
     id?: true
     url?: true
+    titre?: true
     caption?: true
     createdAt?: true
     updatedAt?: true
@@ -2390,6 +3709,7 @@ export namespace Prisma {
   export type PhotoGroupByOutputType = {
     id: number
     url: string
+    titre: string
     caption: string | null
     createdAt: Date
     updatedAt: Date
@@ -2418,6 +3738,7 @@ export namespace Prisma {
   export type PhotoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     url?: boolean
+    titre?: boolean
     caption?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2428,6 +3749,7 @@ export namespace Prisma {
   export type PhotoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     url?: boolean
+    titre?: boolean
     caption?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2438,6 +3760,7 @@ export namespace Prisma {
   export type PhotoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     url?: boolean
+    titre?: boolean
     caption?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2448,13 +3771,14 @@ export namespace Prisma {
   export type PhotoSelectScalar = {
     id?: boolean
     url?: boolean
+    titre?: boolean
     caption?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     workId?: boolean
   }
 
-  export type PhotoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "caption" | "createdAt" | "updatedAt" | "workId", ExtArgs["result"]["photo"]>
+  export type PhotoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "titre" | "caption" | "createdAt" | "updatedAt" | "workId", ExtArgs["result"]["photo"]>
   export type PhotoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     work?: boolean | WorkDefaultArgs<ExtArgs>
   }
@@ -2473,6 +3797,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       url: string
+      titre: string
       caption: string | null
       createdAt: Date
       updatedAt: Date
@@ -2903,6 +4228,7 @@ export namespace Prisma {
   interface PhotoFieldRefs {
     readonly id: FieldRef<"Photo", 'Int'>
     readonly url: FieldRef<"Photo", 'String'>
+    readonly titre: FieldRef<"Photo", 'String'>
     readonly caption: FieldRef<"Photo", 'String'>
     readonly createdAt: FieldRef<"Photo", 'DateTime'>
     readonly updatedAt: FieldRef<"Photo", 'DateTime'>
@@ -4440,7 +5766,10 @@ export namespace Prisma {
   export const WorkScalarFieldEnum: {
     id: 'id',
     title: 'title',
+    subtitle: 'subtitle',
     description: 'description',
+    illustration: 'illustration',
+    type: 'type',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -4448,9 +5777,25 @@ export namespace Prisma {
   export type WorkScalarFieldEnum = (typeof WorkScalarFieldEnum)[keyof typeof WorkScalarFieldEnum]
 
 
+  export const LanguageScalarFieldEnum: {
+    id: 'id',
+    locale: 'locale',
+    title: 'title',
+    slug: 'slug',
+    subtitle: 'subtitle',
+    description: 'description',
+    type: 'type',
+    content: 'content',
+    workId: 'workId'
+  };
+
+  export type LanguageScalarFieldEnum = (typeof LanguageScalarFieldEnum)[keyof typeof LanguageScalarFieldEnum]
+
+
   export const PhotoScalarFieldEnum: {
     id: 'id',
     url: 'url',
+    titre: 'titre',
     caption: 'caption',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -4530,21 +5875,29 @@ export namespace Prisma {
     NOT?: WorkWhereInput | WorkWhereInput[]
     id?: IntFilter<"Work"> | number
     title?: StringFilter<"Work"> | string
-    description?: StringFilter<"Work"> | string
+    subtitle?: StringNullableFilter<"Work"> | string | null
+    description?: StringNullableFilter<"Work"> | string | null
+    illustration?: StringFilter<"Work"> | string
+    type?: StringFilter<"Work"> | string
     createdAt?: DateTimeFilter<"Work"> | Date | string
     updatedAt?: DateTimeFilter<"Work"> | Date | string
     photos?: PhotoListRelationFilter
     videos?: VideoListRelationFilter
+    languages?: LanguageListRelationFilter
   }
 
   export type WorkOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
-    description?: SortOrder
+    subtitle?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    illustration?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     photos?: PhotoOrderByRelationAggregateInput
     videos?: VideoOrderByRelationAggregateInput
+    languages?: LanguageOrderByRelationAggregateInput
   }
 
   export type WorkWhereUniqueInput = Prisma.AtLeast<{
@@ -4553,17 +5906,24 @@ export namespace Prisma {
     OR?: WorkWhereInput[]
     NOT?: WorkWhereInput | WorkWhereInput[]
     title?: StringFilter<"Work"> | string
-    description?: StringFilter<"Work"> | string
+    subtitle?: StringNullableFilter<"Work"> | string | null
+    description?: StringNullableFilter<"Work"> | string | null
+    illustration?: StringFilter<"Work"> | string
+    type?: StringFilter<"Work"> | string
     createdAt?: DateTimeFilter<"Work"> | Date | string
     updatedAt?: DateTimeFilter<"Work"> | Date | string
     photos?: PhotoListRelationFilter
     videos?: VideoListRelationFilter
+    languages?: LanguageListRelationFilter
   }, "id">
 
   export type WorkOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
-    description?: SortOrder
+    subtitle?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    illustration?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: WorkCountOrderByAggregateInput
@@ -4579,9 +5939,89 @@ export namespace Prisma {
     NOT?: WorkScalarWhereWithAggregatesInput | WorkScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Work"> | number
     title?: StringWithAggregatesFilter<"Work"> | string
-    description?: StringWithAggregatesFilter<"Work"> | string
+    subtitle?: StringNullableWithAggregatesFilter<"Work"> | string | null
+    description?: StringNullableWithAggregatesFilter<"Work"> | string | null
+    illustration?: StringWithAggregatesFilter<"Work"> | string
+    type?: StringWithAggregatesFilter<"Work"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Work"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Work"> | Date | string
+  }
+
+  export type LanguageWhereInput = {
+    AND?: LanguageWhereInput | LanguageWhereInput[]
+    OR?: LanguageWhereInput[]
+    NOT?: LanguageWhereInput | LanguageWhereInput[]
+    id?: IntFilter<"Language"> | number
+    locale?: StringFilter<"Language"> | string
+    title?: StringFilter<"Language"> | string
+    slug?: StringFilter<"Language"> | string
+    subtitle?: StringFilter<"Language"> | string
+    description?: StringFilter<"Language"> | string
+    type?: StringFilter<"Language"> | string
+    content?: StringFilter<"Language"> | string
+    workId?: IntFilter<"Language"> | number
+    work?: XOR<WorkScalarRelationFilter, WorkWhereInput>
+  }
+
+  export type LanguageOrderByWithRelationInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    content?: SortOrder
+    workId?: SortOrder
+    work?: WorkOrderByWithRelationInput
+  }
+
+  export type LanguageWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: LanguageWhereInput | LanguageWhereInput[]
+    OR?: LanguageWhereInput[]
+    NOT?: LanguageWhereInput | LanguageWhereInput[]
+    locale?: StringFilter<"Language"> | string
+    title?: StringFilter<"Language"> | string
+    slug?: StringFilter<"Language"> | string
+    subtitle?: StringFilter<"Language"> | string
+    description?: StringFilter<"Language"> | string
+    type?: StringFilter<"Language"> | string
+    content?: StringFilter<"Language"> | string
+    workId?: IntFilter<"Language"> | number
+    work?: XOR<WorkScalarRelationFilter, WorkWhereInput>
+  }, "id">
+
+  export type LanguageOrderByWithAggregationInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    content?: SortOrder
+    workId?: SortOrder
+    _count?: LanguageCountOrderByAggregateInput
+    _avg?: LanguageAvgOrderByAggregateInput
+    _max?: LanguageMaxOrderByAggregateInput
+    _min?: LanguageMinOrderByAggregateInput
+    _sum?: LanguageSumOrderByAggregateInput
+  }
+
+  export type LanguageScalarWhereWithAggregatesInput = {
+    AND?: LanguageScalarWhereWithAggregatesInput | LanguageScalarWhereWithAggregatesInput[]
+    OR?: LanguageScalarWhereWithAggregatesInput[]
+    NOT?: LanguageScalarWhereWithAggregatesInput | LanguageScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Language"> | number
+    locale?: StringWithAggregatesFilter<"Language"> | string
+    title?: StringWithAggregatesFilter<"Language"> | string
+    slug?: StringWithAggregatesFilter<"Language"> | string
+    subtitle?: StringWithAggregatesFilter<"Language"> | string
+    description?: StringWithAggregatesFilter<"Language"> | string
+    type?: StringWithAggregatesFilter<"Language"> | string
+    content?: StringWithAggregatesFilter<"Language"> | string
+    workId?: IntWithAggregatesFilter<"Language"> | number
   }
 
   export type PhotoWhereInput = {
@@ -4590,6 +6030,7 @@ export namespace Prisma {
     NOT?: PhotoWhereInput | PhotoWhereInput[]
     id?: IntFilter<"Photo"> | number
     url?: StringFilter<"Photo"> | string
+    titre?: StringFilter<"Photo"> | string
     caption?: StringNullableFilter<"Photo"> | string | null
     createdAt?: DateTimeFilter<"Photo"> | Date | string
     updatedAt?: DateTimeFilter<"Photo"> | Date | string
@@ -4600,6 +6041,7 @@ export namespace Prisma {
   export type PhotoOrderByWithRelationInput = {
     id?: SortOrder
     url?: SortOrder
+    titre?: SortOrder
     caption?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -4613,6 +6055,7 @@ export namespace Prisma {
     OR?: PhotoWhereInput[]
     NOT?: PhotoWhereInput | PhotoWhereInput[]
     url?: StringFilter<"Photo"> | string
+    titre?: StringFilter<"Photo"> | string
     caption?: StringNullableFilter<"Photo"> | string | null
     createdAt?: DateTimeFilter<"Photo"> | Date | string
     updatedAt?: DateTimeFilter<"Photo"> | Date | string
@@ -4623,6 +6066,7 @@ export namespace Prisma {
   export type PhotoOrderByWithAggregationInput = {
     id?: SortOrder
     url?: SortOrder
+    titre?: SortOrder
     caption?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -4640,6 +6084,7 @@ export namespace Prisma {
     NOT?: PhotoScalarWhereWithAggregatesInput | PhotoScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Photo"> | number
     url?: StringWithAggregatesFilter<"Photo"> | string
+    titre?: StringWithAggregatesFilter<"Photo"> | string
     caption?: StringNullableWithAggregatesFilter<"Photo"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Photo"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Photo"> | Date | string
@@ -4710,53 +6155,75 @@ export namespace Prisma {
 
   export type WorkCreateInput = {
     title: string
-    description: string
+    subtitle?: string | null
+    description?: string | null
+    illustration: string
+    type?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     photos?: PhotoCreateNestedManyWithoutWorkInput
     videos?: VideoCreateNestedManyWithoutWorkInput
+    languages?: LanguageCreateNestedManyWithoutWorkInput
   }
 
   export type WorkUncheckedCreateInput = {
     id?: number
     title: string
-    description: string
+    subtitle?: string | null
+    description?: string | null
+    illustration: string
+    type?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     photos?: PhotoUncheckedCreateNestedManyWithoutWorkInput
     videos?: VideoUncheckedCreateNestedManyWithoutWorkInput
+    languages?: LanguageUncheckedCreateNestedManyWithoutWorkInput
   }
 
   export type WorkUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    illustration?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: PhotoUpdateManyWithoutWorkNestedInput
     videos?: VideoUpdateManyWithoutWorkNestedInput
+    languages?: LanguageUpdateManyWithoutWorkNestedInput
   }
 
   export type WorkUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    illustration?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: PhotoUncheckedUpdateManyWithoutWorkNestedInput
     videos?: VideoUncheckedUpdateManyWithoutWorkNestedInput
+    languages?: LanguageUncheckedUpdateManyWithoutWorkNestedInput
   }
 
   export type WorkCreateManyInput = {
     id?: number
     title: string
-    description: string
+    subtitle?: string | null
+    description?: string | null
+    illustration: string
+    type?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type WorkUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    illustration?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4764,13 +6231,97 @@ export namespace Prisma {
   export type WorkUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    illustration?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type LanguageCreateInput = {
+    locale: string
+    title: string
+    slug: string
+    subtitle: string
+    description: string
+    type: string
+    content: string
+    work: WorkCreateNestedOneWithoutLanguagesInput
+  }
+
+  export type LanguageUncheckedCreateInput = {
+    id?: number
+    locale: string
+    title: string
+    slug: string
+    subtitle: string
+    description: string
+    type: string
+    content: string
+    workId: number
+  }
+
+  export type LanguageUpdateInput = {
+    locale?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    work?: WorkUpdateOneRequiredWithoutLanguagesNestedInput
+  }
+
+  export type LanguageUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    locale?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    workId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type LanguageCreateManyInput = {
+    id?: number
+    locale: string
+    title: string
+    slug: string
+    subtitle: string
+    description: string
+    type: string
+    content: string
+    workId: number
+  }
+
+  export type LanguageUpdateManyMutationInput = {
+    locale?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LanguageUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    locale?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    workId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type PhotoCreateInput = {
     url: string
+    titre: string
     caption?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4780,6 +6331,7 @@ export namespace Prisma {
   export type PhotoUncheckedCreateInput = {
     id?: number
     url: string
+    titre: string
     caption?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4788,6 +6340,7 @@ export namespace Prisma {
 
   export type PhotoUpdateInput = {
     url?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4797,6 +6350,7 @@ export namespace Prisma {
   export type PhotoUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4806,6 +6360,7 @@ export namespace Prisma {
   export type PhotoCreateManyInput = {
     id?: number
     url: string
+    titre: string
     caption?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -4814,6 +6369,7 @@ export namespace Prisma {
 
   export type PhotoUpdateManyMutationInput = {
     url?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4822,6 +6378,7 @@ export namespace Prisma {
   export type PhotoUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4912,6 +6469,20 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -4935,6 +6506,17 @@ export namespace Prisma {
     none?: VideoWhereInput
   }
 
+  export type LanguageListRelationFilter = {
+    every?: LanguageWhereInput
+    some?: LanguageWhereInput
+    none?: LanguageWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type PhotoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -4943,10 +6525,17 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type LanguageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type WorkCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    subtitle?: SortOrder
     description?: SortOrder
+    illustration?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -4958,7 +6547,10 @@ export namespace Prisma {
   export type WorkMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    subtitle?: SortOrder
     description?: SortOrder
+    illustration?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -4966,7 +6558,10 @@ export namespace Prisma {
   export type WorkMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    subtitle?: SortOrder
     description?: SortOrder
+    illustration?: SortOrder
+    type?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5008,81 +6603,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type WorkScalarRelationFilter = {
-    is?: WorkWhereInput
-    isNot?: WorkWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
-  export type PhotoCountOrderByAggregateInput = {
-    id?: SortOrder
-    url?: SortOrder
-    caption?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    workId?: SortOrder
-  }
-
-  export type PhotoAvgOrderByAggregateInput = {
-    id?: SortOrder
-    workId?: SortOrder
-  }
-
-  export type PhotoMaxOrderByAggregateInput = {
-    id?: SortOrder
-    url?: SortOrder
-    caption?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    workId?: SortOrder
-  }
-
-  export type PhotoMinOrderByAggregateInput = {
-    id?: SortOrder
-    url?: SortOrder
-    caption?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    workId?: SortOrder
-  }
-
-  export type PhotoSumOrderByAggregateInput = {
-    id?: SortOrder
-    workId?: SortOrder
-  }
-
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -5098,6 +6618,111 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type WorkScalarRelationFilter = {
+    is?: WorkWhereInput
+    isNot?: WorkWhereInput
+  }
+
+  export type LanguageCountOrderByAggregateInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    content?: SortOrder
+    workId?: SortOrder
+  }
+
+  export type LanguageAvgOrderByAggregateInput = {
+    id?: SortOrder
+    workId?: SortOrder
+  }
+
+  export type LanguageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    content?: SortOrder
+    workId?: SortOrder
+  }
+
+  export type LanguageMinOrderByAggregateInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    content?: SortOrder
+    workId?: SortOrder
+  }
+
+  export type LanguageSumOrderByAggregateInput = {
+    id?: SortOrder
+    workId?: SortOrder
+  }
+
+  export type PhotoCountOrderByAggregateInput = {
+    id?: SortOrder
+    url?: SortOrder
+    titre?: SortOrder
+    caption?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    workId?: SortOrder
+  }
+
+  export type PhotoAvgOrderByAggregateInput = {
+    id?: SortOrder
+    workId?: SortOrder
+  }
+
+  export type PhotoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    url?: SortOrder
+    titre?: SortOrder
+    caption?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    workId?: SortOrder
+  }
+
+  export type PhotoMinOrderByAggregateInput = {
+    id?: SortOrder
+    url?: SortOrder
+    titre?: SortOrder
+    caption?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    workId?: SortOrder
+  }
+
+  export type PhotoSumOrderByAggregateInput = {
+    id?: SortOrder
+    workId?: SortOrder
   }
 
   export type VideoCountOrderByAggregateInput = {
@@ -5151,6 +6776,13 @@ export namespace Prisma {
     connect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
   }
 
+  export type LanguageCreateNestedManyWithoutWorkInput = {
+    create?: XOR<LanguageCreateWithoutWorkInput, LanguageUncheckedCreateWithoutWorkInput> | LanguageCreateWithoutWorkInput[] | LanguageUncheckedCreateWithoutWorkInput[]
+    connectOrCreate?: LanguageCreateOrConnectWithoutWorkInput | LanguageCreateOrConnectWithoutWorkInput[]
+    createMany?: LanguageCreateManyWorkInputEnvelope
+    connect?: LanguageWhereUniqueInput | LanguageWhereUniqueInput[]
+  }
+
   export type PhotoUncheckedCreateNestedManyWithoutWorkInput = {
     create?: XOR<PhotoCreateWithoutWorkInput, PhotoUncheckedCreateWithoutWorkInput> | PhotoCreateWithoutWorkInput[] | PhotoUncheckedCreateWithoutWorkInput[]
     connectOrCreate?: PhotoCreateOrConnectWithoutWorkInput | PhotoCreateOrConnectWithoutWorkInput[]
@@ -5165,8 +6797,19 @@ export namespace Prisma {
     connect?: VideoWhereUniqueInput | VideoWhereUniqueInput[]
   }
 
+  export type LanguageUncheckedCreateNestedManyWithoutWorkInput = {
+    create?: XOR<LanguageCreateWithoutWorkInput, LanguageUncheckedCreateWithoutWorkInput> | LanguageCreateWithoutWorkInput[] | LanguageUncheckedCreateWithoutWorkInput[]
+    connectOrCreate?: LanguageCreateOrConnectWithoutWorkInput | LanguageCreateOrConnectWithoutWorkInput[]
+    createMany?: LanguageCreateManyWorkInputEnvelope
+    connect?: LanguageWhereUniqueInput | LanguageWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -5199,6 +6842,20 @@ export namespace Prisma {
     update?: VideoUpdateWithWhereUniqueWithoutWorkInput | VideoUpdateWithWhereUniqueWithoutWorkInput[]
     updateMany?: VideoUpdateManyWithWhereWithoutWorkInput | VideoUpdateManyWithWhereWithoutWorkInput[]
     deleteMany?: VideoScalarWhereInput | VideoScalarWhereInput[]
+  }
+
+  export type LanguageUpdateManyWithoutWorkNestedInput = {
+    create?: XOR<LanguageCreateWithoutWorkInput, LanguageUncheckedCreateWithoutWorkInput> | LanguageCreateWithoutWorkInput[] | LanguageUncheckedCreateWithoutWorkInput[]
+    connectOrCreate?: LanguageCreateOrConnectWithoutWorkInput | LanguageCreateOrConnectWithoutWorkInput[]
+    upsert?: LanguageUpsertWithWhereUniqueWithoutWorkInput | LanguageUpsertWithWhereUniqueWithoutWorkInput[]
+    createMany?: LanguageCreateManyWorkInputEnvelope
+    set?: LanguageWhereUniqueInput | LanguageWhereUniqueInput[]
+    disconnect?: LanguageWhereUniqueInput | LanguageWhereUniqueInput[]
+    delete?: LanguageWhereUniqueInput | LanguageWhereUniqueInput[]
+    connect?: LanguageWhereUniqueInput | LanguageWhereUniqueInput[]
+    update?: LanguageUpdateWithWhereUniqueWithoutWorkInput | LanguageUpdateWithWhereUniqueWithoutWorkInput[]
+    updateMany?: LanguageUpdateManyWithWhereWithoutWorkInput | LanguageUpdateManyWithWhereWithoutWorkInput[]
+    deleteMany?: LanguageScalarWhereInput | LanguageScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -5237,14 +6894,38 @@ export namespace Prisma {
     deleteMany?: VideoScalarWhereInput | VideoScalarWhereInput[]
   }
 
+  export type LanguageUncheckedUpdateManyWithoutWorkNestedInput = {
+    create?: XOR<LanguageCreateWithoutWorkInput, LanguageUncheckedCreateWithoutWorkInput> | LanguageCreateWithoutWorkInput[] | LanguageUncheckedCreateWithoutWorkInput[]
+    connectOrCreate?: LanguageCreateOrConnectWithoutWorkInput | LanguageCreateOrConnectWithoutWorkInput[]
+    upsert?: LanguageUpsertWithWhereUniqueWithoutWorkInput | LanguageUpsertWithWhereUniqueWithoutWorkInput[]
+    createMany?: LanguageCreateManyWorkInputEnvelope
+    set?: LanguageWhereUniqueInput | LanguageWhereUniqueInput[]
+    disconnect?: LanguageWhereUniqueInput | LanguageWhereUniqueInput[]
+    delete?: LanguageWhereUniqueInput | LanguageWhereUniqueInput[]
+    connect?: LanguageWhereUniqueInput | LanguageWhereUniqueInput[]
+    update?: LanguageUpdateWithWhereUniqueWithoutWorkInput | LanguageUpdateWithWhereUniqueWithoutWorkInput[]
+    updateMany?: LanguageUpdateManyWithWhereWithoutWorkInput | LanguageUpdateManyWithWhereWithoutWorkInput[]
+    deleteMany?: LanguageScalarWhereInput | LanguageScalarWhereInput[]
+  }
+
+  export type WorkCreateNestedOneWithoutLanguagesInput = {
+    create?: XOR<WorkCreateWithoutLanguagesInput, WorkUncheckedCreateWithoutLanguagesInput>
+    connectOrCreate?: WorkCreateOrConnectWithoutLanguagesInput
+    connect?: WorkWhereUniqueInput
+  }
+
+  export type WorkUpdateOneRequiredWithoutLanguagesNestedInput = {
+    create?: XOR<WorkCreateWithoutLanguagesInput, WorkUncheckedCreateWithoutLanguagesInput>
+    connectOrCreate?: WorkCreateOrConnectWithoutLanguagesInput
+    upsert?: WorkUpsertWithoutLanguagesInput
+    connect?: WorkWhereUniqueInput
+    update?: XOR<XOR<WorkUpdateToOneWithWhereWithoutLanguagesInput, WorkUpdateWithoutLanguagesInput>, WorkUncheckedUpdateWithoutLanguagesInput>
+  }
+
   export type WorkCreateNestedOneWithoutPhotosInput = {
     create?: XOR<WorkCreateWithoutPhotosInput, WorkUncheckedCreateWithoutPhotosInput>
     connectOrCreate?: WorkCreateOrConnectWithoutPhotosInput
     connect?: WorkWhereUniqueInput
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type WorkUpdateOneRequiredWithoutPhotosNestedInput = {
@@ -5292,6 +6973,20 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -5349,34 +7044,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -5405,8 +7072,23 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type PhotoCreateWithoutWorkInput = {
     url: string
+    titre: string
     caption?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5415,6 +7097,7 @@ export namespace Prisma {
   export type PhotoUncheckedCreateWithoutWorkInput = {
     id?: number
     url: string
+    titre: string
     caption?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5453,6 +7136,36 @@ export namespace Prisma {
     data: VideoCreateManyWorkInput | VideoCreateManyWorkInput[]
   }
 
+  export type LanguageCreateWithoutWorkInput = {
+    locale: string
+    title: string
+    slug: string
+    subtitle: string
+    description: string
+    type: string
+    content: string
+  }
+
+  export type LanguageUncheckedCreateWithoutWorkInput = {
+    id?: number
+    locale: string
+    title: string
+    slug: string
+    subtitle: string
+    description: string
+    type: string
+    content: string
+  }
+
+  export type LanguageCreateOrConnectWithoutWorkInput = {
+    where: LanguageWhereUniqueInput
+    create: XOR<LanguageCreateWithoutWorkInput, LanguageUncheckedCreateWithoutWorkInput>
+  }
+
+  export type LanguageCreateManyWorkInputEnvelope = {
+    data: LanguageCreateManyWorkInput | LanguageCreateManyWorkInput[]
+  }
+
   export type PhotoUpsertWithWhereUniqueWithoutWorkInput = {
     where: PhotoWhereUniqueInput
     update: XOR<PhotoUpdateWithoutWorkInput, PhotoUncheckedUpdateWithoutWorkInput>
@@ -5475,6 +7188,7 @@ export namespace Prisma {
     NOT?: PhotoScalarWhereInput | PhotoScalarWhereInput[]
     id?: IntFilter<"Photo"> | number
     url?: StringFilter<"Photo"> | string
+    titre?: StringFilter<"Photo"> | string
     caption?: StringNullableFilter<"Photo"> | string | null
     createdAt?: DateTimeFilter<"Photo"> | Date | string
     updatedAt?: DateTimeFilter<"Photo"> | Date | string
@@ -5509,21 +7223,126 @@ export namespace Prisma {
     workId?: IntFilter<"Video"> | number
   }
 
+  export type LanguageUpsertWithWhereUniqueWithoutWorkInput = {
+    where: LanguageWhereUniqueInput
+    update: XOR<LanguageUpdateWithoutWorkInput, LanguageUncheckedUpdateWithoutWorkInput>
+    create: XOR<LanguageCreateWithoutWorkInput, LanguageUncheckedCreateWithoutWorkInput>
+  }
+
+  export type LanguageUpdateWithWhereUniqueWithoutWorkInput = {
+    where: LanguageWhereUniqueInput
+    data: XOR<LanguageUpdateWithoutWorkInput, LanguageUncheckedUpdateWithoutWorkInput>
+  }
+
+  export type LanguageUpdateManyWithWhereWithoutWorkInput = {
+    where: LanguageScalarWhereInput
+    data: XOR<LanguageUpdateManyMutationInput, LanguageUncheckedUpdateManyWithoutWorkInput>
+  }
+
+  export type LanguageScalarWhereInput = {
+    AND?: LanguageScalarWhereInput | LanguageScalarWhereInput[]
+    OR?: LanguageScalarWhereInput[]
+    NOT?: LanguageScalarWhereInput | LanguageScalarWhereInput[]
+    id?: IntFilter<"Language"> | number
+    locale?: StringFilter<"Language"> | string
+    title?: StringFilter<"Language"> | string
+    slug?: StringFilter<"Language"> | string
+    subtitle?: StringFilter<"Language"> | string
+    description?: StringFilter<"Language"> | string
+    type?: StringFilter<"Language"> | string
+    content?: StringFilter<"Language"> | string
+    workId?: IntFilter<"Language"> | number
+  }
+
+  export type WorkCreateWithoutLanguagesInput = {
+    title: string
+    subtitle?: string | null
+    description?: string | null
+    illustration: string
+    type?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    photos?: PhotoCreateNestedManyWithoutWorkInput
+    videos?: VideoCreateNestedManyWithoutWorkInput
+  }
+
+  export type WorkUncheckedCreateWithoutLanguagesInput = {
+    id?: number
+    title: string
+    subtitle?: string | null
+    description?: string | null
+    illustration: string
+    type?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    photos?: PhotoUncheckedCreateNestedManyWithoutWorkInput
+    videos?: VideoUncheckedCreateNestedManyWithoutWorkInput
+  }
+
+  export type WorkCreateOrConnectWithoutLanguagesInput = {
+    where: WorkWhereUniqueInput
+    create: XOR<WorkCreateWithoutLanguagesInput, WorkUncheckedCreateWithoutLanguagesInput>
+  }
+
+  export type WorkUpsertWithoutLanguagesInput = {
+    update: XOR<WorkUpdateWithoutLanguagesInput, WorkUncheckedUpdateWithoutLanguagesInput>
+    create: XOR<WorkCreateWithoutLanguagesInput, WorkUncheckedCreateWithoutLanguagesInput>
+    where?: WorkWhereInput
+  }
+
+  export type WorkUpdateToOneWithWhereWithoutLanguagesInput = {
+    where?: WorkWhereInput
+    data: XOR<WorkUpdateWithoutLanguagesInput, WorkUncheckedUpdateWithoutLanguagesInput>
+  }
+
+  export type WorkUpdateWithoutLanguagesInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    illustration?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    photos?: PhotoUpdateManyWithoutWorkNestedInput
+    videos?: VideoUpdateManyWithoutWorkNestedInput
+  }
+
+  export type WorkUncheckedUpdateWithoutLanguagesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    illustration?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    photos?: PhotoUncheckedUpdateManyWithoutWorkNestedInput
+    videos?: VideoUncheckedUpdateManyWithoutWorkNestedInput
+  }
+
   export type WorkCreateWithoutPhotosInput = {
     title: string
-    description: string
+    subtitle?: string | null
+    description?: string | null
+    illustration: string
+    type?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     videos?: VideoCreateNestedManyWithoutWorkInput
+    languages?: LanguageCreateNestedManyWithoutWorkInput
   }
 
   export type WorkUncheckedCreateWithoutPhotosInput = {
     id?: number
     title: string
-    description: string
+    subtitle?: string | null
+    description?: string | null
+    illustration: string
+    type?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     videos?: VideoUncheckedCreateNestedManyWithoutWorkInput
+    languages?: LanguageUncheckedCreateNestedManyWithoutWorkInput
   }
 
   export type WorkCreateOrConnectWithoutPhotosInput = {
@@ -5544,36 +7363,52 @@ export namespace Prisma {
 
   export type WorkUpdateWithoutPhotosInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    illustration?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     videos?: VideoUpdateManyWithoutWorkNestedInput
+    languages?: LanguageUpdateManyWithoutWorkNestedInput
   }
 
   export type WorkUncheckedUpdateWithoutPhotosInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    illustration?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     videos?: VideoUncheckedUpdateManyWithoutWorkNestedInput
+    languages?: LanguageUncheckedUpdateManyWithoutWorkNestedInput
   }
 
   export type WorkCreateWithoutVideosInput = {
     title: string
-    description: string
+    subtitle?: string | null
+    description?: string | null
+    illustration: string
+    type?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     photos?: PhotoCreateNestedManyWithoutWorkInput
+    languages?: LanguageCreateNestedManyWithoutWorkInput
   }
 
   export type WorkUncheckedCreateWithoutVideosInput = {
     id?: number
     title: string
-    description: string
+    subtitle?: string | null
+    description?: string | null
+    illustration: string
+    type?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     photos?: PhotoUncheckedCreateNestedManyWithoutWorkInput
+    languages?: LanguageUncheckedCreateNestedManyWithoutWorkInput
   }
 
   export type WorkCreateOrConnectWithoutVideosInput = {
@@ -5594,24 +7429,33 @@ export namespace Prisma {
 
   export type WorkUpdateWithoutVideosInput = {
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    illustration?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: PhotoUpdateManyWithoutWorkNestedInput
+    languages?: LanguageUpdateManyWithoutWorkNestedInput
   }
 
   export type WorkUncheckedUpdateWithoutVideosInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    illustration?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: PhotoUncheckedUpdateManyWithoutWorkNestedInput
+    languages?: LanguageUncheckedUpdateManyWithoutWorkNestedInput
   }
 
   export type PhotoCreateManyWorkInput = {
     id?: number
     url: string
+    titre: string
     caption?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5625,8 +7469,20 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type LanguageCreateManyWorkInput = {
+    id?: number
+    locale: string
+    title: string
+    slug: string
+    subtitle: string
+    description: string
+    type: string
+    content: string
+  }
+
   export type PhotoUpdateWithoutWorkInput = {
     url?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5635,6 +7491,7 @@ export namespace Prisma {
   export type PhotoUncheckedUpdateWithoutWorkInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5643,6 +7500,7 @@ export namespace Prisma {
   export type PhotoUncheckedUpdateManyWithoutWorkInput = {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
+    titre?: StringFieldUpdateOperationsInput | string
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5669,6 +7527,38 @@ export namespace Prisma {
     caption?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LanguageUpdateWithoutWorkInput = {
+    locale?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LanguageUncheckedUpdateWithoutWorkInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    locale?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LanguageUncheckedUpdateManyWithoutWorkInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    locale?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
   }
 
 

@@ -1,26 +1,16 @@
-import Image from "next/image";
 import prisma  from "@/lib/prisma";
-
+import CardFilter from "@/app/components/card_filter";
 
 
 export default async function Home() {
-  const works = await prisma.work.findMany({include: {photos: true}});
+  const works = await prisma.work.findMany({include: {photos:{ take: 1}}});
+  const alltags = works.map((work) => work.type);
+  const tags = Array.from(new Set(alltags));
+
+
 
   return (
-    <div>
-      <h1>My Works</h1>
-     { works.map((work) => (
-        <div key={work.id}>
-          <h2>{work.title}</h2>
-          <p>{work.description}</p>
-          {work.photos.length > 0 &&
-            work.photos.map((photo) => (
-              <Image key={photo.id} src={photo.url} alt={work.title} width={300} height={200} />
-            ))
-          }
-        </div>
-      ))
-    }
-    </div>
+    <CardFilter works={works} tags={tags} />
+
   );
 }
