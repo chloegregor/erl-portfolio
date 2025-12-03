@@ -4,16 +4,29 @@ import {useState, useEffect} from 'react';
 interface Work {
   id: number;
   title: string;
+  subtitle: string
+  description: string
   illustration: string;
-  images: string[];
+  photos: string[];
   videos: string[];
 }
 
-export default function Work({ work }: { work: Work}) {
+export default function Work({ work}: { work: Work}) {
+  if (work === null) {
+    return
+  }
+  console.log("work", work) 
   return (
-    <div className={`h-[10em] flex flex-col  items-center justify-center`} key={work.id}>
-      <div id="card" className={`h-[60%] w-[70%]  flex flex-col items-center justify-center gap-3 `}>
-        <h2 id="font"className=" text-[0.5em]">{work.title}</h2>
+    <div className= "flex flex-col  items-center justify-center" key={work.id}>
+      <div id="" className={` flex flex-col items-center justify-center text-justify gap-3 `}>
+        <h2 id=""className=" text-[1em]">{work.title}</h2>
+        <h3>{work?.subtitle}</h3>
+        <p>{work.description}</p>
+        {work.photos?.map((photo, index) => (
+          <div key={index} className=" h-[400px] w-[600px] flex items-center justify-center my-5">
+            <img src={photo.url} alt={work.title} className=" max-h-full max-w-full object-cover"/>
+          </div>
+        ))}
         </div>
     </div>
   );

@@ -9,9 +9,8 @@ interface Work {
   illustration: string;
 }
 
-export default function CardGrid({ work, opacity }: { work: Work, opacity: boolean}) {
+export default function CardGrid({ work, opacity, selectWork}: { work: Work, opacity: boolean, selectWork: React.Dispatch<React.SetStateAction<Work | null>>}) {
   const [place, setPlace] = useState<"center" | "start" | "end"| null>(null);
-  console.log("work in card grid", work);
 
 
   useEffect(() => {
@@ -27,12 +26,12 @@ export default function CardGrid({ work, opacity }: { work: Work, opacity: boole
   }
 
     return (
-    <div className={`h-[10em] flex flex-col  items-${place} justify-${place}` }key={work.id}>
-      <div id="card" className={`h-[60%] w-[70%]  flex flex-col items-center justify-center gap-3 ${opacity ? "opacity-0" : "opacity-100"}`}>
-        <h2 id="font"className=" text-[0.5em]">{work.title}</h2>
+    <div className={`aspect-square border flex flex-col  items-${place} justify-${place}` }key={work.id}>
+      <div id="card" onClick={() => selectWork(work)} className={`h-[60%] w-[70%]  flex flex-col items-center justify-center gap-3 ${opacity ? "opacity-0" : "opacity-100"}`}>
+        <h2 id="font"className=" text-[0.9em]">{work.title}</h2>
         {work.illustration.includes("https://") ? (
-          <div className="h-[70%] w-[100%]  flex items-center justify-center">
-            <img src={work.illustration} alt={work.title} className=" max-h-full max-w-full object-cover"/>
+          <div className="  relative h-[80%] w-[100%]">
+            <Image src={work.illustration} alt={work.title} fill className="object-contain"/>
           </div>
         )
           : (

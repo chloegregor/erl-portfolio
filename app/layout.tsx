@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen `}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col `}
       >
         <header>
 
@@ -33,11 +33,11 @@ export default function RootLayout({
             <h1 className="text-2xl ">Elodie Rougeaux-Léaux</h1>
           </div>
         </header>
-        <div className="pt-[2.8em] h-full">
+        <div className="pt-[2.8em] flex-1">
           {children}
         </div>
         <footer>
-          <div className=" mt-[10em] w-full text-end">
+          <div className=" w-full text-end">
             <p className="text-sm ">© 2024 Elodie Rougeaux-Léaud</p>
           </div>
         </footer>
