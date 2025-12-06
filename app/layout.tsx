@@ -23,7 +23,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         </div>
         <footer>
           <div className=" w-full text-end">
-            <p className="text-sm ">© 2024 Elodie Rougeaux-Léaud</p>
+            <p className="text-sm "></p>
           </div>
         </footer>
       </body>

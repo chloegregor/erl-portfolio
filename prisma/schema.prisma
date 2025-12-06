@@ -20,6 +20,7 @@ model Work {
   illustration String
   placement_x String
   placement_y String
+  url        String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   photos      Photo[]
@@ -60,7 +61,7 @@ model Photo {
 model Video {
   id        Int      @id @default(autoincrement())
   url       String
-  caption   String?
+  thumbnail   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   work      Work     @relation(fields: [workId], references: [id], onDelete: Cascade)

@@ -1,6 +1,5 @@
 
-import WorkPhoto from "./workPhotos";
-import Vimeo from "./vimeo"
+import WorkMedias from "./workMedias";
 
 interface Trad {
   id: number;
@@ -18,17 +17,21 @@ interface Trad {
     }[];
     videos: {
       url: string;
+      thumbnail: string;
     }[];
   } ;
 }
 
-export default function Work({trad}: {trad: Trad | null}) {
+export default function Work({trad}: {trad: Trad}) {
 
   if (trad === null) {
     return
   }
 
   const work =trad.work
+  const photos = work.photos
+  const videos = work.videos
+  const medias = [...photos, ...videos]
 
   return (
     <div className= "mx-50 flex flex-col gap-10 " key={trad.id}>
@@ -38,22 +41,15 @@ export default function Work({trad}: {trad: Trad | null}) {
           <span className=" ml-2 self-end mb-[4px]">{work.year}</span>
         </div>
         <div>
-          <h3 className=" text-[1.2em] italic">{trad.subtitle}</h3>
+          <h3 className=" text-[1.2em] italic w-[600px]">{trad.subtitle}</h3>
         </div>
       </span>
-      <div className="  flex ">
+      <div className="  flex">
         <div className="fit-content mx-auto relative">
-        <p className=" absolute w-50 -left-60 bottom-0 whitespace-pre-wrap text-end ">{trad?.photos_caption}</p>
-        <WorkPhoto photos={work.photos}/>
+        <WorkMedias medias={medias} videos_caption={trad.videos_caption} photos_caption={trad.photos_caption}/>
         </div>
       </div>
-      <p className="whitespace-pre-wrap text-justify mt-10 mr-100 ">{trad?.description}</p>
-      <div className=" flex justify-end relative">
-        <div className="grid grid-cols-2 gap-2 w-[60%] relative ">
-          <Vimeo videos={work.videos}/>
-        <p className=" whitespace-pre-wrap absolute w-50 -left-60 bottom-0 text-end ">{trad?.videos_caption}</p>
-        </div>
-      </div>
+        <p className="whitespace-pre-wrap text-justify mt-30 mr-120 ">{trad?.description}</p>
     </div>
   );
 }

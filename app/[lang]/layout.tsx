@@ -30,7 +30,9 @@ export default async function LangLayout({ children, params }: LangLayoutProps) 
       <nav className=" ">
         <Tags tags={tags} locale={locale} />
       </nav>
-      {children}
+      <div className=" mt-24 mb-[300px]">
+        {children}
+      </div>
 
     </>
   );

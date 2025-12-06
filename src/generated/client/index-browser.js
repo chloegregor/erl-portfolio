@@ -124,6 +124,7 @@ exports.Prisma.WorkScalarFieldEnum = {
   illustration: 'illustration',
   placement_x: 'placement_x',
   placement_y: 'placement_y',
+  url: 'url',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -155,7 +156,7 @@ exports.Prisma.PhotoScalarFieldEnum = {
 exports.Prisma.VideoScalarFieldEnum = {
   id: 'id',
   url: 'url',
-  caption: 'caption',
+  thumbnail: 'thumbnail',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   workId: 'workId'

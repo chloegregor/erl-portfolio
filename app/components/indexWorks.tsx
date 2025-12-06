@@ -7,6 +7,7 @@ interface Work {
   id: number;
   year: string;
   illustration: string;
+  url: string;
   photos: { id: number; url: string; titre: string }[];
   videos: { id: number; url: string }[];
   languages: { id: number; type: string; locale: string;
@@ -49,11 +50,11 @@ export function IndexWorks({ works }: { works: Work[] }) {
               <div className ="border-r col-span-1 text-center">
                 <p>{work.videos.length}</p>
               </div>
-              <button className="border-r cursor-pointer col-span-1 text-center" onClick={() => setSelectedWorkId(work.id)}>Editer</button>
+              <button className="border-r cursor-pointer col-span-1 text-center" onClick={() => setSelectedWorkId(work.id)}>editer</button>
               {selectedWorkId === work.id && (
                 <EditForm workToEdit={work} onClose={() => setSelectedWorkId(null)} />
               )}
-              <button onClick={() => deleteWorkById(work.id)}className="cursor-pointer col-span-1 text-center border-r">Supprimer</button>
+              <button onClick={() => deleteWorkById(work.id)}className="cursor-pointer col-span-1 text-center border-r border-black text-red-500">Poubelle</button>
 
             </div>
           ))}

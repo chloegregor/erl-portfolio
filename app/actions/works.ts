@@ -21,6 +21,7 @@ export async function getWorkById(id: number) {
 export async function createWork(formData: FormData) {
   console.log("formData received in action", formData)
     const type = formData.get('type') as string;
+    const urlarticle = formData.get('urlarticle') as string;
     const year = formData.get('year') as string;
     const title_fr =formData.get('titre_fr') as string;
     const title_en =formData.get('titre_en') as string;
@@ -49,6 +50,7 @@ export async function createWork(formData: FormData) {
         illustration: illustration,
         placement_x: placement_x,
         placement_y: placement_y,
+        url: urlarticle,
         photos: {
           create : photosurls.map((url) => ({ url: url, titre: phototitles[photosurls.indexOf(url)] })),
         },
@@ -78,6 +80,7 @@ export async function updateWork(formData: FormData) {
     console.log("formData received in update action", formData)
     const id = Number(formData.get('id'));
     const type = formData.get('type') as string;
+    const urlarticle = formData.get('urlarticle') as string;
     const year = formData.get('year') as string;
     const fr_id = Number(formData.get('fr_id'));
     const en_id = Number(formData.get('en_id'));
@@ -96,16 +99,34 @@ export async function updateWork(formData: FormData) {
     const videos_captions_fr = formData.get('videos_caption_fr') as string;
     const videos_captions_en = formData.get('videos_caption_en') as string;
 
+    async function fetchThumbnail(url:string) {
+      console.log('fetchThumbnail called with url:', url);
+    const response = await fetch(`https://vimeo.com/api/oembed.json?url=${(url)}`);
+     const data = await response.json();
+      console.log("VIMEO THUMBNAIL DATA", data);
+     const thumbnail_url = data.thumbnail_url_with_play_button;
+     return thumbnail_url;
+   }
+
+   const videoWithThumbnails = await Promise.all(videos.map(async (url) => ({
+      url: url,
+      thumbnail: await fetchThumbnail(url)
+   })));
+
+   console.log('videoWithThumbnails', videoWithThumbnails);
+
+
     await prisma.work.update({
       where: { id: id },
       data: {
         year: year,
         illustration: illustration,
+        url: urlarticle,
         photos: {
           create : photosurls.map((url) => ({ url: url, titre: phototitles[photosurls.indexOf(url)] })),
         },
         videos: {
-          create : videos.map((url) => ({ url: url })),
+          create : videoWithThumbnails
         }
       },
     });

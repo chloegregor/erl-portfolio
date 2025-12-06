@@ -37,6 +37,7 @@ export function CreateForm () {
       }
     });
     formData.append("type", (form.type as HTMLSelectElement).value);
+    formData.append("urlarticle", (form.urlarticle as HTMLInputElement).value);
     formData.append("year", form.year.value);
     formData.append("titre_fr", form.title_fr.value);
     formData.append("subtitle_fr", form.subtitle_fr.value);
@@ -92,7 +93,7 @@ export function CreateForm () {
               <button className="absolute top-0 right-0 cursor-pointer" onClick={() => setIsClicked(false)}>Fermer</button>
               <h2 className="text-[2em] text-center">Création</h2>
               <div className=" mt-[2em] flex flex-col gap-[2em]">
-                <div  className="">
+                <div  className="flex gap-5">
                   <label htmlFor="type">Type de projet :</label>
                   <select id="type" name="type" className="border w-[20%]">
                     <option value="Performances">Performance</option>
@@ -101,6 +102,10 @@ export function CreateForm () {
                     <option value="Presse">Presse</option>
                     <option value ="Publications">Publication</option>
                   </select>
+                   <div className="flex gap-2">
+                    <label htmlFor="urlarticle">lien externe : </label>
+                    <input type="text" className="border" id="urlarticle" name="urlarticle"  />
+                  </div>
                 </div>
                 <div className='flex gap-2'>
                   <label htmlFor="title_fr">Titre-FR:</label>

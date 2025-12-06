@@ -82,7 +82,8 @@ export async function getTraductionsByLocale (locale: string) {
             videos: {
               select: {
                 url: true,
-                id: true
+                id: true,
+                thumbnail: true
               }
             }
           }
@@ -122,7 +123,8 @@ export async function getTraductionBySlugAndLocale(slug: string, locale: string)
             videos: {
               select: {
                 url: true,
-                id: true
+                id: true,
+                thumbnail: true
               }
             }
           }

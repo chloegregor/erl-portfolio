@@ -7,6 +7,7 @@ interface Work {
   id: number;
   year: string;
   illustration: string;
+  url: string;
   photos: { id: number; url: string; titre: string }[];
   videos: { id: number; url: string }[];
   languages: { id: number; type: string; locale: string;
@@ -64,6 +65,7 @@ export function EditForm({ workToEdit, onClose }: EditFormProps ) {
     formData.append("id", work.id.toString());
     formData.append('fr_id', form.traduction_fr_id.value);
     formData.append('en_id', form.traduction_en_id.value);
+    formData.append("urlarticle", (form.urlarticle as HTMLInputElement).value);
     formData.append("title_fr", form.titre_fr.value);
     formData.append("year", form.year.value);
     formData.append("subtitle_fr", form.subtitle_fr.value);
@@ -73,14 +75,14 @@ export function EditForm({ workToEdit, onClose }: EditFormProps ) {
     formData.append("description_en", form.description_en.value);
     formData.append("type", (form.type as HTMLSelectElement).value);
     formData.append("illustration", illustration);
-    formData.append("photos_caption_fr", form.photos_caption_fr.value);
-    formData.append("photos_caption_en", form.photos_caption_en.value);
     formData.append("videos_caption_fr", form.videos_caption_fr.value);
     formData.append("videos_caption_en", form.videos_caption_en.value);
     if (uploadedPhotos.length > 0)
       uploadedPhotos.forEach((photo) => {
-        formData.append("photosurls", photo[0]);
-        formData.append("phototitles", photo[1]);
+    formData.append("photosurls", photo[0]);
+    formData.append("phototitles", photo[1]);
+    formData.append("photos_caption_fr", form.photos_caption_fr.value);
+    formData.append("photos_caption_en", form.photos_caption_en.value);
       });
     const result = await updateWork(formData);
     if (!result.ok) {
@@ -109,7 +111,7 @@ export function EditForm({ workToEdit, onClose }: EditFormProps ) {
           <input type="hidden" name="_method" />
           <input type="hidden" name="traduction_fr_id" value={work.languages.find(lang => lang.locale === 'fr')?.id} />
           <input type="hidden" name="traduction_en_id" value={work.languages.find(lang => lang.locale === 'en')?.id} />
-          <div>
+          <div className="flex gap-5">
             <label htmlFor={`type-${work.id}`}>Type: </label>
             <select
               id="type" name="type"
@@ -123,7 +125,14 @@ export function EditForm({ workToEdit, onClose }: EditFormProps ) {
               <option value="Presse">Presse</option>
               <option value ="Publications">Publication</option>
             </select>
-
+            <label className="" htmlFor={`urlarticle-${work.id}`}>lien externe : </label>
+            <input
+              type="text"
+              className="border w-[30%]"
+              id={`urlarticle-${work.id}`}
+              name="urlarticle"
+              defaultValue={work.url}
+            />
           </div>
           <div className ="flex gap-2">
             <label className="" htmlFor={`title-${work.id}`}>Titre-FR: </label>
@@ -239,9 +248,9 @@ export function EditForm({ workToEdit, onClose }: EditFormProps ) {
               <span>Vidéos:</span>
               <div className="flex flex-col gap-2">
                 {videos.map((video) => (
-                  <div key={video.id}>
+                  <div key={video.id} className="flex gap-2">
                     <p>{video.url}</p>
-                    <button onClick={() => deleteVideoById(video.id)}>x</button>
+                    <button type="button" className="text-red-500 cursor-pointer" onClick={() => deleteVideoById(video.id)}>x</button>
                   </div>
                 ))}
               </div>
