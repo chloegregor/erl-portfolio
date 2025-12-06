@@ -1,22 +1,44 @@
 
-export default function Vimeo({url} : {url: string}) {
+interface Video {
+  url: string;
+}
 
-  const videoId = url.split('/').pop();
+export default function Vimeo({videos} : {videos: Video[]}) {
 
-  if (!videoId) {
+  if (videos.length === 0) {
     return null;
   }
 
+  function videoId (url:string) {
+    if (!url) {
+      return null;
+  }else {
+      return url.split('/').pop();
+    }
+  }
+
   return (
-    <iframe
-      src={`https://player.vimeo.com/video/${videoId}`}
-      width="100"
-      height="100"
-      frameBorder="0"
-      allow="autoplay; fullscreen; picture-in-picture"
-      allowFullScreen
-      title="Vimeo Video Player"
-    ></iframe>
+    <>
+
+    {videos.map((video, index) => {
+        const id = videoId(video.url);
+        if (!id) {
+          return null;
+        }
+
+      return (
+        <div key={index} className=" relative w-full h-[230px]  ">
+          <iframe className="absolute top-0 left-0 w-full h-full"
+        src={`https://player.vimeo.com/video/${id}`}
+        loading ="lazy"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowFullScreen
+        title="Vimeo Video Player"
+      ></iframe>
+        </div>
+      )
+    })}
+    </>
   );
 
 }

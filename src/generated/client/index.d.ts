@@ -1204,33 +1204,30 @@ export namespace Prisma {
 
   export type WorkMinAggregateOutputType = {
     id: number | null
-    title: string | null
-    subtitle: string | null
-    description: string | null
+    year: string | null
     illustration: string | null
-    type: string | null
+    placement_x: string | null
+    placement_y: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type WorkMaxAggregateOutputType = {
     id: number | null
-    title: string | null
-    subtitle: string | null
-    description: string | null
+    year: string | null
     illustration: string | null
-    type: string | null
+    placement_x: string | null
+    placement_y: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type WorkCountAggregateOutputType = {
     id: number
-    title: number
-    subtitle: number
-    description: number
+    year: number
     illustration: number
-    type: number
+    placement_x: number
+    placement_y: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1247,33 +1244,30 @@ export namespace Prisma {
 
   export type WorkMinAggregateInputType = {
     id?: true
-    title?: true
-    subtitle?: true
-    description?: true
+    year?: true
     illustration?: true
-    type?: true
+    placement_x?: true
+    placement_y?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type WorkMaxAggregateInputType = {
     id?: true
-    title?: true
-    subtitle?: true
-    description?: true
+    year?: true
     illustration?: true
-    type?: true
+    placement_x?: true
+    placement_y?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type WorkCountAggregateInputType = {
     id?: true
-    title?: true
-    subtitle?: true
-    description?: true
+    year?: true
     illustration?: true
-    type?: true
+    placement_x?: true
+    placement_y?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1367,11 +1361,10 @@ export namespace Prisma {
 
   export type WorkGroupByOutputType = {
     id: number
-    title: string
-    subtitle: string | null
-    description: string | null
+    year: string
     illustration: string
-    type: string
+    placement_x: string
+    placement_y: string
     createdAt: Date
     updatedAt: Date
     _count: WorkCountAggregateOutputType | null
@@ -1397,11 +1390,10 @@ export namespace Prisma {
 
   export type WorkSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    title?: boolean
-    subtitle?: boolean
-    description?: boolean
+    year?: boolean
     illustration?: boolean
-    type?: boolean
+    placement_x?: boolean
+    placement_y?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     photos?: boolean | Work$photosArgs<ExtArgs>
@@ -1412,38 +1404,35 @@ export namespace Prisma {
 
   export type WorkSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    title?: boolean
-    subtitle?: boolean
-    description?: boolean
+    year?: boolean
     illustration?: boolean
-    type?: boolean
+    placement_x?: boolean
+    placement_y?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["work"]>
 
   export type WorkSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    title?: boolean
-    subtitle?: boolean
-    description?: boolean
+    year?: boolean
     illustration?: boolean
-    type?: boolean
+    placement_x?: boolean
+    placement_y?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["work"]>
 
   export type WorkSelectScalar = {
     id?: boolean
-    title?: boolean
-    subtitle?: boolean
-    description?: boolean
+    year?: boolean
     illustration?: boolean
-    type?: boolean
+    placement_x?: boolean
+    placement_y?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type WorkOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "subtitle" | "description" | "illustration" | "type" | "createdAt" | "updatedAt", ExtArgs["result"]["work"]>
+  export type WorkOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "year" | "illustration" | "placement_x" | "placement_y" | "createdAt" | "updatedAt", ExtArgs["result"]["work"]>
   export type WorkInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     photos?: boolean | Work$photosArgs<ExtArgs>
     videos?: boolean | Work$videosArgs<ExtArgs>
@@ -1462,11 +1451,10 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      title: string
-      subtitle: string | null
-      description: string | null
+      year: string
       illustration: string
-      type: string
+      placement_x: string
+      placement_y: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["work"]>
@@ -1896,11 +1884,10 @@ export namespace Prisma {
    */
   interface WorkFieldRefs {
     readonly id: FieldRef<"Work", 'Int'>
-    readonly title: FieldRef<"Work", 'String'>
-    readonly subtitle: FieldRef<"Work", 'String'>
-    readonly description: FieldRef<"Work", 'String'>
+    readonly year: FieldRef<"Work", 'String'>
     readonly illustration: FieldRef<"Work", 'String'>
-    readonly type: FieldRef<"Work", 'String'>
+    readonly placement_x: FieldRef<"Work", 'String'>
+    readonly placement_y: FieldRef<"Work", 'String'>
     readonly createdAt: FieldRef<"Work", 'DateTime'>
     readonly updatedAt: FieldRef<"Work", 'DateTime'>
   }
@@ -2409,8 +2396,11 @@ export namespace Prisma {
     subtitle: string | null
     description: string | null
     type: string | null
-    content: string | null
+    photos_caption: string | null
+    videos_caption: string | null
     workId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type LanguageMaxAggregateOutputType = {
@@ -2421,8 +2411,11 @@ export namespace Prisma {
     subtitle: string | null
     description: string | null
     type: string | null
-    content: string | null
+    photos_caption: string | null
+    videos_caption: string | null
     workId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type LanguageCountAggregateOutputType = {
@@ -2433,8 +2426,11 @@ export namespace Prisma {
     subtitle: number
     description: number
     type: number
-    content: number
+    photos_caption: number
+    videos_caption: number
     workId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -2457,8 +2453,11 @@ export namespace Prisma {
     subtitle?: true
     description?: true
     type?: true
-    content?: true
+    photos_caption?: true
+    videos_caption?: true
     workId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type LanguageMaxAggregateInputType = {
@@ -2469,8 +2468,11 @@ export namespace Prisma {
     subtitle?: true
     description?: true
     type?: true
-    content?: true
+    photos_caption?: true
+    videos_caption?: true
     workId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type LanguageCountAggregateInputType = {
@@ -2481,8 +2483,11 @@ export namespace Prisma {
     subtitle?: true
     description?: true
     type?: true
-    content?: true
+    photos_caption?: true
+    videos_caption?: true
     workId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -2577,11 +2582,14 @@ export namespace Prisma {
     locale: string
     title: string
     slug: string
-    subtitle: string
-    description: string
+    subtitle: string | null
+    description: string | null
     type: string
-    content: string
+    photos_caption: string | null
+    videos_caption: string | null
     workId: number
+    createdAt: Date
+    updatedAt: Date
     _count: LanguageCountAggregateOutputType | null
     _avg: LanguageAvgAggregateOutputType | null
     _sum: LanguageSumAggregateOutputType | null
@@ -2611,8 +2619,11 @@ export namespace Prisma {
     subtitle?: boolean
     description?: boolean
     type?: boolean
-    content?: boolean
+    photos_caption?: boolean
+    videos_caption?: boolean
     workId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     work?: boolean | WorkDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["language"]>
 
@@ -2624,8 +2635,11 @@ export namespace Prisma {
     subtitle?: boolean
     description?: boolean
     type?: boolean
-    content?: boolean
+    photos_caption?: boolean
+    videos_caption?: boolean
     workId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     work?: boolean | WorkDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["language"]>
 
@@ -2637,8 +2651,11 @@ export namespace Prisma {
     subtitle?: boolean
     description?: boolean
     type?: boolean
-    content?: boolean
+    photos_caption?: boolean
+    videos_caption?: boolean
     workId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     work?: boolean | WorkDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["language"]>
 
@@ -2650,11 +2667,14 @@ export namespace Prisma {
     subtitle?: boolean
     description?: boolean
     type?: boolean
-    content?: boolean
+    photos_caption?: boolean
+    videos_caption?: boolean
     workId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type LanguageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "locale" | "title" | "slug" | "subtitle" | "description" | "type" | "content" | "workId", ExtArgs["result"]["language"]>
+  export type LanguageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "locale" | "title" | "slug" | "subtitle" | "description" | "type" | "photos_caption" | "videos_caption" | "workId" | "createdAt" | "updatedAt", ExtArgs["result"]["language"]>
   export type LanguageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     work?: boolean | WorkDefaultArgs<ExtArgs>
   }
@@ -2675,11 +2695,14 @@ export namespace Prisma {
       locale: string
       title: string
       slug: string
-      subtitle: string
-      description: string
+      subtitle: string | null
+      description: string | null
       type: string
-      content: string
+      photos_caption: string | null
+      videos_caption: string | null
       workId: number
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["language"]>
     composites: {}
   }
@@ -3111,8 +3134,11 @@ export namespace Prisma {
     readonly subtitle: FieldRef<"Language", 'String'>
     readonly description: FieldRef<"Language", 'String'>
     readonly type: FieldRef<"Language", 'String'>
-    readonly content: FieldRef<"Language", 'String'>
+    readonly photos_caption: FieldRef<"Language", 'String'>
+    readonly videos_caption: FieldRef<"Language", 'String'>
     readonly workId: FieldRef<"Language", 'Int'>
+    readonly createdAt: FieldRef<"Language", 'DateTime'>
+    readonly updatedAt: FieldRef<"Language", 'DateTime'>
   }
     
 
@@ -3551,7 +3577,6 @@ export namespace Prisma {
     id: number | null
     url: string | null
     titre: string | null
-    caption: string | null
     createdAt: Date | null
     updatedAt: Date | null
     workId: number | null
@@ -3561,7 +3586,6 @@ export namespace Prisma {
     id: number | null
     url: string | null
     titre: string | null
-    caption: string | null
     createdAt: Date | null
     updatedAt: Date | null
     workId: number | null
@@ -3571,7 +3595,6 @@ export namespace Prisma {
     id: number
     url: number
     titre: number
-    caption: number
     createdAt: number
     updatedAt: number
     workId: number
@@ -3593,7 +3616,6 @@ export namespace Prisma {
     id?: true
     url?: true
     titre?: true
-    caption?: true
     createdAt?: true
     updatedAt?: true
     workId?: true
@@ -3603,7 +3625,6 @@ export namespace Prisma {
     id?: true
     url?: true
     titre?: true
-    caption?: true
     createdAt?: true
     updatedAt?: true
     workId?: true
@@ -3613,7 +3634,6 @@ export namespace Prisma {
     id?: true
     url?: true
     titre?: true
-    caption?: true
     createdAt?: true
     updatedAt?: true
     workId?: true
@@ -3710,7 +3730,6 @@ export namespace Prisma {
     id: number
     url: string
     titre: string
-    caption: string | null
     createdAt: Date
     updatedAt: Date
     workId: number
@@ -3739,7 +3758,6 @@ export namespace Prisma {
     id?: boolean
     url?: boolean
     titre?: boolean
-    caption?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     workId?: boolean
@@ -3750,7 +3768,6 @@ export namespace Prisma {
     id?: boolean
     url?: boolean
     titre?: boolean
-    caption?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     workId?: boolean
@@ -3761,7 +3778,6 @@ export namespace Prisma {
     id?: boolean
     url?: boolean
     titre?: boolean
-    caption?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     workId?: boolean
@@ -3772,13 +3788,12 @@ export namespace Prisma {
     id?: boolean
     url?: boolean
     titre?: boolean
-    caption?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     workId?: boolean
   }
 
-  export type PhotoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "titre" | "caption" | "createdAt" | "updatedAt" | "workId", ExtArgs["result"]["photo"]>
+  export type PhotoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "titre" | "createdAt" | "updatedAt" | "workId", ExtArgs["result"]["photo"]>
   export type PhotoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     work?: boolean | WorkDefaultArgs<ExtArgs>
   }
@@ -3798,7 +3813,6 @@ export namespace Prisma {
       id: number
       url: string
       titre: string
-      caption: string | null
       createdAt: Date
       updatedAt: Date
       workId: number
@@ -4229,7 +4243,6 @@ export namespace Prisma {
     readonly id: FieldRef<"Photo", 'Int'>
     readonly url: FieldRef<"Photo", 'String'>
     readonly titre: FieldRef<"Photo", 'String'>
-    readonly caption: FieldRef<"Photo", 'String'>
     readonly createdAt: FieldRef<"Photo", 'DateTime'>
     readonly updatedAt: FieldRef<"Photo", 'DateTime'>
     readonly workId: FieldRef<"Photo", 'Int'>
@@ -5765,11 +5778,10 @@ export namespace Prisma {
 
   export const WorkScalarFieldEnum: {
     id: 'id',
-    title: 'title',
-    subtitle: 'subtitle',
-    description: 'description',
+    year: 'year',
     illustration: 'illustration',
-    type: 'type',
+    placement_x: 'placement_x',
+    placement_y: 'placement_y',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -5785,8 +5797,11 @@ export namespace Prisma {
     subtitle: 'subtitle',
     description: 'description',
     type: 'type',
-    content: 'content',
-    workId: 'workId'
+    photos_caption: 'photos_caption',
+    videos_caption: 'videos_caption',
+    workId: 'workId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type LanguageScalarFieldEnum = (typeof LanguageScalarFieldEnum)[keyof typeof LanguageScalarFieldEnum]
@@ -5796,7 +5811,6 @@ export namespace Prisma {
     id: 'id',
     url: 'url',
     titre: 'titre',
-    caption: 'caption',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     workId: 'workId'
@@ -5874,11 +5888,10 @@ export namespace Prisma {
     OR?: WorkWhereInput[]
     NOT?: WorkWhereInput | WorkWhereInput[]
     id?: IntFilter<"Work"> | number
-    title?: StringFilter<"Work"> | string
-    subtitle?: StringNullableFilter<"Work"> | string | null
-    description?: StringNullableFilter<"Work"> | string | null
+    year?: StringFilter<"Work"> | string
     illustration?: StringFilter<"Work"> | string
-    type?: StringFilter<"Work"> | string
+    placement_x?: StringFilter<"Work"> | string
+    placement_y?: StringFilter<"Work"> | string
     createdAt?: DateTimeFilter<"Work"> | Date | string
     updatedAt?: DateTimeFilter<"Work"> | Date | string
     photos?: PhotoListRelationFilter
@@ -5888,11 +5901,10 @@ export namespace Prisma {
 
   export type WorkOrderByWithRelationInput = {
     id?: SortOrder
-    title?: SortOrder
-    subtitle?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
+    year?: SortOrder
     illustration?: SortOrder
-    type?: SortOrder
+    placement_x?: SortOrder
+    placement_y?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     photos?: PhotoOrderByRelationAggregateInput
@@ -5905,11 +5917,10 @@ export namespace Prisma {
     AND?: WorkWhereInput | WorkWhereInput[]
     OR?: WorkWhereInput[]
     NOT?: WorkWhereInput | WorkWhereInput[]
-    title?: StringFilter<"Work"> | string
-    subtitle?: StringNullableFilter<"Work"> | string | null
-    description?: StringNullableFilter<"Work"> | string | null
+    year?: StringFilter<"Work"> | string
     illustration?: StringFilter<"Work"> | string
-    type?: StringFilter<"Work"> | string
+    placement_x?: StringFilter<"Work"> | string
+    placement_y?: StringFilter<"Work"> | string
     createdAt?: DateTimeFilter<"Work"> | Date | string
     updatedAt?: DateTimeFilter<"Work"> | Date | string
     photos?: PhotoListRelationFilter
@@ -5919,11 +5930,10 @@ export namespace Prisma {
 
   export type WorkOrderByWithAggregationInput = {
     id?: SortOrder
-    title?: SortOrder
-    subtitle?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
+    year?: SortOrder
     illustration?: SortOrder
-    type?: SortOrder
+    placement_x?: SortOrder
+    placement_y?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: WorkCountOrderByAggregateInput
@@ -5938,11 +5948,10 @@ export namespace Prisma {
     OR?: WorkScalarWhereWithAggregatesInput[]
     NOT?: WorkScalarWhereWithAggregatesInput | WorkScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Work"> | number
-    title?: StringWithAggregatesFilter<"Work"> | string
-    subtitle?: StringNullableWithAggregatesFilter<"Work"> | string | null
-    description?: StringNullableWithAggregatesFilter<"Work"> | string | null
+    year?: StringWithAggregatesFilter<"Work"> | string
     illustration?: StringWithAggregatesFilter<"Work"> | string
-    type?: StringWithAggregatesFilter<"Work"> | string
+    placement_x?: StringWithAggregatesFilter<"Work"> | string
+    placement_y?: StringWithAggregatesFilter<"Work"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Work"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Work"> | Date | string
   }
@@ -5955,11 +5964,14 @@ export namespace Prisma {
     locale?: StringFilter<"Language"> | string
     title?: StringFilter<"Language"> | string
     slug?: StringFilter<"Language"> | string
-    subtitle?: StringFilter<"Language"> | string
-    description?: StringFilter<"Language"> | string
+    subtitle?: StringNullableFilter<"Language"> | string | null
+    description?: StringNullableFilter<"Language"> | string | null
     type?: StringFilter<"Language"> | string
-    content?: StringFilter<"Language"> | string
+    photos_caption?: StringNullableFilter<"Language"> | string | null
+    videos_caption?: StringNullableFilter<"Language"> | string | null
     workId?: IntFilter<"Language"> | number
+    createdAt?: DateTimeFilter<"Language"> | Date | string
+    updatedAt?: DateTimeFilter<"Language"> | Date | string
     work?: XOR<WorkScalarRelationFilter, WorkWhereInput>
   }
 
@@ -5968,40 +5980,49 @@ export namespace Prisma {
     locale?: SortOrder
     title?: SortOrder
     slug?: SortOrder
-    subtitle?: SortOrder
-    description?: SortOrder
+    subtitle?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
     type?: SortOrder
-    content?: SortOrder
+    photos_caption?: SortOrderInput | SortOrder
+    videos_caption?: SortOrderInput | SortOrder
     workId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     work?: WorkOrderByWithRelationInput
   }
 
   export type LanguageWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    slug?: string
     AND?: LanguageWhereInput | LanguageWhereInput[]
     OR?: LanguageWhereInput[]
     NOT?: LanguageWhereInput | LanguageWhereInput[]
     locale?: StringFilter<"Language"> | string
     title?: StringFilter<"Language"> | string
-    slug?: StringFilter<"Language"> | string
-    subtitle?: StringFilter<"Language"> | string
-    description?: StringFilter<"Language"> | string
+    subtitle?: StringNullableFilter<"Language"> | string | null
+    description?: StringNullableFilter<"Language"> | string | null
     type?: StringFilter<"Language"> | string
-    content?: StringFilter<"Language"> | string
+    photos_caption?: StringNullableFilter<"Language"> | string | null
+    videos_caption?: StringNullableFilter<"Language"> | string | null
     workId?: IntFilter<"Language"> | number
+    createdAt?: DateTimeFilter<"Language"> | Date | string
+    updatedAt?: DateTimeFilter<"Language"> | Date | string
     work?: XOR<WorkScalarRelationFilter, WorkWhereInput>
-  }, "id">
+  }, "id" | "slug">
 
   export type LanguageOrderByWithAggregationInput = {
     id?: SortOrder
     locale?: SortOrder
     title?: SortOrder
     slug?: SortOrder
-    subtitle?: SortOrder
-    description?: SortOrder
+    subtitle?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
     type?: SortOrder
-    content?: SortOrder
+    photos_caption?: SortOrderInput | SortOrder
+    videos_caption?: SortOrderInput | SortOrder
     workId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: LanguageCountOrderByAggregateInput
     _avg?: LanguageAvgOrderByAggregateInput
     _max?: LanguageMaxOrderByAggregateInput
@@ -6017,11 +6038,14 @@ export namespace Prisma {
     locale?: StringWithAggregatesFilter<"Language"> | string
     title?: StringWithAggregatesFilter<"Language"> | string
     slug?: StringWithAggregatesFilter<"Language"> | string
-    subtitle?: StringWithAggregatesFilter<"Language"> | string
-    description?: StringWithAggregatesFilter<"Language"> | string
+    subtitle?: StringNullableWithAggregatesFilter<"Language"> | string | null
+    description?: StringNullableWithAggregatesFilter<"Language"> | string | null
     type?: StringWithAggregatesFilter<"Language"> | string
-    content?: StringWithAggregatesFilter<"Language"> | string
+    photos_caption?: StringNullableWithAggregatesFilter<"Language"> | string | null
+    videos_caption?: StringNullableWithAggregatesFilter<"Language"> | string | null
     workId?: IntWithAggregatesFilter<"Language"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Language"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Language"> | Date | string
   }
 
   export type PhotoWhereInput = {
@@ -6031,7 +6055,6 @@ export namespace Prisma {
     id?: IntFilter<"Photo"> | number
     url?: StringFilter<"Photo"> | string
     titre?: StringFilter<"Photo"> | string
-    caption?: StringNullableFilter<"Photo"> | string | null
     createdAt?: DateTimeFilter<"Photo"> | Date | string
     updatedAt?: DateTimeFilter<"Photo"> | Date | string
     workId?: IntFilter<"Photo"> | number
@@ -6042,7 +6065,6 @@ export namespace Prisma {
     id?: SortOrder
     url?: SortOrder
     titre?: SortOrder
-    caption?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     workId?: SortOrder
@@ -6056,7 +6078,6 @@ export namespace Prisma {
     NOT?: PhotoWhereInput | PhotoWhereInput[]
     url?: StringFilter<"Photo"> | string
     titre?: StringFilter<"Photo"> | string
-    caption?: StringNullableFilter<"Photo"> | string | null
     createdAt?: DateTimeFilter<"Photo"> | Date | string
     updatedAt?: DateTimeFilter<"Photo"> | Date | string
     workId?: IntFilter<"Photo"> | number
@@ -6067,7 +6088,6 @@ export namespace Prisma {
     id?: SortOrder
     url?: SortOrder
     titre?: SortOrder
-    caption?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     workId?: SortOrder
@@ -6085,7 +6105,6 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Photo"> | number
     url?: StringWithAggregatesFilter<"Photo"> | string
     titre?: StringWithAggregatesFilter<"Photo"> | string
-    caption?: StringNullableWithAggregatesFilter<"Photo"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Photo"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Photo"> | Date | string
     workId?: IntWithAggregatesFilter<"Photo"> | number
@@ -6154,11 +6173,10 @@ export namespace Prisma {
   }
 
   export type WorkCreateInput = {
-    title: string
-    subtitle?: string | null
-    description?: string | null
+    year: string
     illustration: string
-    type?: string
+    placement_x: string
+    placement_y: string
     createdAt?: Date | string
     updatedAt?: Date | string
     photos?: PhotoCreateNestedManyWithoutWorkInput
@@ -6168,11 +6186,10 @@ export namespace Prisma {
 
   export type WorkUncheckedCreateInput = {
     id?: number
-    title: string
-    subtitle?: string | null
-    description?: string | null
+    year: string
     illustration: string
-    type?: string
+    placement_x: string
+    placement_y: string
     createdAt?: Date | string
     updatedAt?: Date | string
     photos?: PhotoUncheckedCreateNestedManyWithoutWorkInput
@@ -6181,11 +6198,10 @@ export namespace Prisma {
   }
 
   export type WorkUpdateInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: StringFieldUpdateOperationsInput | string
     illustration?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    placement_x?: StringFieldUpdateOperationsInput | string
+    placement_y?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: PhotoUpdateManyWithoutWorkNestedInput
@@ -6195,11 +6211,10 @@ export namespace Prisma {
 
   export type WorkUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: StringFieldUpdateOperationsInput | string
     illustration?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    placement_x?: StringFieldUpdateOperationsInput | string
+    placement_y?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: PhotoUncheckedUpdateManyWithoutWorkNestedInput
@@ -6209,32 +6224,29 @@ export namespace Prisma {
 
   export type WorkCreateManyInput = {
     id?: number
-    title: string
-    subtitle?: string | null
-    description?: string | null
+    year: string
     illustration: string
-    type?: string
+    placement_x: string
+    placement_y: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type WorkUpdateManyMutationInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: StringFieldUpdateOperationsInput | string
     illustration?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    placement_x?: StringFieldUpdateOperationsInput | string
+    placement_y?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type WorkUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: StringFieldUpdateOperationsInput | string
     illustration?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    placement_x?: StringFieldUpdateOperationsInput | string
+    placement_y?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6243,10 +6255,13 @@ export namespace Prisma {
     locale: string
     title: string
     slug: string
-    subtitle: string
-    description: string
+    subtitle?: string | null
+    description?: string | null
     type: string
-    content: string
+    photos_caption?: string | null
+    videos_caption?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     work: WorkCreateNestedOneWithoutLanguagesInput
   }
 
@@ -6255,21 +6270,27 @@ export namespace Prisma {
     locale: string
     title: string
     slug: string
-    subtitle: string
-    description: string
+    subtitle?: string | null
+    description?: string | null
     type: string
-    content: string
+    photos_caption?: string | null
+    videos_caption?: string | null
     workId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type LanguageUpdateInput = {
     locale?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    subtitle?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
+    photos_caption?: NullableStringFieldUpdateOperationsInput | string | null
+    videos_caption?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     work?: WorkUpdateOneRequiredWithoutLanguagesNestedInput
   }
 
@@ -6278,11 +6299,14 @@ export namespace Prisma {
     locale?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    subtitle?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
+    photos_caption?: NullableStringFieldUpdateOperationsInput | string | null
+    videos_caption?: NullableStringFieldUpdateOperationsInput | string | null
     workId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LanguageCreateManyInput = {
@@ -6290,21 +6314,27 @@ export namespace Prisma {
     locale: string
     title: string
     slug: string
-    subtitle: string
-    description: string
+    subtitle?: string | null
+    description?: string | null
     type: string
-    content: string
+    photos_caption?: string | null
+    videos_caption?: string | null
     workId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type LanguageUpdateManyMutationInput = {
     locale?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    subtitle?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
+    photos_caption?: NullableStringFieldUpdateOperationsInput | string | null
+    videos_caption?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LanguageUncheckedUpdateManyInput = {
@@ -6312,17 +6342,19 @@ export namespace Prisma {
     locale?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    subtitle?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
+    photos_caption?: NullableStringFieldUpdateOperationsInput | string | null
+    videos_caption?: NullableStringFieldUpdateOperationsInput | string | null
     workId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PhotoCreateInput = {
     url: string
     titre: string
-    caption?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     work: WorkCreateNestedOneWithoutPhotosInput
@@ -6332,7 +6364,6 @@ export namespace Prisma {
     id?: number
     url: string
     titre: string
-    caption?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     workId: number
@@ -6341,7 +6372,6 @@ export namespace Prisma {
   export type PhotoUpdateInput = {
     url?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
-    caption?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     work?: WorkUpdateOneRequiredWithoutPhotosNestedInput
@@ -6351,7 +6381,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
-    caption?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workId?: IntFieldUpdateOperationsInput | number
@@ -6361,7 +6390,6 @@ export namespace Prisma {
     id?: number
     url: string
     titre: string
-    caption?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     workId: number
@@ -6370,7 +6398,6 @@ export namespace Prisma {
   export type PhotoUpdateManyMutationInput = {
     url?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
-    caption?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6379,7 +6406,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
-    caption?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workId?: IntFieldUpdateOperationsInput | number
@@ -6469,20 +6495,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -6512,11 +6524,6 @@ export namespace Prisma {
     none?: LanguageWhereInput
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type PhotoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -6531,11 +6538,10 @@ export namespace Prisma {
 
   export type WorkCountOrderByAggregateInput = {
     id?: SortOrder
-    title?: SortOrder
-    subtitle?: SortOrder
-    description?: SortOrder
+    year?: SortOrder
     illustration?: SortOrder
-    type?: SortOrder
+    placement_x?: SortOrder
+    placement_y?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6546,22 +6552,20 @@ export namespace Prisma {
 
   export type WorkMaxOrderByAggregateInput = {
     id?: SortOrder
-    title?: SortOrder
-    subtitle?: SortOrder
-    description?: SortOrder
+    year?: SortOrder
     illustration?: SortOrder
-    type?: SortOrder
+    placement_x?: SortOrder
+    placement_y?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type WorkMinOrderByAggregateInput = {
     id?: SortOrder
-    title?: SortOrder
-    subtitle?: SortOrder
-    description?: SortOrder
+    year?: SortOrder
     illustration?: SortOrder
-    type?: SortOrder
+    placement_x?: SortOrder
+    placement_y?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -6603,6 +6607,99 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type WorkScalarRelationFilter = {
+    is?: WorkWhereInput
+    isNot?: WorkWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type LanguageCountOrderByAggregateInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    photos_caption?: SortOrder
+    videos_caption?: SortOrder
+    workId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LanguageAvgOrderByAggregateInput = {
+    id?: SortOrder
+    workId?: SortOrder
+  }
+
+  export type LanguageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    photos_caption?: SortOrder
+    videos_caption?: SortOrder
+    workId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LanguageMinOrderByAggregateInput = {
+    id?: SortOrder
+    locale?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    photos_caption?: SortOrder
+    videos_caption?: SortOrder
+    workId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LanguageSumOrderByAggregateInput = {
+    id?: SortOrder
+    workId?: SortOrder
+  }
+
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -6620,76 +6717,10 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type WorkScalarRelationFilter = {
-    is?: WorkWhereInput
-    isNot?: WorkWhereInput
-  }
-
-  export type LanguageCountOrderByAggregateInput = {
-    id?: SortOrder
-    locale?: SortOrder
-    title?: SortOrder
-    slug?: SortOrder
-    subtitle?: SortOrder
-    description?: SortOrder
-    type?: SortOrder
-    content?: SortOrder
-    workId?: SortOrder
-  }
-
-  export type LanguageAvgOrderByAggregateInput = {
-    id?: SortOrder
-    workId?: SortOrder
-  }
-
-  export type LanguageMaxOrderByAggregateInput = {
-    id?: SortOrder
-    locale?: SortOrder
-    title?: SortOrder
-    slug?: SortOrder
-    subtitle?: SortOrder
-    description?: SortOrder
-    type?: SortOrder
-    content?: SortOrder
-    workId?: SortOrder
-  }
-
-  export type LanguageMinOrderByAggregateInput = {
-    id?: SortOrder
-    locale?: SortOrder
-    title?: SortOrder
-    slug?: SortOrder
-    subtitle?: SortOrder
-    description?: SortOrder
-    type?: SortOrder
-    content?: SortOrder
-    workId?: SortOrder
-  }
-
-  export type LanguageSumOrderByAggregateInput = {
-    id?: SortOrder
-    workId?: SortOrder
-  }
-
   export type PhotoCountOrderByAggregateInput = {
     id?: SortOrder
     url?: SortOrder
     titre?: SortOrder
-    caption?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     workId?: SortOrder
@@ -6704,7 +6735,6 @@ export namespace Prisma {
     id?: SortOrder
     url?: SortOrder
     titre?: SortOrder
-    caption?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     workId?: SortOrder
@@ -6714,7 +6744,6 @@ export namespace Prisma {
     id?: SortOrder
     url?: SortOrder
     titre?: SortOrder
-    caption?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     workId?: SortOrder
@@ -6806,10 +6835,6 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -6914,6 +6939,10 @@ export namespace Prisma {
     connect?: WorkWhereUniqueInput
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type WorkUpdateOneRequiredWithoutLanguagesNestedInput = {
     create?: XOR<WorkCreateWithoutLanguagesInput, WorkUncheckedCreateWithoutLanguagesInput>
     connectOrCreate?: WorkCreateOrConnectWithoutLanguagesInput
@@ -6975,20 +7004,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -7044,6 +7059,34 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -7072,24 +7115,9 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type PhotoCreateWithoutWorkInput = {
     url: string
     titre: string
-    caption?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7098,7 +7126,6 @@ export namespace Prisma {
     id?: number
     url: string
     titre: string
-    caption?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7140,10 +7167,13 @@ export namespace Prisma {
     locale: string
     title: string
     slug: string
-    subtitle: string
-    description: string
+    subtitle?: string | null
+    description?: string | null
     type: string
-    content: string
+    photos_caption?: string | null
+    videos_caption?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type LanguageUncheckedCreateWithoutWorkInput = {
@@ -7151,10 +7181,13 @@ export namespace Prisma {
     locale: string
     title: string
     slug: string
-    subtitle: string
-    description: string
+    subtitle?: string | null
+    description?: string | null
     type: string
-    content: string
+    photos_caption?: string | null
+    videos_caption?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type LanguageCreateOrConnectWithoutWorkInput = {
@@ -7189,7 +7222,6 @@ export namespace Prisma {
     id?: IntFilter<"Photo"> | number
     url?: StringFilter<"Photo"> | string
     titre?: StringFilter<"Photo"> | string
-    caption?: StringNullableFilter<"Photo"> | string | null
     createdAt?: DateTimeFilter<"Photo"> | Date | string
     updatedAt?: DateTimeFilter<"Photo"> | Date | string
     workId?: IntFilter<"Photo"> | number
@@ -7247,19 +7279,21 @@ export namespace Prisma {
     locale?: StringFilter<"Language"> | string
     title?: StringFilter<"Language"> | string
     slug?: StringFilter<"Language"> | string
-    subtitle?: StringFilter<"Language"> | string
-    description?: StringFilter<"Language"> | string
+    subtitle?: StringNullableFilter<"Language"> | string | null
+    description?: StringNullableFilter<"Language"> | string | null
     type?: StringFilter<"Language"> | string
-    content?: StringFilter<"Language"> | string
+    photos_caption?: StringNullableFilter<"Language"> | string | null
+    videos_caption?: StringNullableFilter<"Language"> | string | null
     workId?: IntFilter<"Language"> | number
+    createdAt?: DateTimeFilter<"Language"> | Date | string
+    updatedAt?: DateTimeFilter<"Language"> | Date | string
   }
 
   export type WorkCreateWithoutLanguagesInput = {
-    title: string
-    subtitle?: string | null
-    description?: string | null
+    year: string
     illustration: string
-    type?: string
+    placement_x: string
+    placement_y: string
     createdAt?: Date | string
     updatedAt?: Date | string
     photos?: PhotoCreateNestedManyWithoutWorkInput
@@ -7268,11 +7302,10 @@ export namespace Prisma {
 
   export type WorkUncheckedCreateWithoutLanguagesInput = {
     id?: number
-    title: string
-    subtitle?: string | null
-    description?: string | null
+    year: string
     illustration: string
-    type?: string
+    placement_x: string
+    placement_y: string
     createdAt?: Date | string
     updatedAt?: Date | string
     photos?: PhotoUncheckedCreateNestedManyWithoutWorkInput
@@ -7296,11 +7329,10 @@ export namespace Prisma {
   }
 
   export type WorkUpdateWithoutLanguagesInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: StringFieldUpdateOperationsInput | string
     illustration?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    placement_x?: StringFieldUpdateOperationsInput | string
+    placement_y?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: PhotoUpdateManyWithoutWorkNestedInput
@@ -7309,11 +7341,10 @@ export namespace Prisma {
 
   export type WorkUncheckedUpdateWithoutLanguagesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: StringFieldUpdateOperationsInput | string
     illustration?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    placement_x?: StringFieldUpdateOperationsInput | string
+    placement_y?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: PhotoUncheckedUpdateManyWithoutWorkNestedInput
@@ -7321,11 +7352,10 @@ export namespace Prisma {
   }
 
   export type WorkCreateWithoutPhotosInput = {
-    title: string
-    subtitle?: string | null
-    description?: string | null
+    year: string
     illustration: string
-    type?: string
+    placement_x: string
+    placement_y: string
     createdAt?: Date | string
     updatedAt?: Date | string
     videos?: VideoCreateNestedManyWithoutWorkInput
@@ -7334,11 +7364,10 @@ export namespace Prisma {
 
   export type WorkUncheckedCreateWithoutPhotosInput = {
     id?: number
-    title: string
-    subtitle?: string | null
-    description?: string | null
+    year: string
     illustration: string
-    type?: string
+    placement_x: string
+    placement_y: string
     createdAt?: Date | string
     updatedAt?: Date | string
     videos?: VideoUncheckedCreateNestedManyWithoutWorkInput
@@ -7362,11 +7391,10 @@ export namespace Prisma {
   }
 
   export type WorkUpdateWithoutPhotosInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: StringFieldUpdateOperationsInput | string
     illustration?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    placement_x?: StringFieldUpdateOperationsInput | string
+    placement_y?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     videos?: VideoUpdateManyWithoutWorkNestedInput
@@ -7375,11 +7403,10 @@ export namespace Prisma {
 
   export type WorkUncheckedUpdateWithoutPhotosInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: StringFieldUpdateOperationsInput | string
     illustration?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    placement_x?: StringFieldUpdateOperationsInput | string
+    placement_y?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     videos?: VideoUncheckedUpdateManyWithoutWorkNestedInput
@@ -7387,11 +7414,10 @@ export namespace Prisma {
   }
 
   export type WorkCreateWithoutVideosInput = {
-    title: string
-    subtitle?: string | null
-    description?: string | null
+    year: string
     illustration: string
-    type?: string
+    placement_x: string
+    placement_y: string
     createdAt?: Date | string
     updatedAt?: Date | string
     photos?: PhotoCreateNestedManyWithoutWorkInput
@@ -7400,11 +7426,10 @@ export namespace Prisma {
 
   export type WorkUncheckedCreateWithoutVideosInput = {
     id?: number
-    title: string
-    subtitle?: string | null
-    description?: string | null
+    year: string
     illustration: string
-    type?: string
+    placement_x: string
+    placement_y: string
     createdAt?: Date | string
     updatedAt?: Date | string
     photos?: PhotoUncheckedCreateNestedManyWithoutWorkInput
@@ -7428,11 +7453,10 @@ export namespace Prisma {
   }
 
   export type WorkUpdateWithoutVideosInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: StringFieldUpdateOperationsInput | string
     illustration?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    placement_x?: StringFieldUpdateOperationsInput | string
+    placement_y?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: PhotoUpdateManyWithoutWorkNestedInput
@@ -7441,11 +7465,10 @@ export namespace Prisma {
 
   export type WorkUncheckedUpdateWithoutVideosInput = {
     id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
+    year?: StringFieldUpdateOperationsInput | string
     illustration?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    placement_x?: StringFieldUpdateOperationsInput | string
+    placement_y?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     photos?: PhotoUncheckedUpdateManyWithoutWorkNestedInput
@@ -7456,7 +7479,6 @@ export namespace Prisma {
     id?: number
     url: string
     titre: string
-    caption?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7474,16 +7496,18 @@ export namespace Prisma {
     locale: string
     title: string
     slug: string
-    subtitle: string
-    description: string
+    subtitle?: string | null
+    description?: string | null
     type: string
-    content: string
+    photos_caption?: string | null
+    videos_caption?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PhotoUpdateWithoutWorkInput = {
     url?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
-    caption?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7492,7 +7516,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
-    caption?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7501,7 +7524,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     url?: StringFieldUpdateOperationsInput | string
     titre?: StringFieldUpdateOperationsInput | string
-    caption?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7533,10 +7555,13 @@ export namespace Prisma {
     locale?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    subtitle?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
+    photos_caption?: NullableStringFieldUpdateOperationsInput | string | null
+    videos_caption?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LanguageUncheckedUpdateWithoutWorkInput = {
@@ -7544,10 +7569,13 @@ export namespace Prisma {
     locale?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    subtitle?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
+    photos_caption?: NullableStringFieldUpdateOperationsInput | string | null
+    videos_caption?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LanguageUncheckedUpdateManyWithoutWorkInput = {
@@ -7555,10 +7583,13 @@ export namespace Prisma {
     locale?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
-    subtitle?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     type?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
+    photos_caption?: NullableStringFieldUpdateOperationsInput | string | null
+    videos_caption?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

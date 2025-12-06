@@ -1,10 +1,12 @@
 'use server'
 import  prisma  from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
+import {createTraduction} from '@/app/actions/traductions';
+import {updateTraduction} from '@/app/actions/traductions';
 
 
 export async function getAllWorks() {
-    const works = await prisma.work.findMany({include: {photos: true, videos: true}});
+    const works = await prisma.work.findMany({include: {photos: true, videos: true, languages: true}});
     return works;
 }
 
@@ -17,51 +19,87 @@ export async function getWorkById(id: number) {
 }
 
 export async function createWork(formData: FormData) {
+  console.log("formData received in action", formData)
     const type = formData.get('type') as string;
-    const title =formData.get('titre') as string;
-    const subtitle =formData.get('subtitle') as string;
-    const description = formData.get('description') as string;
+    const year = formData.get('year') as string;
+    const title_fr =formData.get('titre_fr') as string;
+    const title_en =formData.get('titre_en') as string;
+    const subtitle_fr =formData.get('subtitle_fr') as string;
+    const subtitle_en =formData.get('subtitle_en') as string;
+    const description_fr = formData.get('description_fr') as string;
+    const description_en = formData.get('description_en') as string;
     const photosurls = formData.getAll('photosurls') as string[];
     const phototitles = formData.getAll('phototitles') as string[];
     const videos = formData.getAll('video') as string[];
     const illustration = formData.get('illustration') as string;
+    const photos_captions_fr = formData.get('photos_caption_fr') as string;
+    const photos_captions_en = formData.get('photos_caption_en') as string;
+    const videos_captions_fr = formData.get('videos_caption_fr') as string;
+    const videos_captions_en = formData.get('videos_caption_en') as string;
 
-    const newWork = await prisma.work.create({
+
+    const position = ["start", "center", "end"];
+    const placement_x = position[Math.floor(Math.random() * position.length)];
+    const placement_y = position[Math.floor(Math.random() * position.length)];
+
+
+   const work = await prisma.work.create({
       data: {
-        type: type,
-        title: title,
-        subtitle: subtitle,
-        description: description,
+        year: year,
         illustration: illustration,
+        placement_x: placement_x,
+        placement_y: placement_y,
         photos: {
           create : photosurls.map((url) => ({ url: url, titre: phototitles[photosurls.indexOf(url)] })),
         },
         videos: {
           create : videos.map((url) => ({ url: url })),
         }
-
       }
-  })
+    }
+    );
+
+    const type_en = type === "Performances" ? "Performances" :
+                    type === "Expositions" ? "Exhibitions" :
+                    type === "Workshops" ? "Workshops" :
+                    type === "Presse" ? "Press" :
+                    type === "Publications" ? "Publications" : type;
+
+
+    await createTraduction( type, title_fr, subtitle_fr, description_fr, 'fr', photos_captions_fr, videos_captions_fr, work.id);
+    await createTraduction( type_en, title_en, subtitle_en, description_en, 'en', photos_captions_en, videos_captions_en, work.id);
+
     revalidatePath('/admin/works');
     return { ok: true};
   }
 
 export async function updateWork(formData: FormData) {
+  console.log('updateWork called');
+    console.log("formData received in update action", formData)
     const id = Number(formData.get('id'));
-    const title =formData.get('titre') as string;
-    const description = formData.get('description') as string;
+    const type = formData.get('type') as string;
+    const year = formData.get('year') as string;
+    const fr_id = Number(formData.get('fr_id'));
+    const en_id = Number(formData.get('en_id'));
+    const title_fr =formData.get('title_fr') as string;
+    const title_en =formData.get('title_en') as string;
+    const subtitle_fr =formData.get('subtitle_fr') as string;
+    const subtitle_en =formData.get('subtitle_en') as string;
+    const description_fr = formData.get('description_fr') as string;
+    const description_en = formData.get('description_en') as string;
     const photosurls = formData.getAll('photosurls') as string[];
     const phototitles = formData.getAll('phototitles') as string[];
     const videos = formData.getAll('video') as string[];
     const illustration = formData.get('illustration') as string;
-    console.log("updating with pictures", photosurls);
-
+    const photos_captions_fr = formData.get('photos_caption_fr') as string;
+    const photos_captions_en = formData.get('photos_caption_en') as string;
+    const videos_captions_fr = formData.get('videos_caption_fr') as string;
+    const videos_captions_en = formData.get('videos_caption_en') as string;
 
     await prisma.work.update({
       where: { id: id },
       data: {
-        title: title,
-        description: description,
+        year: year,
         illustration: illustration,
         photos: {
           create : photosurls.map((url) => ({ url: url, titre: phototitles[photosurls.indexOf(url)] })),
@@ -71,6 +109,16 @@ export async function updateWork(formData: FormData) {
         }
       },
     });
+
+    const type_en = type === "Performances" ? "Performances" :
+                    type === "Expositions" ? "Exhibitions" :
+                    type === "Workshops" ? "Workshops" :
+                    type === "Presse" ? "Press" :
+                    type === "Publications" ? "Publications" : type;
+
+    await updateTraduction(type, fr_id, title_fr, subtitle_fr, description_fr, photos_captions_fr, videos_captions_fr);
+    await updateTraduction(type_en, en_id, title_en, subtitle_en, description_en, photos_captions_en, videos_captions_en);
+
     revalidatePath('/admin/works');
     return { ok: true};
 }

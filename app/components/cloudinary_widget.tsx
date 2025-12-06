@@ -3,8 +3,11 @@
 import { CldUploadWidget } from "next-cloudinary";
 import { useState, useEffect } from "react";
 
+interface CloudinaryWidgetProps {
+  handleUpload: (urls: [string, string][]) => void;
+}
 
-export default function CloudinaryWidget({handleUpload}) {
+export default function CloudinaryWidget({handleUpload}: CloudinaryWidgetProps) {
 
   const [url, setUrl] = useState<[string, string][]>([]);
 
@@ -16,21 +19,25 @@ export default function CloudinaryWidget({handleUpload}) {
 
   return (
 
-    <CldUploadWidget
-    uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!}
-    cloudName={process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!}
-    upload={{multiple:true}}
+    <CldUploadWidget uploadPreset="erl_uploads"
+    config={{
+      cloud:{
+        cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+      }
+    }}
     options={{
       multiple: true,
       sources: ['local']
     }}
     onSuccess={
       (result => {
-        const newurl = result?.info?.secure_url;
-        const newname = result?.info?.original_filename;
-        setUrl([[newurl, newname]]);
-
-      })
+              const infos = result?.info;
+              if (typeof infos === "object" && infos !== null && "secure_url" in infos) {
+                const newUrl: [string, string] = [infos.secure_url, infos.original_filename];
+                setUrl((prev) => [...prev, newUrl]);
+              }
+        }
+      )
     }
   >
     {({ open }) => {

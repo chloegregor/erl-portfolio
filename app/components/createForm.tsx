@@ -5,7 +5,6 @@ import  CloudinaryWidget  from "./cloudinary_widget";
 import Image from "next/image";
 
 export function CreateForm () {
-  const type = ["performance", "exposition", 'travaux', 'workshop', 'textes', 'publications'];
   const [isClicked, setIsClicked] = useState(false);
   const [uploadedPhotos, setUploadedPhotos] = useState<[string, string][]>([]);
   const [urlVideos, setUrlVideos] = useState<string[]>([]);
@@ -38,19 +37,26 @@ export function CreateForm () {
       }
     });
     formData.append("type", (form.type as HTMLSelectElement).value);
-    formData.append("titre", form.title.value);
-    formData.append("subtitle", form.subtitle.value);
-    formData.append("description", form.description.value);
-    formData.append("illustration", illustration);
-    if (uploadedPhotos.length > 0)
+    formData.append("year", form.year.value);
+    formData.append("titre_fr", form.title_fr.value);
+    formData.append("subtitle_fr", form.subtitle_fr.value);
+    formData.append("description_fr", form.description_fr.value);
+    formData.append("titre_en", form.title_en.value);
+    formData.append("subtitle_en", form.subtitle_en.value);
+    formData.append("description_en", form.description_en.value);
+    formData.append("videos_caption_fr", form.videos_caption_fr.value);
+    formData.append("videos_caption_en", form.videos_caption_en.value);
+
+    if (illustration) {
+      formData.append("illustration", illustration);
+    }
+    if (uploadedPhotos.length > 0){
+      formData.append("photos_caption_fr", form.photos_caption_fr.value);
+      formData.append("photos_caption_en", form.photos_caption_en.value);
       uploadedPhotos.forEach((photo) => {
         formData.append("photosurls", photo[0]);
         formData.append("phototitles", photo[1]);
-      });
-      console.log("formData before adding files", formData)
-
-
-      console.log("formData", formData)
+      })};
 
     const result = await createWork(formData);
     if (!result.ok) {
@@ -74,9 +80,11 @@ export function CreateForm () {
 
   return (
     <>
-      <button className={`${isClicked ? "hidden" : "block p-1 border"} `} onClick={() => setIsClicked(true)}>
-        Ajouter un projet
-      </button>
+      <span className=" ">
+        <button className={`${isClicked ? "hidden" : " p-1 border"} `} onClick={() => setIsClicked(true)}>
+          Ajouter un projet
+        </button>
+      </span>
 
       {isClicked && (
           <div className="absolute overflow-scroll bg-white  p-[1em] left-50 right-50 top-30 bottom-30 shadow-2xl z-10">
@@ -87,43 +95,66 @@ export function CreateForm () {
                 <div  className="">
                   <label htmlFor="type">Type de projet :</label>
                   <select id="type" name="type" className="border w-[20%]">
-                    <option value="performance">Performance</option>
-                    <option value="exposition">Exposition</option>
-                    <option value="travaux">Travaux</option>
-                    <option value="workshop">Workshop</option>
-                    <option value="textes">Textes</option>
-                    <option value ="publications">Publications</option>
+                    <option value="Performances">Performance</option>
+                    <option value="Expositions">Exposition</option>
+                    <option value="Workshops">Workshop</option>
+                    <option value="Presse">Presse</option>
+                    <option value ="Publications">Publication</option>
                   </select>
                 </div>
-                <div>
-                  <label htmlFor="title">Titre:</label>
-                  <input type="text" className="border w-[50%]" id="title" name="title" required />
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex gap-3">
-                    <label htmlFor="subtitle">Sous-titre:</label>
-                    <input type="radio" id="illustration" name="illustration" required onChange={(e) => {setIllustration("subtitle");}} />
-                    <label htmlFor="illustration">Définir comme illustration.</label>
+                <div className='flex gap-2'>
+                  <label htmlFor="title_fr">Titre-FR:</label>
+                  <input type="text" className="border w-[30%]" id="title_fr" name="title_fr" required />
+                  <label htmlFor="title_en">Titre-EN:</label>
+                  <input type="text" className="border w-[30%]" id="title_en" name="title_en"  />
+                  <div>
+                    <label htmlFor="year">Année: </label>
+                    <input type="text" className="border w-[20%]" id="year" name="year"  />
                   </div>
-                  <input type="text" className="border w-[50%]" id="subtitle" name="subtitle"  />
                 </div>
                 <div className="flex flex-col">
                   <div className="flex gap-3">
-                    <label htmlFor="description">Contenu:</label>
+                    <label htmlFor="illustration">Définir comme illustration</label>
+                    <input type="radio" id="illustration" name="illustration" onChange={(e) => {setIllustration("subtitle");}} />
+                  </div>
+                  <div className='flex gap-2'>
+                    <div className="flex flex-col w-[50%]">
+                      <label htmlFor="subtitle_fr">Sous-titre-FR:</label>
+                      <input type="text" className="border" id="subtitle_fr" name="subtitle_fr"/>
+                    </div>
+                    <div className="flex flex-col w-[50%]">
+                      <label htmlFor="subtitle_en">Sous-titre-EN:</label>
+                      <input type="text" className="border" id="subtitle_en" name="subtitle_en"  />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col">
+                  <div className="flex gap-3">
+                    <label htmlFor="illustration">Définir comme illustration</label>
                     <input type="radio" id="illustration" name="illustration" onChange={(e) => {setIllustration("description");}} />
                   </div>
-                  <textarea className="border grow h-[20em]" id="description" name="description" required ></textarea>
+                  <label htmlFor="description_fr">Contenu-FR:</label>
+                  <textarea className="border grow h-[10em]" id="description" name="description_fr" ></textarea>
+                  <label htmlFor="description_en">Contenu-EN:</label>
+                  <textarea className="border grow h-[10em]" id="description_en" name="description_en"  ></textarea>
                 </div>
                 <div>
                   {uploadedPhotos.length > 0 && (
-                    <div className="flex gap-2">
-                      {uploadedPhotos.map((photo, index) => (
-                          <div className="flex gap-3" key={index}>
-                            <span className="underline">{photo[1]}</span>
-                            <input type="radio" id="illustration" name="illustration" onChange={(e) => {setIllustration(photo[0]);}} />
-                            <button className="text-red-500 cursor-pointer" onClick={() => deleteFromEverywhere(photo[0])}>x</button>
-                          </div>
-                      ))}
+                    <div className="flex flex-col gap-2">
+                      <div className="flex gap-2">
+                        {uploadedPhotos.map((photo, index) => (
+                            <div className="flex gap-3" key={index}>
+                              <span className="underline">{photo[1]}</span>
+                              <input type="radio" id="illustration" name="illustration" onChange={(e) => {setIllustration(photo[0]);}} />
+                              <button className="text-red-500 cursor-pointer" onClick={() => deleteFromEverywhere(photo[0])}>x</button>
+                            </div>
+                        ))}
+                      </div>
+                      <label htmlFor="photos_caption_fr">descriptions des photos FR:</label>
+                      <textarea className="border w-full" id="photos_caption_fr" name="photos_caption_fr" ></textarea>
+                      <label htmlFor="photos_caption_en">descriptions des photos EN:</label>
+                      <textarea className="border w-full" id="photos_caption_en" name="photos_caption_en" ></textarea>
                     </div>
                   )}
                 </div>
@@ -136,6 +167,10 @@ export function CreateForm () {
                   <label htmlFor="video">Url vidéo : </label>
                   <input type="text" className="border" id="video" name="video" />
                 </div>
+                <label htmlFor="videos_caption_fr">descriptions des vidéos FR:</label>
+                <textarea className="border w-full" id="videos_caption_fr" name="videos_caption_fr" ></textarea>
+                <label htmlFor="videos_caption_en">descriptions des vidéos EN:</label>
+                <textarea className="border w-full" id="videos_caption_en" name="videos_caption_en" ></textarea>
                 <div>
                   <button className="border p-1 cursor-pointer" type="button" onClick={addVideo}>Ajouter une vidéo</button>
                 </div>

@@ -92,11 +92,10 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.WorkScalarFieldEnum = {
   id: 'id',
-  title: 'title',
-  subtitle: 'subtitle',
-  description: 'description',
+  year: 'year',
   illustration: 'illustration',
-  type: 'type',
+  placement_x: 'placement_x',
+  placement_y: 'placement_y',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -109,15 +108,17 @@ exports.Prisma.LanguageScalarFieldEnum = {
   subtitle: 'subtitle',
   description: 'description',
   type: 'type',
-  content: 'content',
-  workId: 'workId'
+  photos_caption: 'photos_caption',
+  videos_caption: 'videos_caption',
+  workId: 'workId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.PhotoScalarFieldEnum = {
   id: 'id',
   url: 'url',
   titre: 'titre',
-  caption: 'caption',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   workId: 'workId'
@@ -196,13 +197,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/client\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Work {\n  id           Int        @id @default(autoincrement())\n  title        String\n  subtitle     String?\n  description  String?\n  illustration String\n  type         String     @default(\"performance\")\n  createdAt    DateTime   @default(now())\n  updatedAt    DateTime   @updatedAt\n  photos       Photo[]\n  videos       Video[]\n  languages    Language[]\n}\n\nmodel Language {\n  id          Int    @id @default(autoincrement())\n  locale      String\n  title       String\n  slug        String\n  subtitle    String\n  description String\n  type        String\n  content     String\n  work        Work   @relation(fields: [workId], references: [id], onDelete: Cascade)\n  workId      Int\n}\n\nmodel Photo {\n  id        Int      @id @default(autoincrement())\n  url       String\n  titre     String\n  caption   String?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  work      Work     @relation(fields: [workId], references: [id], onDelete: Cascade)\n  workId    Int\n}\n\nmodel Video {\n  id        Int      @id @default(autoincrement())\n  url       String\n  caption   String?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  work      Work     @relation(fields: [workId], references: [id], onDelete: Cascade)\n  workId    Int\n}\n",
-  "inlineSchemaHash": "d62aafd0487dcc29422b1f446c3814c99708c8108dc907915dbe483578a9e66b",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/client\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Work {\n  id           Int        @id @default(autoincrement())\n  year         String\n  illustration String\n  placement_x  String\n  placement_y  String\n  createdAt    DateTime   @default(now())\n  updatedAt    DateTime   @updatedAt\n  photos       Photo[]\n  videos       Video[]\n  languages    Language[]\n}\n\nmodel Language {\n  id             Int      @id @default(autoincrement())\n  locale         String\n  title          String\n  slug           String   @unique\n  subtitle       String?\n  description    String?\n  type           String\n  photos_caption String?\n  videos_caption String?\n  work           Work     @relation(fields: [workId], references: [id], onDelete: Cascade)\n  workId         Int\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n}\n\nmodel Photo {\n  id        Int      @id @default(autoincrement())\n  url       String\n  titre     String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  work      Work     @relation(fields: [workId], references: [id], onDelete: Cascade)\n  workId    Int\n}\n\nmodel Video {\n  id        Int      @id @default(autoincrement())\n  url       String\n  caption   String?\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  work      Work     @relation(fields: [workId], references: [id], onDelete: Cascade)\n  workId    Int\n}\n",
+  "inlineSchemaHash": "8c812efa8db78b31ad82c6ebe1fd3647cb4e6b5b4bb26d8da41c76ba04a3f7f5",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Work\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"subtitle\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"illustration\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"photos\",\"kind\":\"object\",\"type\":\"Photo\",\"relationName\":\"PhotoToWork\"},{\"name\":\"videos\",\"kind\":\"object\",\"type\":\"Video\",\"relationName\":\"VideoToWork\"},{\"name\":\"languages\",\"kind\":\"object\",\"type\":\"Language\",\"relationName\":\"LanguageToWork\"}],\"dbName\":null},\"Language\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"locale\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"subtitle\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"work\",\"kind\":\"object\",\"type\":\"Work\",\"relationName\":\"LanguageToWork\"},{\"name\":\"workId\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"Photo\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"titre\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"caption\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"work\",\"kind\":\"object\",\"type\":\"Work\",\"relationName\":\"PhotoToWork\"},{\"name\":\"workId\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"Video\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"caption\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"work\",\"kind\":\"object\",\"type\":\"Work\",\"relationName\":\"VideoToWork\"},{\"name\":\"workId\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Work\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"year\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"illustration\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"placement_x\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"placement_y\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"photos\",\"kind\":\"object\",\"type\":\"Photo\",\"relationName\":\"PhotoToWork\"},{\"name\":\"videos\",\"kind\":\"object\",\"type\":\"Video\",\"relationName\":\"VideoToWork\"},{\"name\":\"languages\",\"kind\":\"object\",\"type\":\"Language\",\"relationName\":\"LanguageToWork\"}],\"dbName\":null},\"Language\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"locale\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"subtitle\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"photos_caption\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"videos_caption\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"work\",\"kind\":\"object\",\"type\":\"Work\",\"relationName\":\"LanguageToWork\"},{\"name\":\"workId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Photo\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"titre\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"work\",\"kind\":\"object\",\"type\":\"Work\",\"relationName\":\"PhotoToWork\"},{\"name\":\"workId\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"Video\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"caption\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"work\",\"kind\":\"object\",\"type\":\"Work\",\"relationName\":\"VideoToWork\"},{\"name\":\"workId\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
