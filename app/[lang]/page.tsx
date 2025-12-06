@@ -13,9 +13,6 @@ export default async function Home({params, searchParams}: {params: Promise<{ la
   const traductions = await getTraductionsByLocale(locale);
   const filtered_traductions = tag ? traductions.filter((trad) => trad.type === tag) : traductions;
 
-  const alltags = traductions.map((work) => work.type);
-  const tags = Array.from(new Set(alltags));
-
 
   return (
     <>

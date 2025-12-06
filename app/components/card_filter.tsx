@@ -1,6 +1,5 @@
 'use client';
 import CardGrid from "@/app/components/card_grid";
-import {useState} from "react";
 import Link from "next/link";
 
 interface Traduction {
@@ -24,17 +23,15 @@ interface Traduction {
 export default function CardFilter({ traductions, filtered_traductions }: { traductions: Traduction[], filtered_traductions: Traduction[]}) {
 
   const filtered_works = filtered_traductions
-  console.log("filtered_works", filtered_works)
+
   return(
     <>
 
     <div className="pl-15 pr-15 mt-50 ">
       <div className =" ">
         <div className={` grid grid-cols-6 gap-[4em]`}>
-          { traductions.map((trad) => (
-              <Link key={trad.id} href={`/${trad.locale}/${trad.slug}`} className="">
-                <CardGrid trad={trad} opacity={filtered_works.includes(trad) ? false : true}  />
-              </Link>
+          { traductions.map((trad, index) => (
+                <CardGrid trad={trad} key={index} opacity={filtered_works.includes(trad) ? false : true}  />
             ))
           }
         </div>
