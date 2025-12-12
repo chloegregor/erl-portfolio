@@ -14,6 +14,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Profile {
+  id        Int      @id @default(autoincrement())
+  cv        String
+  portfolio String
+  email     String
+  telephone  String
+}
+
+
 model Work {
   id          Int      @id @default(autoincrement())
   year       String
@@ -61,7 +70,7 @@ model Photo {
 model Video {
   id        Int      @id @default(autoincrement())
   url       String
-  thumbnail   String?
+  thumbnail   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   work      Work     @relation(fields: [workId], references: [id], onDelete: Cascade)

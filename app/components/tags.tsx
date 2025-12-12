@@ -1,27 +1,45 @@
 'use client'
-import {useRouter} from "next/navigation";
-
-export default function Tags ({tags, locale}: {tags: string[], locale: string}) {
-
-  const router = useRouter();
+import { useEffect} from "react";
+import { usePathname, useSearchParams} from "next/navigation";
+import Link from "next/link";
 
 
-  function handleClickTag(tag: string) {
+export default function Tags ({tags, locale,}: {tags: string[], locale: string}) {
 
-    console.log("Clicked tag:", tag);
-    const newUrl = tag === "tous" ? `/${locale}` : `/${locale}/?tag=${tag}`;
-    router.push(newUrl);
-  }
+const pathname = usePathname();
+console.log("Current pathname:", pathname);
 
+const searchParams = useSearchParams();
+
+const currentTag = searchParams.get('tag') || "tout";
+console.log("Current tag in Tags component:", currentTag);
+
+
+const tagColor: Record<string, [string, string]> = {
+  Expositions: ["text-green-400", "hover:text-green-400"],
+  Exhibitions: ["text-green-400", "hover:text-green-400"],
+  Performances: ["text-pink-400", "hover:text-pink-400"],
+  Workshops: ["text-blue-500", "hover:text-blue-500"],
+  Presse: ["text-orange-500", "hover:text-orange-500"],
+  Publications: ["text-yellow-500", "hover:text-yellow-500"],
+
+};
+
+ useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant'});
+  }, [pathname]);
 
 
   return (
 
-    <div className="flex gap-2 h-40 items-center  pl-4 pt-[4em]  w-full fixed bg-fond z-50">
-      <button className="" onClick={() => handleClickTag("tous")}>{locale === "fr" ? "Voir tout" : "See all"}</button>
-    {tags.map((tag, index) => (
-      <button onClick={() => handleClickTag(tag)} key={index} className="">{tag}</button>
-    ))}
+    <div className="flex gap-2 overflow-x-scroll max-w-full
+    ">
+    <Link href={`/${locale}`}  className={` lg:text-[1.1em] text-[0.8em] ${currentTag === "tout" ? "text-purple-800" : "hover:text-purple-800"}`} scroll={true}> <p className="w-fit"> {locale === "fr" ? "Tout voir" : "See all"}</p></Link>
+    <Link href={`/${locale}/?tag=expositions`} className={currentTag === "expositions" || currentTag === "Exhibitions" ? tagColor["Expositions"][0] : tagColor["Expositions"][1]}>{locale === 'fr' ? "Éxpositions" : "Exhibitions"}</Link>
+    <Link href={`/${locale}/?tag=performances`} className={currentTag === "performances" ? tagColor["Performances"][0] : tagColor["Performances"][1]}>Performances</Link>
+    <Link href={`/${locale}/?tag=workshops`} className={currentTag === "workshops" ? tagColor["Workshops"][0] : tagColor["Workshops"][1]}>Workshops</Link>
+    <Link href={`/${locale}/?tag=presse`} className={currentTag === "presse" || currentTag === "Press" ? tagColor["Presse"][0] : tagColor["Presse"][1]}>{locale === 'fr' ? "Presse" : "Press"}</Link>
+    <Link href={`/${locale}/?tag=publications`} className={currentTag === "publications" ? tagColor["Publications"][0] : tagColor["Publications"][1]}>Publication</Link>
     </div>
   )
 }

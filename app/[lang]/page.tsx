@@ -1,5 +1,5 @@
 import CardFilter from "@/app/components/card_filter";
-import {getTraductionsByLocale} from "@/app/actions/traductions";
+import {getTraductionsByLocale} from "@/lib/db";
 
 export default async function Home({params, searchParams}: {params: Promise<{ lang: string }>,
   searchParams: Promise<{ [key: string]: string | undefined }>}) {
@@ -15,9 +15,11 @@ export default async function Home({params, searchParams}: {params: Promise<{ la
 
 
   return (
-    <>
-    <CardFilter traductions={traductions} filtered_traductions={filtered_traductions} />
-    </>
+    <div className="w-full">
+
+      <CardFilter traductions={traductions} filtered_traductions={filtered_traductions} currentTag={tag} />
+    </div>
+
 
   );
 }

@@ -1,8 +1,12 @@
 import type { NextConfig } from "next";
 
+const hostnames = ['res.cloudinary.com', "i.vimeocdn.com"];
 const nextConfig: NextConfig = {
   images: {
-    domains: ['res.cloudinary.com', "i.vimeocdn.com"],
+    remotePatterns: hostnames.map((hostname) => ({
+      protocol: 'https',
+      hostname: hostname,
+    })),
   },
 };
 

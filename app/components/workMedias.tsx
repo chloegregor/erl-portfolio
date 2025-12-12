@@ -43,28 +43,27 @@ export default function WorkMedia({medias, photos_caption, videos_caption}: Work
   const renderThumbnails = (media: Media) => {
     return (
       media.thumbnail ? (
-          <Image src={media.thumbnail} alt="video thumbnail" fill className="object-contain"/>
+          <Image src={media.thumbnail} alt="video thumbnail" fill className=" "/>
       ) : (
         <Image src={media.url} alt="photo thumbnail" fill className="object-contain"/>
       )
     )
   }
 
-  console.log("WORK media", medias);
   if (medias.length >= 1) {
     return (
-        <div className=" h-[600px] w-[600px]  relative ">
+        <div className=" aspect-3/2  w-[60%] mx-auto relative  ">
           <p className=" absolute w-50 -left-55 bottom-0 whitespace-pre-wrap text-end ">
             {renderCaption()}
           </p>
           {renderMedia()}
 
             {medias.length > 1 && (
-              <div className=" absolute pr-7 -right-100 w-[250px] h-[600px] overflow-y-scroll flex flex-col gap-1">
+              <div className=" absolute flex  pr-7 -right-70 w-[250px] h-[600px] overflow-y-scroll flex-col gap-2">
                 {medias.map ((media, index) => {
                   return (
-                    <div key={index} className='flex flex-col '>
-                      <div className={`relative flex h-[120px] w-[120px] cursor-pointer ${index % 2 === 0 ? "self-start" : "self-end"}`} onClick={() => setCurrentIndex(index)}>
+                    <div key={index} className='flex flex-col  '>
+                      <div className={`relative flex  w-[90px] aspect-3/2 cursor-pointer ${index % 2 === 0 ? "self-start" : "self-end"}`} onClick={() => setCurrentIndex(index)}>
                         {renderThumbnails (media)}
                       </div>
                     </div>

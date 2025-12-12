@@ -118,6 +118,14 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.ProfileScalarFieldEnum = {
+  id: 'id',
+  cv: 'cv',
+  portfolio: 'portfolio',
+  email: 'email',
+  telephone: 'telephone'
+};
+
 exports.Prisma.WorkScalarFieldEnum = {
   id: 'id',
   year: 'year',
@@ -174,6 +182,7 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
+  Profile: 'Profile',
   Work: 'Work',
   Language: 'Language',
   Photo: 'Photo',

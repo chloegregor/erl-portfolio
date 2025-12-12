@@ -43,6 +43,19 @@ export async function createWork(formData: FormData) {
     const placement_x = position[Math.floor(Math.random() * position.length)];
     const placement_y = position[Math.floor(Math.random() * position.length)];
 
+    async function fetchThumbnail(url:string) {
+      console.log('fetchThumbnail called with url:', url);
+    const response = await fetch(`https://vimeo.com/api/oembed.json?url=${(url)}`);
+     const data = await response.json();
+      console.log("VIMEO THUMBNAIL DATA", data);
+     const thumbnail_url = data.thumbnail_url_with_play_button;
+     return thumbnail_url;
+   }
+
+   const videoWithThumbnails = await Promise.all(videos.map(async (url) => ({
+      url: url,
+      thumbnail: await fetchThumbnail(url)
+   })));
 
    const work = await prisma.work.create({
       data: {
@@ -55,7 +68,7 @@ export async function createWork(formData: FormData) {
           create : photosurls.map((url) => ({ url: url, titre: phototitles[photosurls.indexOf(url)] })),
         },
         videos: {
-          create : videos.map((url) => ({ url: url })),
+          create : videoWithThumbnails,
         }
       }
     }
@@ -113,7 +126,6 @@ export async function updateWork(formData: FormData) {
       thumbnail: await fetchThumbnail(url)
    })));
 
-   console.log('videoWithThumbnails', videoWithThumbnails);
 
 
     await prisma.work.update({

@@ -7,7 +7,7 @@ interface Work {
   id: number;
   year: string;
   illustration: string;
-  url: string;
+  url: string | null;
   photos: { id: number; url: string; titre: string }[];
   videos: { id: number; url: string }[];
   languages: { id: number; type: string; locale: string;
@@ -77,12 +77,19 @@ export function EditForm({ workToEdit, onClose }: EditFormProps ) {
     formData.append("illustration", illustration);
     formData.append("videos_caption_fr", form.videos_caption_fr.value);
     formData.append("videos_caption_en", form.videos_caption_en.value);
+    if( photos && photos.length > 0) {
+
+    formData.append("photos_caption_fr", form.photos_caption_fr.value);
+    formData.append("photos_caption_en", form.photos_caption_en.value);
+    }
     if (uploadedPhotos.length > 0)
       uploadedPhotos.forEach((photo) => {
     formData.append("photosurls", photo[0]);
     formData.append("phototitles", photo[1]);
-    formData.append("photos_caption_fr", form.photos_caption_fr.value);
-    formData.append("photos_caption_en", form.photos_caption_en.value);
+      if (!photos || photos.length === 0) {
+        formData.append("photos_caption_fr", form.photos_caption_fr.value);
+        formData.append("photos_caption_en", form.photos_caption_en.value);
+      }
       });
     const result = await updateWork(formData);
     if (!result.ok) {
@@ -101,7 +108,7 @@ export function EditForm({ workToEdit, onClose }: EditFormProps ) {
   return (
     <>
 
-    <div className="absolute overflow-scroll bg-white  p-[1em] left-50 right-50 top-30 bottom-30 shadow-2xl">
+    <div className="fixed overflow-scroll bg-white  p-[1em] inset-0 w-[70%] h-[700px] m-auto shadow-2xl">
       <form onSubmit={handleSubmit}  className="flex flex-col gap-[1em] mt-[1em] relative ">
         <button className="absolute top-0 right-0 z-10 cursor-pointer" onClick={onClose} type="button">Fermer</button>
         <h2 className="text-[2em] text-center">Edition</h2>
@@ -119,11 +126,11 @@ export function EditForm({ workToEdit, onClose }: EditFormProps ) {
               defaultValue={work.languages.find(lang => lang.locale === 'fr')?.type}
               required
               >
-              <option value="Performances">Performance</option>
-              <option value="Expositions">Exposition</option>
-              <option value="Workshops">Workshop</option>
-              <option value="Presse">Presse</option>
-              <option value ="Publications">Publication</option>
+              <option value="performances">Performance</option>
+              <option value="expositions">Exposition</option>
+              <option value="workshops">Workshop</option>
+              <option value="presse">Presse</option>
+              <option value ="publications">Publication</option>
             </select>
             <label className="" htmlFor={`urlarticle-${work.id}`}>lien externe : </label>
             <input
@@ -131,7 +138,7 @@ export function EditForm({ workToEdit, onClose }: EditFormProps ) {
               className="border w-[30%]"
               id={`urlarticle-${work.id}`}
               name="urlarticle"
-              defaultValue={work.url}
+              defaultValue={work.url ?? '' }
             />
           </div>
           <div className ="flex gap-2">
@@ -221,7 +228,6 @@ export function EditForm({ workToEdit, onClose }: EditFormProps ) {
                   }
                 </div>
                 <label htmlFor="photos_caption_fr">descriptions des photos FR:</label>
-
                 <textarea className="border w-full" id="photos_caption_fr" name="photos_caption_fr" defaultValue={work.languages.find(lang => lang.locale === 'fr')?.photos_caption ?? ''} ></textarea>
                 <label htmlFor="photos_caption_en">descriptions des photos EN:</label>
                 <textarea className="border w-full" id="photos_caption_en" name="photos_caption_en" defaultValue={work.languages.find(lang => lang.locale === 'en')?.photos_caption ?? ''} ></textarea>
@@ -236,6 +242,14 @@ export function EditForm({ workToEdit, onClose }: EditFormProps ) {
                     <button type="button" className="text-red-500" onClick={() => deleteFromEverywhere(photo[0])}>x</button>
                     </div>
                 ))}
+                {photos.length === 0 && (
+                  <span>
+                      <label htmlFor="photos_caption_fr">descriptions des photos FR:</label>
+                      <textarea className="border w-full" id="photos_caption_fr" name="photos_caption_fr" defaultValue={work.languages.find(lang => lang.locale === 'fr')?.photos_caption ?? ''} ></textarea>
+                      <label htmlFor="photos_caption_en">descriptions des photos EN:</label>
+                      <textarea className="border w-full" id="photos_caption_en" name="photos_caption_en" defaultValue={work.languages.find(lang => lang.locale === 'en')?.photos_caption ?? ''} ></textarea>
+                  </span>
+                )}
               </div>
             )}
           </div>

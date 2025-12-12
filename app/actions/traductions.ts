@@ -15,6 +15,7 @@ type Language = {
   videos_caption: string;
   work: {
     year: string;
+    url: string;
     illustration: string;
     placement_x: string;
     placement_y: string;
@@ -30,17 +31,6 @@ type Language = {
   }
 }
 
-export async function getAllTraductions() {
-    const traductions = await prisma.language.findMany(
-      {
-        include: { work: {
-          include: { photos: true, videos: true
-        } }
-      }
-    }
-    );
-    return traductions;
-  }
 
 export async function getTraductionById(id: number) {
     const traduction = await prisma.language.findUnique({
@@ -53,95 +43,6 @@ export async function getTraductionById(id: number) {
     return traduction;
 }
 
-export async function getTraductionsByLocale (locale: string) {
-    const traductions = await prisma.language.findMany({
-      where: { locale: locale },
-      select: {
-        id: true,
-        type: true,
-        slug: true,
-        locale : true,
-        title: true,
-        subtitle: true,
-        description: true,
-        photos_caption: true,
-        videos_caption: true,
-        work: {
-          select: {
-            year: true,
-            placement_x: true,
-            placement_y: true,
-            illustration: true,
-            photos: {
-              select: {
-                url: true,
-                titre: true,
-                id: true
-              }
-            },
-            videos: {
-              select: {
-                url: true,
-                id: true,
-                thumbnail: true
-              }
-            }
-          }
-        }
-
-
-      }
-    });
-    return traductions;
-}
-
-export async function getTraductionBySlugAndLocale(slug: string, locale: string) {
-    const traduction = await prisma.language.findUnique({
-      where: {
-        locale: locale,
-        slug: slug
-      },
-      select: {
-         id: true,
-        type: true,
-        title: true,
-        subtitle: true,
-        description: true,
-        photos_caption: true,
-        videos_caption: true,
-        workId: true,
-        work: {
-          select: {
-            year: true,
-            photos: {
-              select: {
-                url: true,
-                titre: true,
-                id: true
-              }
-            },
-            videos: {
-              select: {
-                url: true,
-                id: true,
-                thumbnail: true
-              }
-            }
-          }
-        }
-      }
-    });
-    return traduction;
-  }
-
-  export async function getAllTraductionsRoutes () {
-    const traductions = await getAllTraductions();
-    const routing_infos = traductions.map((trad) => ({
-      locale: trad.locale,
-      slug: trad.slug
-    }))
-    return routing_infos;
-  }
 
 export async function createTraduction(type: string, title: string, subtitle: string, description: string, locale: string, photos_caption: string, videos_caption: string, workId: number) {
     console.log ("createTraduction called with:", type, title, subtitle, description, locale, workId);

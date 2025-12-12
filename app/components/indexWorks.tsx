@@ -7,7 +7,7 @@ interface Work {
   id: number;
   year: string;
   illustration: string;
-  url: string;
+  url: string | null;
   photos: { id: number; url: string; titre: string }[];
   videos: { id: number; url: string }[];
   languages: { id: number; type: string; locale: string;
@@ -22,7 +22,7 @@ export function IndexWorks({ works }: { works: Work[] }) {
   const [selectedWorkId, setSelectedWorkId] = useState<number | null>(null);
 
   return (
-    <div className="w-full flex flex-col gap-4 p-2">
+    <div className="flex-1 flex flex-col gap-4 p-2">
       <h2>projet Publiés</h2>
         <div className="flex flex-col">
           <div className="grid border grid-cols-20 h-[2em]">

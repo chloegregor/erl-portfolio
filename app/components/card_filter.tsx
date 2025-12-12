@@ -1,6 +1,4 @@
-'use client';
 import CardGrid from "@/app/components/card_grid";
-import Link from "next/link";
 
 interface Traduction {
   id: number;
@@ -13,25 +11,25 @@ interface Traduction {
   photos_caption: string | null;
   videos_caption: string | null;
   work: {
-    illustration: string | null;
+    illustration: string;
     placement_x: string;
     placement_y: string;
   }
 }
 
 
-export default function CardFilter({ traductions, filtered_traductions }: { traductions: Traduction[], filtered_traductions: Traduction[]}) {
+export default function CardFilter({ traductions, filtered_traductions, currentTag }: { traductions: Traduction[], filtered_traductions: Traduction[], currentTag: string}) {
 
   const filtered_works = filtered_traductions
 
   return(
     <>
 
-    <div className="pl-15 pr-15 mt-50 ">
+    <div className="lg:pl-15 lg:pr-15 pl-2 pr-2 lg:mt-[17%] mt-[50%]">
       <div className =" ">
-        <div className={` grid grid-cols-6 gap-[4em]`}>
+        <div className={` grid lg:grid-cols-6 grid-cols-2 lg:gap-[4em] gap-[2em]`}>
           { traductions.map((trad, index) => (
-                <CardGrid trad={trad} key={index} opacity={filtered_works.includes(trad) ? false : true}  />
+                <CardGrid trad={trad} key={index} opacity={filtered_works.includes(trad) ? true : false} currentTag={currentTag} />
             ))
           }
         </div>

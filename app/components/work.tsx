@@ -11,6 +11,7 @@ interface Trad {
   videos_caption: string | null;
   work: {
     year: string | null;
+    url: string | null;
     photos: {
       url: string;
       titre: string;
@@ -34,22 +35,27 @@ export default function Work({trad}: {trad: Trad}) {
   const medias = [...photos, ...videos]
 
   return (
-    <div className= "mx-50 flex flex-col gap-10 " key={trad.id}>
+    <div className= "mx-[7%] h-full flex flex-col gap-0  " key={trad.id}>
       <span className=" flex flex-col gap-2 ">
         <div id="" className={` flex text-justify`}>
           <h2 id=""className=" text-[1.5em]">{trad.title}</h2>
           <span className=" ml-2 self-end mb-[4px]">{work.year}</span>
         </div>
-        <div>
-          <h3 className=" text-[1.2em] italic w-[600px]">{trad.subtitle}</h3>
+        <div className="h-[50px]">
+          <h3 className=" text-[1em] italic mr-[70%]">{trad.subtitle}</h3>
+          {work.url && (
+            <a href={work.url} target="_blank" className="text-[0.9em] text-blue-700 underline underline-offset-3 cursor-pointer">{work.url}</a>
+          )}
         </div>
       </span>
-      <div className="  flex">
-        <div className="fit-content mx-auto relative">
+      {medias.length > 0 && (
+
+        <div className="mt-[2%]">
         <WorkMedias medias={medias} videos_caption={trad.videos_caption} photos_caption={trad.photos_caption}/>
         </div>
-      </div>
-        <p className="whitespace-pre-wrap text-justify mt-30 mr-120 ">{trad?.description}</p>
+
+        )}
+        <p className="whitespace-pre-wrap text-justify mt-[7%] mr-[50%] ">{trad?.description}</p>
     </div>
   );
 }

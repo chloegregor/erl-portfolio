@@ -2,7 +2,6 @@
 import {useState, useEffect} from "react";
 import {createWork} from "@/app/actions/works";
 import  CloudinaryWidget  from "./cloudinary_widget";
-import Image from "next/image";
 
 export function CreateForm () {
   const [isClicked, setIsClicked] = useState(false);
@@ -10,9 +9,10 @@ export function CreateForm () {
   const [urlVideos, setUrlVideos] = useState<string[]>([]);
   const [illustration, setIllustration] = useState<string | null>(null);
 
- function handleUpload(urls: [string, string][]){
-    setUploadedPhotos((prev) => [...prev, ...urls]);
+ function handleUpload(url: [string, string][]){
+    setUploadedPhotos((prev) => [...prev, ...url]);
  }
+
 
   function addVideo() {
     const container = document.getElementById('videoInputs');
@@ -81,11 +81,11 @@ export function CreateForm () {
 
   return (
     <>
-      <span className=" ">
-        <button className={`${isClicked ? "hidden" : " p-1 border"} `} onClick={() => setIsClicked(true)}>
+
+        <button className={`${isClicked ? "disabled" : ""} p-1 border cursor-pointer `} onClick={() => setIsClicked(true)}>
           Ajouter un projet
         </button>
-      </span>
+
 
       {isClicked && (
           <div className="absolute overflow-scroll bg-white  p-[1em] left-50 right-50 top-30 bottom-30 shadow-2xl z-10">
@@ -96,30 +96,37 @@ export function CreateForm () {
                 <div  className="flex gap-5">
                   <label htmlFor="type">Type de projet :</label>
                   <select id="type" name="type" className="border w-[20%]">
-                    <option value="Performances">Performance</option>
-                    <option value="Expositions">Exposition</option>
-                    <option value="Workshops">Workshop</option>
-                    <option value="Presse">Presse</option>
-                    <option value ="Publications">Publication</option>
+                    <option value="performances">Performance</option>
+                    <option value="expositions">Exposition</option>
+                    <option value="workshops">Workshop</option>
+                    <option value="presse">Presse</option>
+                    <option value ="publications">Publication</option>
                   </select>
                    <div className="flex gap-2">
                     <label htmlFor="urlarticle">lien externe : </label>
                     <input type="text" className="border" id="urlarticle" name="urlarticle"  />
                   </div>
                 </div>
-                <div className='flex gap-2'>
-                  <label htmlFor="title_fr">Titre-FR:</label>
-                  <input type="text" className="border w-[30%]" id="title_fr" name="title_fr" required />
-                  <label htmlFor="title_en">Titre-EN:</label>
-                  <input type="text" className="border w-[30%]" id="title_en" name="title_en"  />
-                  <div>
+                <div className="flex gap-2">
+                  <label htmlFor="illustration">Définir comme illustration</label>
+                  <input type="radio" id="illustration" name="illustration" required onChange={(e) => {setIllustration("title");}} />
+                </div>
+                <div className='flex gap-3'>
+                  <span className="flex flex-col gap-2">
+                    <label htmlFor="title_fr">Titre-FR:</label>
+                    <input type="text" className="border " id="title_fr" name="title_fr" required />
+                  </span>
+                  <span className="flex flex-col gap-2">
+                    <label htmlFor="title_en">Titre-EN:</label>
+                    <input type="text" className="border" id="title_en" name="title_en"  />
+                  </span>
+                  <div className="flex flex-col">
                     <label htmlFor="year">Année: </label>
-                    <input type="text" className="border w-[20%]" id="year" name="year"  />
+                    <input type="text" className="border w-[30%]" id="year" name="year"  />
                   </div>
                 </div>
                 <div className="flex flex-col">
                   <div className="flex gap-3">
-                    <label htmlFor="illustration">Définir comme illustration</label>
                     <input type="radio" id="illustration" name="illustration" onChange={(e) => {setIllustration("subtitle");}} />
                   </div>
                   <div className='flex gap-2'>
@@ -136,7 +143,6 @@ export function CreateForm () {
 
                 <div className="flex flex-col">
                   <div className="flex gap-3">
-                    <label htmlFor="illustration">Définir comme illustration</label>
                     <input type="radio" id="illustration" name="illustration" onChange={(e) => {setIllustration("description");}} />
                   </div>
                   <label htmlFor="description_fr">Contenu-FR:</label>
