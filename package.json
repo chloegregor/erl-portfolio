@@ -14,6 +14,7 @@
     "@prisma/extension-accelerate": "^2.0.2",
     "dotenv": "^17.2.3",
     "next": "16.0.3",
+    "next-auth": "^4.24.13",
     "next-cloudinary": "^6.17.5",
     "ngrok": "^5.0.0-beta.2",
     "react": "19.2.0",

@@ -32,14 +32,18 @@ const tagColor: Record<string, [string, string]> = {
 
   return (
 
-    <div className="flex gap-2 overflow-x-scroll max-w-full
+    <div className="flex gap-2
     ">
-    <Link href={`/${locale}`}  className={` lg:text-[1.1em] text-[0.8em] ${currentTag === "tout" ? "text-purple-800" : "hover:text-purple-800"}`} scroll={true}> <p className="w-fit"> {locale === "fr" ? "Tout voir" : "See all"}</p></Link>
-    <Link href={`/${locale}/?tag=expositions`} className={currentTag === "expositions" || currentTag === "Exhibitions" ? tagColor["Expositions"][0] : tagColor["Expositions"][1]}>{locale === 'fr' ? "Éxpositions" : "Exhibitions"}</Link>
-    <Link href={`/${locale}/?tag=performances`} className={currentTag === "performances" ? tagColor["Performances"][0] : tagColor["Performances"][1]}>Performances</Link>
-    <Link href={`/${locale}/?tag=workshops`} className={currentTag === "workshops" ? tagColor["Workshops"][0] : tagColor["Workshops"][1]}>Workshops</Link>
-    <Link href={`/${locale}/?tag=presse`} className={currentTag === "presse" || currentTag === "Press" ? tagColor["Presse"][0] : tagColor["Presse"][1]}>{locale === 'fr' ? "Presse" : "Press"}</Link>
-    <Link href={`/${locale}/?tag=publications`} className={currentTag === "publications" ? tagColor["Publications"][0] : tagColor["Publications"][1]}>Publication</Link>
+    <span className=" flex flex-col lg:flex-row gap-2">
+      <Link href={`/${locale}`}  className={` ${currentTag === "tout" ? "text-purple-800" : "hover:text-purple-800"}`} scroll={true}> {locale === "fr" ? "Tout voir" : "See all"}</Link>
+      <Link href={`/${locale}/?tag=expositions`} className={currentTag === "expositions" || currentTag === "Exhibitions" ? tagColor["Expositions"][0] : tagColor["Expositions"][1]}>{locale === 'fr' ? "Éxpositions" : "Exhibitions"}</Link>
+      <Link href={`/${locale}/?tag=performances`} className={currentTag === "performances" ? tagColor["Performances"][0] : tagColor["Performances"][1]}>Performances</Link>
+    </span>
+    <span className=" flex flex-col lg:flex-row gap-2">
+      <Link href={`/${locale}/?tag=workshops`} className={currentTag === "workshops" ? tagColor["Workshops"][0] : tagColor["Workshops"][1]}>Workshops</Link>
+      <Link href={`/${locale}/?tag=presse`} className={currentTag === "presse" || currentTag === "Press" ? tagColor["Presse"][0] : tagColor["Presse"][1]}>{locale === 'fr' ? "Presse" : "Press"}</Link>
+      <Link href={`/${locale}/?tag=publications`} className={currentTag === "publications" ? tagColor["Publications"][0] : tagColor["Publications"][1]}>Publication</Link>
+    </span>
     </div>
   )
 }

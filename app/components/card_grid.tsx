@@ -42,16 +42,16 @@ export default function CardGrid({ trad, opacity, currentTag}: { trad: Language,
   const isTextKey = !isUrl && ValidTextKeys.includes(illustrationValue as TextKey);
   const textKey = isTextKey ? (illustrationValue as TextKey) : null;
 
-  const url = currentTag ? `${trad.locale}/${trad.slug}/?tag=${currentTag}` : `${trad.locale}/${trad.slug}`
+  const url = `${trad.locale}/${trad.slug}/?tag=${trad.type}`
 
 
     return (
-    <div className={`aspect-square flex flex-col items-${work.placement_x} justify-${work.placement_y}` }key={trad.id}>
-      <div id="card"className={`
-    flex flex-col items-center justify-center gap-3 lg:h-[50%] lg:w-[80%] h-full w-full
-    ${ isVisible  ? "opacity-100" : "opacity-0 disabled-pointer-events"}
+    <div className={`aspect-square  flex flex-col items-${work.placement_x} justify-${work.placement_y}` }key={trad.id}>
+      <div id=""className={`
+    flex flex-col items-center justify-center gap-3 h-[100%] w-[100%] lg:h-[50%] lg:w-[80%] transform
+    ${ isVisible  ? " opacity-100 " : " opacity-0 disabled"}
   `}>
-        <Link href={`/${url}`} className="h-full w-full">
+        <Link href={`/${url}`} className="h-full w-full ">
         {
           illustrationValue && (
             work.illustration?.includes("https://") ? (
@@ -61,7 +61,7 @@ export default function CardGrid({ trad, opacity, currentTag}: { trad: Language,
             )
               : textKey && (
                 <div className=" w-full ">
-                  <p className={`text-justify text-[0.5em] line-clamp-6 w-[80%] last-center  ${italic ? "italic" : ""}`}>{trad[textKey]}</p>
+                  <p className={`text-justify text-[0.5em] lg:line-clamp-6 w-[80%] w-[100%] line-clamp-8 last-center  ${italic ? "italic" : ""}`}>{trad[textKey]}</p>
                 </div>
               )
           )

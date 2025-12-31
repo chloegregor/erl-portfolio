@@ -15,11 +15,9 @@ export default async function Home({params, searchParams}: {params: Promise<{ la
 
 
   return (
-    <div className="w-full">
-
+    <div className="w-full ">
       <CardFilter traductions={traductions} filtered_traductions={filtered_traductions} currentTag={tag} />
     </div>
-
 
   );
 }

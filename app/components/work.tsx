@@ -23,7 +23,102 @@ interface Trad {
   } ;
 }
 
-export default function Work({trad}: {trad: Trad}) {
+function Arrowprev ({slug}: {slug?: string}) {
+  if (!slug) {
+    return (
+    <div className="rotate-180">
+      <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={50}
+          height={92}
+          fill="none"
+          viewBox="0 0 24 24"
+
+        >
+        <path
+          stroke="#6666"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={0.600}
+          d="M20 12H4m16 0-6 6m6-6-6-6"
+        />
+      </svg>
+    </div>
+
+    )
+  }
+  return (
+    <div className="rotate-180">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={50}
+        height={92}
+        fill="none"
+        viewBox="0 0 24 24"
+
+      >
+      <path
+        stroke="#171717"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.600}
+        d="M20 12H4m16 0-6 6m6-6-6-6"
+      />
+      </svg>
+    </div>
+
+  )
+
+}
+
+function Arrownext ({slug}: {slug?: string}) {
+  if (!slug) {
+    return (
+      <div className="">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={50}
+          height={92}
+          fill="none"
+          viewBox="0 0 24 24"
+
+        >
+          <path
+            stroke="#6666"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={0.600}
+            d="M20 12H4m16 0-6 6m6-6-6-6"
+          />
+        </svg>
+      </div>
+
+    )
+  }
+  return (
+    <div className="">
+       <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={50}
+        height={92}
+        fill="none"
+        viewBox="0 0 24 24"
+
+      >
+      <path
+        stroke="#171717"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={0.600}
+        d="M20 12H4m16 0-6 6m6-6-6-6"
+      />
+      </svg>
+    </div>
+
+  )
+
+}
+export default function Work({trad, next, prev, locale}: {trad: Trad, next: string, prev: string, locale: string}) {
 
   if (trad === null) {
     return
@@ -34,15 +129,23 @@ export default function Work({trad}: {trad: Trad}) {
   const videos = work.videos
   const medias = [...photos, ...videos]
 
+  function url (slug:string) {
+    if (!slug) {
+      return "#"
+    }
+    return `/${locale}/${slug}/?tag=${trad.type}`
+  }
+
+
   return (
-    <div className= "mx-[7%] h-full flex flex-col gap-0  " key={trad.id}>
+    <div className= "lg:mx-[100px] pl-4 pr-4 h-full flex flex-col gap-2 " key={trad.id}>
       <span className=" flex flex-col gap-2 ">
         <div id="" className={` flex text-justify`}>
           <h2 id=""className=" text-[1.5em]">{trad.title}</h2>
           <span className=" ml-2 self-end mb-[4px]">{work.year}</span>
         </div>
         <div className="h-[50px]">
-          <h3 className=" text-[1em] italic mr-[70%]">{trad.subtitle}</h3>
+          <h3 className=" text-[1em] italic lg:mr-[70%]">{trad.subtitle}</h3>
           {work.url && (
             <a href={work.url} target="_blank" className="text-[0.9em] text-blue-700 underline underline-offset-3 cursor-pointer">{work.url}</a>
           )}
@@ -55,7 +158,15 @@ export default function Work({trad}: {trad: Trad}) {
         </div>
 
         )}
-        <p className="whitespace-pre-wrap text-justify mt-[7%] mr-[50%] ">{trad?.description}</p>
+        <p className="whitespace-pre-wrap text-justify mt-[7%] lg:mr-[50%] ">{trad?.description}</p>
+        <div className=" mt-[7%] flex ">
+
+        <a className={prev ? "" : "disabled"} href={url(prev)}><Arrowprev slug={prev}/></a>
+
+          <span className="ml-auto">
+            <a className={next ? "" : "disabled"} href={url(next)}><Arrownext slug={next}/></a>
+          </span>
+        </div>
     </div>
   );
 }

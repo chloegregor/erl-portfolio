@@ -32,8 +32,8 @@ export default async function LangLayout({ children, params }: LangLayoutProps) 
       <h1 className="lg:text-3xl text-[1.3em] ">Élodie Rougeaux-Léaux</h1>
     </div>
     </header>
-      <nav className="flex flex-wrap  items-center lg:h-[150px] pl-4 pr-4 pt-[4em] w-full fixed bg-fond z-50 justify-between">
-          <span>
+      <nav className="flex lg:items-center lg:h-[150px] h-[220px] pl-4 pr-4 pt-[5em] w-full lg:fixed bg-fond z-50 justify-between">
+          <span className="">
             <Tags tags={tags} locale={locale} />
           </span>
         {profile && (

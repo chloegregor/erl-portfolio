@@ -52,7 +52,6 @@ export const getTraductionsByLocale = cache(async (locale: string) =>  {
 export const  getTraductionBySlugAndLocale = cache(async (slug: string, locale: string) => {
     const traduction = await prisma.language.findUnique({
       where: {
-        locale: locale,
         slug: slug,
       },
       select: {
@@ -86,12 +85,56 @@ export const  getTraductionBySlugAndLocale = cache(async (slug: string, locale: 
         }
       }
     });
-    return traduction;
+    if (traduction) {
+
+      const next_trad = await prisma.language.findFirst({
+        where: {
+          locale: locale,
+          type: traduction.type,
+          id: {
+            gt: traduction.id
+          },
+        },
+        orderBy: { id: 'asc' },
+        select: {
+          slug: true
+        }
+
+      })
+      const prev_trad = await prisma.language.findFirst({
+        where: {
+          locale: locale,
+          type:traduction.type,
+          id: {
+            lt: traduction.id
+          }
+        },
+        orderBy: { id: 'desc' },
+        select: {
+          slug: true
+        }
+      })
+      return {traduction: traduction, next_trad: next_trad?.slug, prev_trad: prev_trad?.slug};
+    }
+    return null;
   });
 
   export async function getAllTraductions() {
     const traductions = await prisma.language.findMany(
       {
+        include: { work: {
+          include: { photos: true, videos: true
+        } }
+      }
+    }
+    );
+    return traductions;
+  }
+
+  export async function getAllTraductionsByType(type: string) {
+    const traductions = await prisma.language.findMany(
+      {
+        where: { type: type },
         include: { work: {
           include: { photos: true, videos: true
         } }
