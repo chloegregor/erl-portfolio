@@ -4,11 +4,21 @@ import {IndexWorks} from "../components/indexWorks";
 import {CreateForm} from "../components/createForm";
 import {EditProfile} from "@/app/components/editProfile";
 import {PrismaClient} from "@/src/generated/client";
+import { auth } from "@/lib/auth"; // Ton instance Better Auth
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 const prisma = new PrismaClient();
 
 
 export default async function AdminPage() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user) {
+    redirect('/sign-in');
+  }
   const works = await getAllWorks();
   const profile = await prisma.profile.findFirst();
 
