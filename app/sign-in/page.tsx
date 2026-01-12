@@ -64,9 +64,7 @@ export default function SignInPage() {
                     {loading ? "..." : "Connexion"}
                 </button>
             </form>
-            <Link href="/sign-up" className="mt-4 text-blue-500 hover:underline">
-            Creer compte
-            </Link>
+           
         </div>
     )
 }
