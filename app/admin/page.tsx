@@ -3,18 +3,19 @@ import {getAllWorks} from "@/app/actions/works";
 import {IndexWorks} from "../components/indexWorks";
 import {CreateForm} from "../components/createForm";
 import {EditProfile} from "@/app/components/editProfile";
-import {PrismaClient} from "@/src/generated/client";
+import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth"; // Ton instance Better Auth
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-const prisma = new PrismaClient();
 
 
 export default async function AdminPage() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
+
+  console.log("Session admin page:", session);
 
   if (!session?.user) {
     redirect('/sign-in');

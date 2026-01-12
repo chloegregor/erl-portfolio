@@ -1,6 +1,6 @@
 import CardGrid from "@/app/components/card_grid";
 
-interface Traduction {
+export interface Traduction {
   id: number;
   slug: string;
   locale: string;
@@ -25,9 +25,9 @@ export default function CardFilter({ traductions, filtered_traductions, currentT
   return(
     <>
 
-    <div className="lg:pl-15 lg:pr-15 pl-2 pr-2 lg:mt-[17%] ">
+    <div className="lg:pl-25 lg:pr-25 pl-2 pr-2">
       <div className =" ">
-        <div className={` grid lg:grid-cols-6 grid-cols-3 lg:gap-[4em] gap-[2em]`}>
+        <div className={`grid lg:grid-cols-6 grid-cols-3 lg:gap-[4em] gap-[2em]`}>
           { traductions.map((trad, index) => (
                 <CardGrid trad={trad} key={index} opacity={filtered_works.includes(trad) ? true : false} currentTag={currentTag} />
             ))

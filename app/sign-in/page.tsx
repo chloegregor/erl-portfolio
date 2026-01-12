@@ -34,7 +34,7 @@ export default function SignInPage() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-4">
             <form onSubmit={handleSignIn} className="w-full max-w-md space-y-4 bg-white p-8 border rounded-lg shadow-sm">
-                <h1 className="text-2xl font-bold text-center mb-6">Initialiser le compte Artiste</h1>
+                <h1 className="text-2xl font-bold text-center mb-6"> Connexion</h1>
 
                 <div>
                     <label className="block text-sm font-medium mb-1">Email</label>
@@ -61,7 +61,7 @@ export default function SignInPage() {
                     disabled={loading}
                     className="w-full bg-black text-white p-2 rounded hover:bg-gray-800 disabled:bg-gray-400"
                 >
-                    {loading ? "Création..." : "Créer le compte"}
+                    {loading ? "..." : "Connexion"}
                 </button>
             </form>
             <Link href="/sign-up" className="mt-4 text-blue-500 hover:underline">

@@ -22,24 +22,12 @@ export const getTraductionsByLocale = cache(async (locale: string) =>  {
         videos_caption: true,
         work: {
           select: {
-            year: true,
+
             placement_x: true,
             placement_y: true,
             illustration: true,
-            photos: {
-              select: {
-                url: true,
-                titre: true,
-                id: true
-              }
-            },
-            videos: {
-              select: {
-                url: true,
-                id: true,
-                thumbnail: true
-              }
-            }
+
+
           }
         }
 
@@ -146,7 +134,7 @@ export const  getTraductionBySlugAndLocale = cache(async (slug: string, locale: 
 
     export async function getAllTraductionsRoutes () {
     const traductions = await getAllTraductions();
-    const routing_infos = traductions.map((trad) => ({
+    const routing_infos = traductions.map((trad: { locale: string; slug: string }) => ({
       locale: trad.locale,
       slug: trad.slug
     }))

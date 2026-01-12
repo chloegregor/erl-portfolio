@@ -25,7 +25,7 @@ export default function WorkMedia({medias, photos_caption, videos_caption}: Work
           <Vimeo url={medias[currentIndex].url} />
         </div>
       ) : (
-        <Image src={medias[currentIndex].url} alt={`media${currentIndex}`} fill priority className="object-contain object-bottom"/>
+        <Image src={medias[currentIndex].url} alt={`media${currentIndex}`} fill priority className="object-contain object-left"/>
 
       )
     )
@@ -45,32 +45,31 @@ export default function WorkMedia({medias, photos_caption, videos_caption}: Work
       media.thumbnail ? (
           <Image src={media.thumbnail} alt="video thumbnail" fill className=" "/>
       ) : (
-        <Image src={media.url} alt="photo thumbnail" fill className="object-contain"/>
+        <Image src={media.url} alt="photo thumbnail" fill className="object-cover"/>
       )
     )
   }
 
   if (medias.length >= 1) {
     return (
-      <div className=" flex lg:flex-row flex-col gap-5">
-
-        <p className="  lg:w-[20%] order-2 lg:order-0  lg:self-end lg:-left-55 lg:bottom-0  lg:whitespace-pre-wrap lg:text-end ">
-          {renderCaption()}
-        </p>
-        <div className=" aspect-3/2 flex-1 relative  ">
-          {renderMedia()}
+      <div className="  flex lg:flex-row  flex-col gap-2 ">
+        <div className="lg:order-2 w-full flex flex-col gap-2 lg:relative">
+          <div className="aspect-3/2 flex-1 relative ">
+            {renderMedia()}
+          </div>
+          <p className=" lg:absolute lg:-bottom-8  text-gray-400 text-[0.9em]">
+            {renderCaption()}
+          </p>
         </div>
 
-        <div className=" order-3 min-h-[70px] lg:w-[20%] overflow-y-scroll">
+        <div className=" lg:w-[70px] w-full  overflow-y-scroll">
         {medias.length > 1 && (
-            <div className=" lg:w-[50%] lg:ml-3 flex lg:flex-col flex-row gap-2">
+            <div className=" flex lg:flex-col flex-row gap-2">
               {medias.map ((media, index) => {
                 return (
-                  <div key={index} className='flex flex-col  '>
-                    <div className={`relative flex  w-[70%] aspect-3/2 cursor-pointer ${index % 2 === 0 ? "self-start" : "self-end"}`} onClick={() => setCurrentIndex(index)}>
+                    <div key={index}className={`  relative flex aspect-3/2 w-full cursor-pointer`} onClick={() => setCurrentIndex(index)}>
                       {renderThumbnails (media)}
                     </div>
-                  </div>
                 )
               }
               )}

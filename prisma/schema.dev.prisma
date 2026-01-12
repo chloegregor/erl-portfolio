@@ -1,0 +1,138 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../src/generated/client/dev"
+}
+
+datasource db {
+  provider = "sqlite"
+  url  = "file:./dev.db"
+}
+model Profile {
+  id        Int      @id @default(autoincrement())
+  cv        String
+  portfolio String
+  email     String
+  telephone  String
+}
+
+
+model Work {
+  id          Int      @id @default(autoincrement())
+  year       String
+  illustration String
+  placement_x String
+  placement_y String
+  url        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  photos      Photo[]
+  videos      Video[]
+  languages   Language[]
+
+}
+
+model Language {
+  id        Int      @id @default(autoincrement())
+  locale    String
+  title     String
+  slug     String @unique
+  subtitle  String?
+  description String?
+  type     String
+  photos_caption String?
+  videos_caption String?
+  work      Work     @relation(fields: [workId], references: [id], onDelete: Cascade)
+  workId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+
+model Photo {
+  id        Int      @id @default(autoincrement())
+  url       String
+  titre     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  work      Work     @relation(fields: [workId], references: [id], onDelete: Cascade)
+  workId    Int
+}
+
+
+
+model Video {
+  id        Int      @id @default(autoincrement())
+  url       String
+  thumbnail   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  work      Work     @relation(fields: [workId], references: [id], onDelete: Cascade)
+  workId    Int
+}
+
+
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean
+  image         String?
+  createdAt     DateTime
+  updatedAt     DateTime
+  sessions      Session[]
+  accounts      Account[]
+
+  @@unique([email])
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}

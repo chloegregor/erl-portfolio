@@ -1,26 +1,41 @@
 // app/layout.tsx
 // CE FICHIER EST STATIQUE ET GÈRE L'ENVELOPPE GLOBALE ET LES BOUTONS DE LANGUE.
-import LocalFont from 'next/font/local';
 import type { Metadata } from "next";
 import "./globals.css";
+import { DM_Sans, Mulish, Noto_Sans_Kannada } from 'next/font/google';
 
-export const enbyGertrude = LocalFont({
-  src: "../public/fonts/Enby_Gertrude_roman.woff2",
-});
+
+
 
 export const metadata: Metadata = {
   title: "Élodie Rougeaux-Léaux",
   description: "Portfolio de Élodie Rougeaux-Léaux",
 };
 
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-dm-sans',
+});
 
+const mulish = Mulish({
+  subsets: ['latin'],
+  weight: ['400', '700', '900'],
+  variable: '--font-mulish',
+});
+
+const notoSansKannada = Noto_Sans_Kannada({
+  subsets: ['kannada'],
+  weight: ['400', '700', '100','300', '200'],
+  variable: '--font-noto-sans-kannada',
+});
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
 
   return (
-    <html lang="en">
+    <html className={`${dmSans.variable} ${mulish.variable} ${notoSansKannada.variable}`} lang="fr">
       <body
-        className={`antialiased min-h-screen flex flex-col ${enbyGertrude.className} `}
+        className={`antialiased flex flex-col `}
       >
         <div className="flex-1 ">
           {children}

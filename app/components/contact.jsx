@@ -12,11 +12,11 @@ export function Contact({ email, tel}) {
 
   return (
     <div>
-    <button className={`cursor-pointer ${isClicked ? "text-gray-400" : ""}`} onClick={()=> setIsClicked(!isClicked)}>
+    <button className={`cursor-pointer ${isClicked ? "text-green-400" : ""}`} onClick={()=> setIsClicked(!isClicked)}>
       Contact
     </button>
     {isClicked && (
-      <div className=" flex gap-2 absolute  -bottom-10 right-0">
+      <div className=" flex gap-2 absolute -bottom-6 right-0">
         <p>{startEmail}@{endEmail}</p>
         <p>{tel}</p>
       </div>

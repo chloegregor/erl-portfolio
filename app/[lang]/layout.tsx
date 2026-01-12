@@ -4,12 +4,21 @@ import {getProfile} from "@/lib/db";
 import Tags from "../components/tags";
 import LanguageButtons from "@/app/components/language_buttons";
 import {AboutPage} from "@/app/components/about";
+import Link from "next/link";
+import LocalFont from 'next/font/local';
+
 
 
 interface LangLayoutProps {
   children: React.ReactNode;
   params: Promise<{ lang: string }>;
+
+
 }
+
+export const enbyGertrude = LocalFont({
+  src: "../../public/fonts/Enby_Gertrude_roman.woff2",
+});
 
 export default async function LangLayout({ children, params }: LangLayoutProps) {
 
@@ -24,25 +33,25 @@ export default async function LangLayout({ children, params }: LangLayoutProps) 
 
   return (
     <>
-      <header>
-      <div className ="fixed top-0 right-0 z-[1000]">
-        <LanguageButtons currentLanguage={locale} />
-      </div>
-    <div className=" p-4 fixed bg-fond w-full z-[100]">
-      <h1 className="lg:text-3xl text-[1.3em] ">Élodie Rougeaux-Léaux</h1>
-    </div>
+      <header className={`${enbyGertrude.className}`}>
+        <div className=" flex flex-col gap-6 lg:gap-3 px-4 pt-2 pb-6 fixed bg-fond w-full z-[100]">
+          <div className= {`flex justify-between `}>
+            <Link href="/" className="lg:text-3xl text-[1.3em] ">Élodie Rougeaux-Léaux</Link>
+            <LanguageButtons currentLanguage={locale} />
+          </div>
+          <nav className="flex w-full bg-fond justify-between">
+              <span className="">
+                <Tags tags={tags} locale={locale} />
+              </span>
+            {profile && (
+            <span>
+              <AboutPage cv={profile.cv } portfolio={profile.portfolio} email={profile.email} tel={profile.telephone}/>
+            </span>
+              )}
+          </nav>
+        </div>
     </header>
-      <nav className="flex lg:items-center lg:h-[150px] h-[220px] pl-4 pr-4 pt-[5em] w-full lg:fixed bg-fond z-50 justify-between">
-          <span className="">
-            <Tags tags={tags} locale={locale} />
-          </span>
-        {profile && (
-        <span>
-          <AboutPage cv={profile.cv } portfolio={profile.portfolio} email={profile.email} tel={profile.telephone}/>
-        </span>
-          )}
-      </nav>
-      <div className=" w-full mb-[100px]">
+      <div className=" w-full ">
         {children}
       </div>
 

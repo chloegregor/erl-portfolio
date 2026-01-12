@@ -7,14 +7,14 @@ export default async function SlugPage({ params }: { params: Promise<{ lang: str
   const { lang, slug } = await params;
 
   const trad = await getTraductionBySlugAndLocale(slug, lang);
-console.log('trad', trad)
+
 
   if (!trad){
     notFound();}
 
 
   return (
-    <div className=" w-full  lg:mt-[180px]">
+    <div className=" w-full lg:mt-[140px] mt-[250px]">
       <Work trad={trad.traduction} next={trad.next_trad} prev={trad.prev_trad} locale={lang} />
     </div>
   )

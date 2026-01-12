@@ -1,15 +1,25 @@
-import { PrismaClient } from '../src/generated/client';
+// lib/prisma.ts
+import { PrismaClient as DevClient } from "../src/generated/client/dev";
+import { PrismaClient as ProdClient } from "../src/generated/client/prod";
 
-const prismaClientSingleton = () => {
-  return new PrismaClient()
+let prismaInstance: any; // On utilise une variable intermédiaire
+
+if (process.env.NODE_ENV === "production") {
+  prismaInstance = new ProdClient();
+} else {
+  const globalForPrisma = globalThis as unknown as {
+    prisma: DevClient | undefined;
+  };
+
+  if (!globalForPrisma.prisma) {
+    globalForPrisma.prisma = new DevClient();
+  }
+  prismaInstance = globalForPrisma.prisma;
 }
 
-declare const globalThis: {
-  prismaGlobal: ReturnType<typeof prismaClientSingleton>;
-} & typeof global;
+// On exporte l'instance en la castant vers DevClient
+// Cela permet à TypeScript d'utiliser ton schéma (tables, relations)
+// sans se soucier du conflit entre SQLite et Postgres.
+export const prisma = prismaInstance as DevClient;
 
-const prisma = globalThis.prismaGlobal ?? prismaClientSingleton()
-
-export default prisma
-
-if (process.env.NODE_ENV !== 'production') globalThis.prismaGlobal = prisma
+export default prisma;

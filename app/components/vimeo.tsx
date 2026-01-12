@@ -7,7 +7,8 @@ export  default function Vimeo({ url } : {url: string}) {
 
   return (
     <>
-        <iframe className="absolute aspect-16/9 bottom-0 w-full "
+        <iframe className="absolute aspect-16/9 bottom-0 w-full h-full "
+          style={{backgroundColor: 'black'}}
           src={`https://player.vimeo.com/video/${id}`}
           loading ="lazy"
           allow="autoplay; fullscreen; picture-in-picture"

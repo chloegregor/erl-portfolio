@@ -58,7 +58,7 @@ function Arrowprev ({slug}: {slug?: string}) {
 
       >
       <path
-        stroke="#171717"
+        stroke="#05df72"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={0.600}
@@ -106,7 +106,7 @@ function Arrownext ({slug}: {slug?: string}) {
 
       >
       <path
-        stroke="#171717"
+        stroke="#05df72"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={0.600}
@@ -118,7 +118,7 @@ function Arrownext ({slug}: {slug?: string}) {
   )
 
 }
-export default function Work({trad, next, prev, locale}: {trad: Trad, next: string, prev: string, locale: string}) {
+export default function Work({trad, next, prev, locale}: {trad: Trad, next?: string, prev?: string, locale: string}) {
 
   if (trad === null) {
     return
@@ -129,7 +129,7 @@ export default function Work({trad, next, prev, locale}: {trad: Trad, next: stri
   const videos = work.videos
   const medias = [...photos, ...videos]
 
-  function url (slug:string) {
+  function url (slug?:string) {
     if (!slug) {
       return "#"
     }
@@ -138,27 +138,34 @@ export default function Work({trad, next, prev, locale}: {trad: Trad, next: stri
 
 
   return (
-    <div className= "lg:mx-[100px] pl-4 pr-4 h-full flex flex-col gap-2 " key={trad.id}>
-      <span className=" flex flex-col gap-2 ">
-        <div id="" className={` flex text-justify`}>
-          <h2 id=""className=" text-[1.5em]">{trad.title}</h2>
-          <span className=" ml-2 self-end mb-[4px]">{work.year}</span>
-        </div>
-        <div className="h-[50px]">
-          <h3 className=" text-[1em] italic lg:mr-[70%]">{trad.subtitle}</h3>
-          {work.url && (
-            <a href={work.url} target="_blank" className="text-[0.9em] text-blue-700 underline underline-offset-3 cursor-pointer">{work.url}</a>
+    <div className= "px-4 lg:px-20 h-full flex flex-col " key={trad.id}>
+      <div className="flex lg:flex-row flex-col  ">
+        {medias.length > 0 && (
+          <div className=" lg:w-[75%] order-2 lg:order-0 lg:mt-0 mt-[10px] ">
+            <WorkMedias medias={medias} videos_caption={trad.videos_caption} photos_caption={trad.photos_caption}/>
+          </div>
+
           )}
-        </div>
-      </span>
-      {medias.length > 0 && (
+        <div className={`lg:pl-15 flex flex-col ${medias.length > 0 ? "lg:w-[25%]" : "lg:w-[50%]"}`}>
+          <span className="  flex flex-col gap-2 ">
+            <div id="" className={` flex flex-col text-justify`}>
+              <h2 id=""className=" lg:text-[1.5em] text-[1.2em]">{trad.title}</h2>
+              <span className="text-[0.8em]">{work.year}</span>
 
-        <div className="mt-[2%]">
-        <WorkMedias medias={medias} videos_caption={trad.videos_caption} photos_caption={trad.photos_caption}/>
+            </div>
+            <div className="h-[50px]">
+              <h3 className=" thin ">{trad.subtitle}</h3>
+              {work.url && (
+                <a href={work.url} target="_blank" className="text-[0.9em] text-blue-700 underline underline-offset-3 cursor-pointer">{work.url}</a>
+              )}
+            </div>
+          </span>
         </div>
 
-        )}
-        <p className="whitespace-pre-wrap text-justify mt-[7%] lg:mr-[50%] ">{trad?.description}</p>
+
+      </div>
+      <p className={`whitespace-pre-wrap text-justify lg:w-[75%] lg:pl-[70px] mt-[60px]`}>{trad?.description}</p>
+
         <div className=" mt-[7%] flex ">
 
         <a className={prev ? "" : "disabled"} href={url(prev)}><Arrowprev slug={prev}/></a>
