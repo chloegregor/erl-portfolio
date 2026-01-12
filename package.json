@@ -13,7 +13,7 @@
     "@prisma/extension-accelerate": "^2.0.2",
     "better-auth": "^1.4.10",
     "dotenv": "^17.2.3",
-    "next": "16.0.3",
+    "next": "^16.0.10",
     "next-cloudinary": "^6.17.5",
     "react": "19.2.0",
     "react-dom": "19.2.0",
