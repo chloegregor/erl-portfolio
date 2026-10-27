@@ -97,7 +97,7 @@ export function CreateForm () {
                   <label htmlFor="type">Type de projet :</label>
                   <select id="type" name="type" className="border w-[20%]">
                     <option value="performances">Performance</option>
-                    <option value="expositions">Réalisation</option>
+                    <option value="realisations">Réalisation</option>
                     <option value="workshops">Workshop</option>
                     <option value="presse">Presse</option>
                     <option value ="publications">Publication</option>
