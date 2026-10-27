@@ -45,7 +45,6 @@ export function EditProfile ({profile}: Profile) {
     setIsClicked(false);
     const form = event.currentTarget;
 
-    // Here you would typically handle form submission, e.g., send data to the server
    const telephone = (form.telephone as HTMLInputElement).value;
    const email = (form.email as HTMLInputElement).value;
    const cv = uploadedCv ? uploadedCv[0] : profile?.cv || '';

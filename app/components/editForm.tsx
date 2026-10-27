@@ -127,7 +127,7 @@ export function EditForm({ workToEdit, onClose }: EditFormProps ) {
               required
               >
               <option value="performances">Performance</option>
-              <option value="expositions">Exposition</option>
+              <option value="expositions">Realisation</option>
               <option value="workshops">Workshop</option>
               <option value="presse">Presse</option>
               <option value ="publications">Publication</option>

@@ -10,6 +10,7 @@ export async function getProfile() {
 export const getTraductionsByLocale = cache(async (locale: string) =>  {
     const traductions = await prisma.language.findMany({
       where: { locale: locale },
+      orderBy: { id: 'desc' },
       select: {
         id: true,
         type: true,
@@ -32,7 +33,7 @@ export const getTraductionsByLocale = cache(async (locale: string) =>  {
         }
 
 
-      }
+      },
     });
     return traductions;
 });
@@ -106,37 +107,3 @@ export const  getTraductionBySlugAndLocale = cache(async (slug: string, locale: 
     }
     return null;
   });
-
-  export async function getAllTraductions() {
-    const traductions = await prisma.language.findMany(
-      {
-        include: { work: {
-          include: { photos: true, videos: true
-        } }
-      }
-    }
-    );
-    return traductions;
-  }
-
-  export async function getAllTraductionsByType(type: string) {
-    const traductions = await prisma.language.findMany(
-      {
-        where: { type: type },
-        include: { work: {
-          include: { photos: true, videos: true
-        } }
-      }
-    }
-    );
-    return traductions;
-  }
-
-    export async function getAllTraductionsRoutes () {
-    const traductions = await getAllTraductions();
-    const routing_infos = traductions.map((trad: { locale: string; slug: string }) => ({
-      locale: trad.locale,
-      slug: trad.slug
-    }))
-    return routing_infos;
-  }

@@ -8,8 +8,8 @@ import { DM_Sans, Mulish, Noto_Sans_Kannada } from 'next/font/google';
 
 
 export const metadata: Metadata = {
-  title: "Élodie Rougeaux-Léaux",
-  description: "Portfolio de Élodie Rougeaux-Léaux",
+  title: "Élodie Rougeaux-Léaux - Portfolio",
+  description: "Portfolio de l'artiste plasticienne Élodie Rougeaux-Léaux.",
 };
 
 const dmSans = DM_Sans({

@@ -17,7 +17,6 @@ export default function CloudinaryWidget({handleUpload}: CloudinaryWidgetProps) 
     }
   },[url]);
 
-  console.log("Uploaded URLs:", url);
   return (
 
     <CldUploadWidget uploadPreset="erl_preset"
