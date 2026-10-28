@@ -93,7 +93,7 @@ export function CreateForm () {
               <button className="absolute top-0 right-0 cursor-pointer" onClick={() => setIsClicked(false)}>Fermer</button>
               <h2 className="text-[2em] text-center">Création</h2>
               <div className=" mt-[2em] flex flex-col gap-[2em]">
-                <div  className="flex gap-5">
+                <div  className="flex gap-5 ">
                   <label htmlFor="type">Type de projet :</label>
                   <select id="type" name="type" className="border w-[20%]">
                     <option value="performances">Performance</option>
@@ -105,6 +105,10 @@ export function CreateForm () {
                    <div className="flex gap-2">
                     <label htmlFor="urlarticle">lien externe : </label>
                     <input type="text" className="border" id="urlarticle" name="urlarticle"  />
+                  </div>
+                  <div className=" flex-col">
+                    <label htmlFor="year">Année: </label>
+                    <input type="text" className="border w-[30%]" id="year" name="year"  />
                   </div>
                 </div>
                 <div className="flex gap-2">
@@ -120,10 +124,6 @@ export function CreateForm () {
                     <label htmlFor="title_en">Titre-EN:</label>
                     <input type="text" className="border" id="title_en" name="title_en"  />
                   </span>
-                  <div className="flex flex-col">
-                    <label htmlFor="year">Année: </label>
-                    <input type="text" className="border w-[30%]" id="year" name="year"  />
-                  </div>
                 </div>
                 <div className="flex flex-col">
                   <div className="flex gap-3">

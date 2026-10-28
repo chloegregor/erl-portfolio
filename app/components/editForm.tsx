@@ -141,33 +141,37 @@ export function EditForm({ workToEdit, onClose }: EditFormProps ) {
               defaultValue={work.url ?? '' }
             />
           </div>
-          <div className ="flex gap-2">
-            <label className="" htmlFor={`title-${work.id}`}>Titre-FR: </label>
-            <input
-              type="text"
-              className="border w-[30%]"
-              id={`title-${work.id}`}
-              name="titre_fr"
-              defaultValue={work.languages.find(lang => lang.locale === 'fr')?.title}
-              required
-            />
-            <label className="" htmlFor={`title-${work.id}`}>Titre-EN: </label>
-            <input
-              type="text"
-              className="border w-[30%]"
-              id={`title-${work.id}`}
-              name="titre_en"
-              defaultValue={work.languages.find(lang => lang.locale === 'en')?.title}
+          <div>
+            <input type="radio" id="illustration" name="illustration"  defaultChecked={work.illustration == "title"} onClick={() => setIllustration("title")}  />
+            <div className ="flex gap-2">
+              <label className="" htmlFor={`title-${work.id}`}>Titre-FR: </label>
+              <input
+                type="text"
+                className="border w-[30%]"
+                id={`title-${work.id}`}
+                name="titre_fr"
+                defaultValue={work.languages.find(lang => lang.locale === 'fr')?.title}
+                required
+              />
+              <label className="" htmlFor={`title-${work.id}`}>Titre-EN: </label>
+              <input
+                type="text"
+                className="border w-[30%]"
+                id={`title-${work.id}`}
+                name="titre_en"
+                defaultValue={work.languages.find(lang => lang.locale === 'en')?.title}
 
-            />
-            <label htmlFor="year">Année: </label>
-            <input
-              type="text"
-              className="border w-[20%]"
-              id={`year-${work.id}`}
-              name="year"
-              defaultValue={work.year}
-            />
+              />
+              <label htmlFor="year">Année: </label>
+              <input
+                type="text"
+                className="border w-[20%]"
+                id={`year-${work.id}`}
+                name="year"
+                defaultValue={work.year}
+              />
+            </div>
+
           </div>
           <div>
             <input type="radio" id="illustration" name="illustration" defaultChecked={work.illustration == "subtitle"} onClick={() => setIllustration("subtitle")} />
