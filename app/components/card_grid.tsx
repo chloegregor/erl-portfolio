@@ -60,7 +60,7 @@ export default function CardGrid({ trad, opacity, currentTag}: { trad: Language,
               </div>
             )
               : textKey && (
-                <div className=" w-full border">
+                <div className=" w-full ">
                   <p className={`text-justify text-[0.6em] lg:line-clamp-6 w-[80%] w-[100%] line-clamp-8 last-center  ${italic ? "italic" : ""}`}>{trad[textKey]}</p>
                 </div>
               )
