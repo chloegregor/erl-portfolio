@@ -122,7 +122,7 @@ export function CreateForm () {
                   </span>
                   <span className="flex flex-col gap-2">
                     <label htmlFor="title_en">Titre-EN:</label>
-                    <input type="text" className="border" id="title_en" name="title_en"  />
+                    <input type="text" className="border" id="title_en" name="title_en" required />
                   </span>
                 </div>
                 <div className="flex flex-col">

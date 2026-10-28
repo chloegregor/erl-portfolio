@@ -3,6 +3,8 @@ import  prisma  from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
 import {createTraduction} from '@/app/actions/traductions';
 import {updateTraduction} from '@/app/actions/traductions';
+import slugify from 'slugify';
+
 
 
 export async function getAllWorks() {
@@ -75,14 +77,18 @@ export async function createWork(formData: FormData) {
     );
 
     const type_en = type === "Performances" ? "Performances" :
-                    type === "Expositions" ? "Exhibitions" :
+                    type === "Realisations" ? "Realisations" :
                     type === "Workshops" ? "Workshops" :
                     type === "Presse" ? "Press" :
                     type === "Publications" ? "Publications" : type;
 
 
-    await createTraduction( type, title_fr, subtitle_fr, description_fr, 'fr', photos_captions_fr, videos_captions_fr, work.id);
-    await createTraduction( type_en, title_en, subtitle_en, description_en, 'en', photos_captions_en, videos_captions_en, work.id);
+    const slug_fr = slugify(title_fr, { lower: true, strict: true });
+    const ToSlug_en = slugify(title_en, { lower: true, strict: true });
+    const slug_en = slug_fr === ToSlug_en ? `${ToSlug_en}-en` : ToSlug_en
+
+    await createTraduction( type, title_fr, slug_fr, subtitle_fr, description_fr, 'fr', photos_captions_fr, videos_captions_fr, work.id);
+    await createTraduction( type_en, title_en, slug_en, subtitle_en, description_en, 'en', photos_captions_en, videos_captions_en, work.id);
 
     revalidatePath('/admin/works');
     return { ok: true};
@@ -95,8 +101,8 @@ export async function updateWork(formData: FormData) {
     const type = formData.get('type') as string;
     const urlarticle = formData.get('urlarticle') as string;
     const year = formData.get('year') as string;
-    const fr_id = Number(formData.get('fr_id'));
-    const en_id = Number(formData.get('en_id'));
+    const fr_id = Number(formData.get('fr_id')) || 0;
+    const en_id = Number(formData.get('en_id')) || 0;
     const title_fr =formData.get('title_fr') as string;
     const title_en =formData.get('title_en') as string;
     const subtitle_fr =formData.get('subtitle_fr') as string;
@@ -113,7 +119,6 @@ export async function updateWork(formData: FormData) {
     const videos_captions_en = formData.get('videos_caption_en') as string;
 
     async function fetchThumbnail(url:string) {
-      console.log('fetchThumbnail called with url:', url);
     const response = await fetch(`https://vimeo.com/api/oembed.json?url=${(url)}`);
      const data = await response.json();
       console.log("VIMEO THUMBNAIL DATA", data);
@@ -144,7 +149,7 @@ export async function updateWork(formData: FormData) {
     });
 
     const type_en = type === "Performances" ? "Performances" :
-                    type === "Expositions" ? "Exhibitions" :
+                    type === "Realisations" ? "Realisations" :
                     type === "Workshops" ? "Workshops" :
                     type === "Presse" ? "Press" :
                     type === "Publications" ? "Publications" : type;

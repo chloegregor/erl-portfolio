@@ -44,13 +44,10 @@ export async function getTraductionById(id: number) {
 }
 
 
-export async function createTraduction(type: string, title: string, subtitle: string, description: string, locale: string, photos_caption: string, videos_caption: string, workId: number) {
+export async function createTraduction(type: string, title: string, slug: string, subtitle: string, description: string, locale: string, photos_caption: string, videos_caption: string, workId: number) {
     console.log ("createTraduction called with:", type, title, subtitle, description, locale, workId);
-    if (!title) {
-      return
-    }
 
-    const slug = slugify(title, { lower: true, strict: true });
+
 
      await prisma.language.create({
       data: {
