@@ -11,7 +11,7 @@ interface Work {
   photos: { id: number; url: string; titre: string }[];
   videos: { id: number; url: string }[];
   languages: { id: number; type: string; locale: string;
-    title: string; slug: string; subtitle: string | null; description: string | null;
+    title: string; subtitle: string | null; description: string | null;
     photos_caption: string | null; videos_caption: string | null
   }[];
 }

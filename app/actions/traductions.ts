@@ -1,7 +1,6 @@
 'use server'
 import  prisma  from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
-import slugify from 'slugify';
 
 type Language = {
   id: number;
