@@ -11,7 +11,7 @@ interface Work {
   photos: { id: number; url: string; titre: string }[];
   videos: { id: number; url: string }[];
   languages: { id: number; type: string; locale: string;
-    title: string; subtitle: string | null; description: string | null;
+    title: string; slug: string; subtitle: string | null; description: string | null;
     photos_caption: string | null; videos_caption: string | null
   }[];
 }
@@ -220,8 +220,8 @@ export function EditForm({ workToEdit, onClose }: EditFormProps ) {
           <span>Photos:</span>
           <div className="flex gap-2">
             {photos && photos.length > 0 && (
-              <div className="flex flex-col">
-                <div className="flex gap-2">
+              <div className="flex flex-col ">
+                <div className="flex gap-2 ">
                   {photos.map((photo) => (
                     <div className="flex gap-2" key={photo.id}>
                       <p className="underline">{photo.titre}</p>
@@ -238,9 +238,9 @@ export function EditForm({ workToEdit, onClose }: EditFormProps ) {
               </div>
             )}
             {uploadedPhotos.length > 0 && (
-              <div className=" ">
+              <div className=" flex gap-2">
                 {uploadedPhotos.map((photo, index) => (
-                    <div className="flex gap-2" key={index}>
+                    <div className="flex gap-2  h-fit" key={index}>
                       <p className="underline">{photo[1]}</p>
                       <input type="radio" id="illustration" name="illustration" defaultChecked={work.illustration == photo[0]} onClick={()=> setIllustration(photo[0])} />
                     <button type="button" className="text-red-500" onClick={() => deleteFromEverywhere(photo[0])}>x</button>

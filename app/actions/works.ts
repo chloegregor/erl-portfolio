@@ -121,7 +121,6 @@ export async function updateWork(formData: FormData) {
     async function fetchThumbnail(url:string) {
     const response = await fetch(`https://vimeo.com/api/oembed.json?url=${(url)}`);
      const data = await response.json();
-      console.log("VIMEO THUMBNAIL DATA", data);
      const thumbnail_url = data.thumbnail_url_with_play_button;
      return thumbnail_url;
    }
@@ -154,8 +153,12 @@ export async function updateWork(formData: FormData) {
                     type === "Presse" ? "Press" :
                     type === "Publications" ? "Publications" : type;
 
-    await updateTraduction(type, fr_id, title_fr, subtitle_fr, description_fr, photos_captions_fr, videos_captions_fr);
-    await updateTraduction(type_en, en_id, title_en, subtitle_en, description_en, photos_captions_en, videos_captions_en);
+    const slug_fr = slugify(title_fr, { lower: true, strict: true });
+    const ToSlug_en = slugify(title_en, { lower: true, strict: true });
+    const slug_en = slug_fr === ToSlug_en ? `${ToSlug_en}-en` : ToSlug_en
+
+    await updateTraduction(type, fr_id, title_fr, slug_fr, subtitle_fr, description_fr, photos_captions_fr, videos_captions_fr);
+    await updateTraduction(type_en, en_id, title_en, slug_en, subtitle_en, description_en, photos_captions_en, videos_captions_en);
 
     revalidatePath('/admin/works');
     return { ok: true};
